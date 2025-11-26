@@ -26,6 +26,10 @@ resources:
  - productcatalogservice.yaml
  - recommendationservice.yaml
  - shippingservice.yaml
+ - grafana.yaml
+ - prometheus.yaml
+ - loki.yaml
+ - promtail.yaml
 # components:
 # - ../kustomize/components/cymbal-branding
 # - ../kustomize/components/google-cloud-operations
