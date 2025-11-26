@@ -30,6 +30,191 @@ data:
         ]
     }
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-provisioning-dashboards
+  labels:
+    app: grafana
+data:
+  dashboards.yaml: |-
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  labels:
+    app: grafana
+data:
+  prometheus-dashboard.json: |-
+    {
+      "annotations": { "list": [] },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "id": null,
+      "links": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 1,
+          "gridPos": { "h": 9, "w": 12, "x": 0, "y": 0 },
+          "id": 2,
+          "legend": { "avg": false, "current": false, "max": false, "min": false, "show": true, "total": false, "values": false },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"default\", image!=\"\"}[5m])) by (pod)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Usage",
+          "tooltip": { "shared": true, "sort": 0, "value_type": "individual" },
+          "type": "graph",
+          "xaxis": { "buckets": null, "mode": "time", "name": null, "show": true, "values": [] },
+          "yaxes": [ { "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true }, { "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true } ],
+          "yaxis": { "align": false, "alignLevel": null }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 1,
+          "gridPos": { "h": 9, "w": 12, "x": 12, "y": 0 },
+          "id": 3,
+          "legend": { "avg": false, "current": false, "max": false, "min": false, "show": true, "total": false, "values": false },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(container_memory_usage_bytes{namespace=\"default\", image!=\"\"}) by (pod)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Usage",
+          "tooltip": { "shared": true, "sort": 0, "value_type": "individual" },
+          "type": "graph",
+          "xaxis": { "buckets": null, "mode": "time", "name": null, "show": true, "values": [] },
+          "yaxes": [ { "format": "bytes", "label": null, "logBase": 1, "max": null, "min": null, "show": true }, { "format": "short", "label": null, "logBase": 1, "max": null, "min": null, "show": true } ],
+          "yaxis": { "align": false, "alignLevel": null }
+        }
+      ],
+      "schemaVersion": 16,
+      "style": "dark",
+      "tags": [],
+      "templating": { "list": [] },
+      "time": { "from": "now-1h", "to": "now" },
+      "timepicker": { "refresh_intervals": [ "5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d" ], "time_options": [ "5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d" ] },
+      "timezone": "",
+      "title": "Microservices Metrics",
+      "uid": "microservices-metrics",
+      "version": 1
+    }
+  loki-dashboard.json: |-
+    {
+      "annotations": { "list": [] },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "id": null,
+      "links": [],
+      "panels": [
+        {
+          "datasource": "Loki",
+          "gridPos": { "h": 20, "w": 24, "x": 0, "y": 0 },
+          "id": 2,
+          "options": { "showLabels": true, "showTime": true, "sortOrder": "Descending", "wrapLogMessage": false },
+          "targets": [ { "expr": "{namespace=\"default\", service=~\"$service\"}", "refId": "A" } ],
+          "title": "Logs",
+          "type": "logs"
+        }
+      ],
+      "schemaVersion": 16,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "allValue": ".*",
+            "current": { "text": "All", "value": "$__all" },
+            "datasource": "Loki",
+            "definition": "label_values(service)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "Service",
+            "multi": false,
+            "name": "service",
+            "options": [],
+            "query": "label_values(service)",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          }
+        ]
+      },
+      "time": { "from": "now-1h", "to": "now" },
+      "timepicker": { "refresh_intervals": [ "5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d" ], "time_options": [ "5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d" ] },
+      "timezone": "",
+      "title": "Microservices Logs",
+      "uid": "microservices-logs",
+      "version": 1
+    }
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,10 +249,20 @@ spec:
         volumeMounts:
           - name: grafana-datasources
             mountPath: /etc/grafana/provisioning/datasources/
+          - name: grafana-provisioning-dashboards
+            mountPath: /etc/grafana/provisioning/dashboards/
+          - name: grafana-dashboards
+            mountPath: /var/lib/grafana/dashboards/
       volumes:
         - name: grafana-datasources
           configMap:
             name: grafana-datasources
+        - name: grafana-provisioning-dashboards
+          configMap:
+            name: grafana-provisioning-dashboards
+        - name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards
 ---
 apiVersion: v1
 kind: Service
