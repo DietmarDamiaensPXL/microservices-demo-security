@@ -26,6 +26,44 @@ data:
                 "type": "loki",
                 "url": "http://loki:3100",
                 "version": 1
+            },
+            {
+               "access":"proxy",
+                "editable": true,
+                "name": "Tempo",
+                "orgId": 1,
+                "type": "tempo",
+                "url": "http://tempo:3200",
+                "version": 1,
+                "jsonData": {
+                    "tracesToLogs": {
+                        "datasourceUid": "loki",
+                        "filterByTraceID": true,
+                        "filterBySpanID": false,
+                        "tags": ["service_name", "service.name"]
+                    },
+                    "tracesToMetrics": {
+                        "datasourceUid": "prometheus",
+                        "tags": [
+                            {
+                                "key": "service.name",
+                                "value": "service"
+                            },
+                            {
+                                "key": "job"
+                            }
+                        ]
+                    },
+                    "serviceMap": {
+                        "datasourceUid": "prometheus"
+                    },
+                    "nodeGraph": {
+                        "enabled": true
+                    },
+                    "search": {
+                        "hide": false
+                    }
+                }
             }
         ]
     }
