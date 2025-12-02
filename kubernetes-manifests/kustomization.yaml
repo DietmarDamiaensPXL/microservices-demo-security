@@ -35,6 +35,7 @@ resources:
  - promtail.yaml
  - tempo.yaml
  - opentelemetry-collector.yaml
+ - pushgateway.yaml
 # components:
 # - ../kustomize/components/cymbal-branding
 # - ../kustomize/components/google-cloud-operations
