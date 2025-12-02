@@ -16,7 +16,8 @@ data:
                 "orgId": 1,
                 "type": "prometheus",
                 "url": "http://prometheus:9090",
-                "version": 1
+                "version": 1,
+                "uid": "prometheus"
             },
             {
                "access":"proxy",
@@ -25,7 +26,8 @@ data:
                 "orgId": 1,
                 "type": "loki",
                 "url": "http://loki:3100",
-                "version": 1
+                "version": 1,
+                "uid": "loki"
             },
             {
                "access":"proxy",
@@ -35,12 +37,16 @@ data:
                 "type": "tempo",
                 "url": "http://tempo:3200",
                 "version": 1,
+                "uid": "tempo",
                 "jsonData": {
                     "tracesToLogs": {
                         "datasourceUid": "loki",
                         "filterByTraceID": true,
                         "filterBySpanID": false,
-                        "tags": ["service_name", "service.name"]
+                        "tags": ["service_name", "service.name"],
+                        "mapTagNamesEnabled": false,
+                        "spanStartTimeShift": "-1h",
+                        "spanEndTimeShift": "1h"
                     },
                     "tracesToMetrics": {
                         "datasourceUid": "prometheus",
@@ -52,6 +58,12 @@ data:
                             {
                                 "key": "job"
                             }
+                        ],
+                        "queries": [
+                            {
+                                "name": "Sample query",
+                                "query": "sum(rate(traces_service_graph_request_total{}[5m]))"
+                            }
                         ]
                     },
                     "serviceMap": {
@@ -62,6 +74,9 @@ data:
                     },
                     "search": {
                         "hide": false
+                    },
+                    "lokiSearch": {
+                        "datasourceUid": "loki"
                     }
                 }
             }

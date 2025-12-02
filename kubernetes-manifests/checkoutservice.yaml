@@ -70,6 +70,12 @@ spec:
             value: "1"
           - name: COLLECTOR_SERVICE_ADDR
             value: "opentelemetry-collector:4317"
+          - name: OTEL_SERVICE_NAME
+            value: "checkoutservice"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://opentelemetry-collector:4317"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.name=checkoutservice,service.version=1.0"
           resources:
             requests:
               cpu: 100m

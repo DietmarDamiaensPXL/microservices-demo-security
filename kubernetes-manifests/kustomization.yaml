@@ -28,6 +28,9 @@ resources:
  - shippingservice.yaml
  - grafana.yaml
  - prometheus.yaml
+ - prometheus-alerting-rules.yaml
+ - alertmanager-minimal.yaml
+ - mailhog.yaml
  - loki.yaml
  - promtail.yaml
  - tempo.yaml
