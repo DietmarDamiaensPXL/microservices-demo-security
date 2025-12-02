@@ -4,6 +4,7 @@ import json
 import glob
 from datetime import datetime
 import pandas as pd
+import requests
 
 # Path naar laatste Trivy scan
 SCAN_DIR = "secops-automation/scans/trivy"
@@ -41,9 +42,30 @@ for json_file in glob.glob(f"{latest_scan_dir}/*.json"):
         **counts
     })
 
+
 # Zet om naar dataframe
 df = pd.DataFrame(severity_data)
 df = df.sort_values(by=["CRITICAL","HIGH"], ascending=False)
+
+# Bouw payload voor Pushgateway
+gateway = "http://localhost:9091/metrics/job/trivy_scan"
+payload = ""
+
+for _, row in df.iterrows():
+    image_label = row["Image"].replace('"', '\\"')  # escape quotes
+    payload += f'trivy_critical{{image="{image_label}"}} {row["CRITICAL"]}\n'
+    payload += f'trivy_high{{image="{image_label}"}} {row["HIGH"]}\n'
+    payload += f'trivy_medium{{image="{image_label}"}} {row["MEDIUM"]}\n'
+    payload += f'trivy_low{{image="{image_label}"}} {row["LOW"]}\n'
+    payload += f'trivy_unknown{{image="{image_label}"}} {row["UNKNOWN"]}\n'
+
+print("[+] Sending metrics to Pushgateway...")
+res = requests.post(gateway, data=payload)
+if res.status_code == 200:
+    print("[✓] Metrics pushed successfully")
+else:
+    print(f"[!] Failed to push metrics: {res.status_code} {res.text}")
+
 
 # Sla op als CSV en Markdown
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
