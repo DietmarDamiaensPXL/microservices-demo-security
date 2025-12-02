@@ -8,6 +8,17 @@ data:
   prometheus.yml: |
     global:
       scrape_interval: 15s
+      evaluation_interval: 15s
+
+    rule_files:
+      - "/etc/prometheus/rules/*.yml"
+
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+              - alertmanager:9093
+
     scrape_configs:
       - job_name: 'pushgateway-trivy'
         static_configs:
@@ -121,17 +132,32 @@ spec:
         args:
           - "--config.file=/etc/prometheus/prometheus.yml"
           - "--storage.tsdb.path=/prometheus/"
+          - "--web.enable-lifecycle"
+          - "--web.route-prefix=/"
+          - "--storage.tsdb.retention.time=15d"
         ports:
         - containerPort: 9090
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "100m"
+          limits:
+            memory: "800Mi"
+            cpu: "200m"
         volumeMounts:
         - name: prometheus-config-volume
           mountPath: /etc/prometheus/
+        - name: prometheus-alerting-rules-volume
+          mountPath: /etc/prometheus/rules/
         - name: prometheus-storage-volume
           mountPath: /prometheus/
       volumes:
       - name: prometheus-config-volume
         configMap:
           name: prometheus-config
+      - name: prometheus-alerting-rules-volume
+        configMap:
+          name: prometheus-alerting-rules
       - name: prometheus-storage-volume
         emptyDir: {}
 ---

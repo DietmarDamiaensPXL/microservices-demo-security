@@ -28,9 +28,7 @@ spec:
         app: frontend
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/metrics"
+        prometheus.io/scrape: "false"
     spec:
       serviceAccountName: frontend
       securityContext:
@@ -104,6 +102,12 @@ spec:
             value: "1"
           - name: COLLECTOR_SERVICE_ADDR
             value: "opentelemetry-collector:4317"
+          - name: OTEL_SERVICE_NAME
+            value: "frontend"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://opentelemetry-collector:4317"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.name=frontend,service.version=1.0"
           resources:
             requests:
               cpu: 100m
