@@ -16,7 +16,8 @@ data:
                 "orgId": 1,
                 "type": "prometheus",
                 "url": "http://prometheus:9090",
-                "version": 1
+                "version": 1,
+                "uid": "prometheus"
             },
             {
                "access":"proxy",
@@ -25,7 +26,8 @@ data:
                 "orgId": 1,
                 "type": "loki",
                 "url": "http://loki:3100",
-                "version": 1
+                "version": 1,
+                "uid": "loki"
             },
             {
                "access":"proxy",
@@ -35,12 +37,16 @@ data:
                 "type": "tempo",
                 "url": "http://tempo:3200",
                 "version": 1,
+                "uid": "tempo",
                 "jsonData": {
                     "tracesToLogs": {
                         "datasourceUid": "loki",
                         "filterByTraceID": true,
                         "filterBySpanID": false,
-                        "tags": ["service_name", "service.name"]
+                        "tags": ["service_name", "service.name"],
+                        "mapTagNamesEnabled": false,
+                        "spanStartTimeShift": "-1h",
+                        "spanEndTimeShift": "1h"
                     },
                     "tracesToMetrics": {
                         "datasourceUid": "prometheus",
@@ -52,6 +58,12 @@ data:
                             {
                                 "key": "job"
                             }
+                        ],
+                        "queries": [
+                            {
+                                "name": "Sample query",
+                                "query": "sum(rate(traces_service_graph_request_total{}[5m]))"
+                            }
                         ]
                     },
                     "serviceMap": {
@@ -62,6 +74,9 @@ data:
                     },
                     "search": {
                         "hide": false
+                    },
+                    "lokiSearch": {
+                        "datasourceUid": "loki"
                     }
                 }
             }
@@ -252,455 +267,266 @@ data:
       "uid": "microservices-logs",
       "version": 1
     }
-  tempo-dashboard.json: |-
+  trivy-vulnerability-dashboard.json: |-
     {
-      "annotations": { "list": [] },
+      "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": null,
+      "id": 0,
       "links": [],
       "panels": [
-        {
-          "datasource": { "type": "tempo", "uid": "tempo" },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "thresholds" },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "red", "value": 80 }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
-          "id": 2,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [ "lastNotNull" ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "sum(rate(traces_service_graph_request_total[$__rate_interval]))",
-              "interval": "",
-              "legendFormat": "Total Requests/sec",
-              "refId": "A"
-            }
-          ],
-          "title": "Total Request Rate",
-          "type": "stat"
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
-        {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "thresholds" },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "yellow", "value": 0.95 },
-                  { "color": "red", "value": 0.99 }
-                ]
-              },
-              "unit": "percentunit"
+        "description": "critical issues by image.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
             },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
-          "id": 3,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [ "lastNotNull" ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "sum(rate(traces_service_graph_request_total{status_code!~\"4.*|5.*\"}[$__rate_interval])) / sum(rate(traces_service_graph_request_total[$__rate_interval]))",
-              "interval": "",
-              "legendFormat": "Success Rate",
-              "refId": "A"
-            }
-          ],
-          "title": "Success Rate",
-          "type": "stat"
-        },
-        {
-          "datasource": { "type": "tempo", "uid": "tempo" },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "vis": false
-                }
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
               },
-              "mappings": []
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 15, "w": 24, "x": 0, "y": 8 },
-          "id": 4,
-          "options": {
-            "legend": { "displayMode": "list", "placement": "bottom" },
-            "tooltip": { "mode": "single" }
-          },
-          "targets": [
-            {
-              "datasource": { "type": "tempo", "uid": "tempo" },
-              "query": "{service.name=~\"$service\"}",
-              "refId": "A"
-            }
-          ],
-          "title": "Service Map",
-          "type": "nodeGraph"
-        },
-        {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "palette-classic" },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "vis": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": { "type": "linear" },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": { "group": "A", "mode": "none" },
-                "thresholdsStyle": { "mode": "off" }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "red", "value": 80 }
-                ]
-              },
-              "unit": "s"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 23 },
-          "id": 5,
-          "options": {
-            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom" },
-            "tooltip": { "mode": "single" }
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "histogram_quantile(0.95, sum(rate(traces_service_graph_request_duration_seconds_bucket{client=~\"$service\"}[$__rate_interval])) by (le, client, server))",
-              "interval": "",
-              "legendFormat": "{{client}} -> {{server}} (p95)",
-              "refId": "A"
-            },
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "histogram_quantile(0.50, sum(rate(traces_service_graph_request_duration_seconds_bucket{client=~\"$service\"}[$__rate_interval])) by (le, client, server))",
-              "interval": "",
-              "legendFormat": "{{client}} -> {{server}} (p50)",
-              "refId": "B"
-            }
-          ],
-          "title": "Request Duration (Percentiles)",
-          "type": "timeseries"
-        },
-        {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "palette-classic" },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "vis": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": { "type": "linear" },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": { "group": "A", "mode": "none" },
-                "thresholdsStyle": { "mode": "off" }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "red", "value": 80 }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 23 },
-          "id": 6,
-          "options": {
-            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom" },
-            "tooltip": { "mode": "single" }
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "sum(rate(traces_service_graph_request_total{client=~\"$service\"}[$__rate_interval])) by (client, server)",
-              "interval": "",
-              "legendFormat": "{{client}} -> {{server}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Request Rate by Service",
-          "type": "timeseries"
-        },
-        {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "palette-classic" },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "vis": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": { "type": "linear" },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": { "group": "A", "mode": "none" },
-                "thresholdsStyle": { "mode": "off" }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "green", "value": null },
-                  { "color": "red", "value": 80 }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 31 },
-          "id": 7,
-          "options": {
-            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom" },
-            "tooltip": { "mode": "single" }
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "sum(rate(traces_service_graph_request_total{status_code=~\"4.*\",client=~\"$service\"}[$__rate_interval])) by (client, server)",
-              "interval": "",
-              "legendFormat": "4xx: {{client}} -> {{server}}",
-              "refId": "A"
-            },
-            {
-              "datasource": { "type": "prometheus", "uid": "prometheus" },
-              "expr": "sum(rate(traces_service_graph_request_total{status_code=~\"5.*\",client=~\"$service\"}[$__rate_interval])) by (client, server)",
-              "interval": "",
-              "legendFormat": "5xx: {{client}} -> {{server}}",
-              "refId": "B"
-            }
-          ],
-          "title": "Error Rate by Service",
-          "type": "timeseries"
-        },
-        {
-          "datasource": { "type": "tempo", "uid": "tempo" },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto"
-              },
-              "mappings": []
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 31 },
-          "id": 8,
-          "options": {
-            "showHeader": true
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "tempo", "uid": "tempo" },
-              "query": "{service.name=~\"$service\"} | select(duration > 1s)",
-              "queryType": "traceql",
-              "refId": "A"
-            }
-          ],
-          "title": "Slow Traces (>1s)",
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {},
-                "indexByName": {},
-                "renameByName": {
-                  "duration": "Duration",
-                  "name": "Operation",
-                  "service.name": "Service",
-                  "traceID": "Trace ID"
-                }
+              {
+                "color": "red",
+                "value": 1
               }
-            }
-          ],
-          "type": "table"
+            ]
+          }
         },
-        {
-          "datasource": { "type": "tempo", "uid": "tempo" },
-          "gridPos": { "h": 12, "w": 24, "x": 0, "y": 39 },
-          "id": 9,
-          "options": {
-            "query": "{service.name=~\"$service\"} && duration > $duration",
-            "queryType": "traceql",
-            "serviceName": "",
-            "spanName": "",
-            "tags": ""
-          },
-          "pluginVersion": "8.0.0",
-          "targets": [
-            {
-              "datasource": { "type": "tempo", "uid": "tempo" },
-              "query": "{service.name=~\"$service\"} && duration > $duration",
-              "queryType": "traceql",
-              "refId": "A"
-            }
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "title": "Trace Search",
-          "type": "traces"
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(trivy_critical) by (image)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
         }
       ],
-      "schemaVersion": 27,
-      "style": "dark",
-      "tags": ["tempo", "tracing", "microservices"],
-      "templating": {
-        "list": [
-          {
-            "allValue": ".*",
-            "current": { "text": "All", "value": "$__all" },
-            "datasource": { "type": "prometheus", "uid": "prometheus" },
-            "definition": "label_values(traces_service_graph_request_total, client)",
-            "hide": 0,
-            "includeAll": true,
-            "label": "Service",
-            "multi": true,
-            "name": "service",
-            "options": [],
-            "query": "label_values(traces_service_graph_request_total, client)",
-            "refresh": 2,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 1,
-            "tagValuesQuery": "",
-            "tags": [],
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
+      "title": "Critical vulnerabilities",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Trivy results on image scan with high issues.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
-          {
-            "allValue": null,
-            "current": { "text": "100ms", "value": "100ms" },
-            "datasource": null,
-            "definition": "",
-            "hide": 0,
-            "includeAll": false,
-            "label": "Duration Filter",
-            "multi": false,
-            "name": "duration",
-            "options": [
-              { "text": "10ms", "value": "10ms" },
-              { "text": "50ms", "value": "50ms" },
-              { "text": "100ms", "value": "100ms" },
-              { "text": "500ms", "value": "500ms" },
-              { "text": "1s", "value": "1s" },
-              { "text": "5s", "value": "5s" }
-            ],
-            "query": "10ms,50ms,100ms,500ms,1s,5s",
-            "refresh": 0,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "tagValuesQuery": "",
-            "tags": [],
-            "tagsQuery": "",
-            "type": "custom",
-            "useTags": false
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
           }
-        ]
+        },
+        "overrides": []
       },
-      "time": { "from": "now-1h", "to": "now" },
-      "timepicker": { 
-        "refresh_intervals": [ "5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d" ], 
-        "time_options": [ "5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d" ] 
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
-      "timezone": "",
-      "title": "Tempo Tracing Dashboard",
-      "uid": "tempo-tracing",
-      "version": 1
+      "id": 2,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(trivy_high) by (image)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "High vulnerabilities",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "topk(5, trivy_critical) + trivy_high + trivy_medium + trivy_low",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+        ],
+        "title": "top 5 images with most issues",
+        "type": "stat"
+      }
+      ],
+      "preload": false,
+      "schemaVersion": 42,
+      "tags": [],
+      "templating": {
+      "list": []
+      },
+      "time": {
+        "from": "now-15m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "browser",
+      "title": "SecOps dashboard",
+      "uid": "adlv859",
+      "version": 7
     }
 ---
 apiVersion: apps/v1

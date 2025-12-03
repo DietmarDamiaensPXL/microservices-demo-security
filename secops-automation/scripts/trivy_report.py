@@ -6,75 +6,68 @@ from datetime import datetime
 import pandas as pd
 import requests
 
-# Path naar laatste Trivy scan
-SCAN_DIR = "secops-automation/scans/trivy"
-REPORT_DIR = "secops-automation/reports"
+base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCAN_DIR = os.path.join(base, "scans", "trivy")
+REPORT_DIR = os.path.join(base, "reports")
+HTML_DIR = os.path.join(REPORT_DIR, "html")
 os.makedirs(REPORT_DIR, exist_ok=True)
+os.makedirs(HTML_DIR, exist_ok=True)
 
-# Vind nieuwste scanmap
-scan_timestamps = sorted(os.listdir(SCAN_DIR))
-if not scan_timestamps:
-    print("Geen Trivy scans gevonden.")
+# Vind de laatste scan
+scan_dirs = sorted(os.listdir(SCAN_DIR))
+if not scan_dirs:
+    print("Geen scans!")
     exit(1)
 
-latest_scan_dir = os.path.join(SCAN_DIR, scan_timestamps[-1])
-print(f"[*] Latest scan: {latest_scan_dir}")
+latest_dir = os.path.join(SCAN_DIR, scan_dirs[-1])
+print(f"[*] Latest scan: {latest_dir}")
 
-# Parse JSON files
 severity_data = []
 
-for json_file in glob.glob(f"{latest_scan_dir}/*.json"):
+for json_file in glob.glob(f"{latest_dir}/*.json"):
     with open(json_file) as f:
         data = json.load(f)
-    image = os.path.basename(json_file).replace(".json","")
-    
-    # Tel vulnerabilities per severity
-    counts = {"CRITICAL":0, "HIGH":0, "MEDIUM":0, "LOW":0, "UNKNOWN":0}
-    for vuln in data.get("Results", []):
-        for v in vuln.get("Vulnerabilities", []) or []:
-            sev = v.get("Severity", "UNKNOWN").upper()
+
+    image = os.path.basename(json_file).replace(".json", "")
+    counts = {s: 0 for s in ["CRITICAL", "HIGH", "MEDIUM", "LOW", "UNKNOWN"]}
+
+    for result in data.get("Results", []):
+        for vuln in result.get("Vulnerabilities", []) or []:
+            sev = vuln.get("Severity", "UNKNOWN").upper()
             if sev not in counts:
                 sev = "UNKNOWN"
             counts[sev] += 1
 
-    severity_data.append({
-        "Image": image,
-        **counts
-    })
+    severity_data.append({"Image": image, **counts})
 
-
-# Zet om naar dataframe
 df = pd.DataFrame(severity_data)
-df = df.sort_values(by=["CRITICAL","HIGH"], ascending=False)
+df = df.sort_values(by=["CRITICAL", "HIGH"], ascending=False)
 
-# Bouw payload voor Pushgateway
+# Pushgateway payload
 gateway = "http://localhost:9091/metrics/job/trivy_scan"
 payload = ""
 
 for _, row in df.iterrows():
-    image_label = row["Image"].replace('"', '\\"')  # escape quotes
-    payload += f'trivy_critical{{image="{image_label}"}} {row["CRITICAL"]}\n'
-    payload += f'trivy_high{{image="{image_label}"}} {row["HIGH"]}\n'
-    payload += f'trivy_medium{{image="{image_label}"}} {row["MEDIUM"]}\n'
-    payload += f'trivy_low{{image="{image_label}"}} {row["LOW"]}\n'
-    payload += f'trivy_unknown{{image="{image_label}"}} {row["UNKNOWN"]}\n'
+    image = row["Image"].replace('"', '\\"')
+    for sev in ["CRITICAL", "HIGH", "MEDIUM", "LOW", "UNKNOWN"]:
+        metric = f"trivy_{sev.lower()}"
+        payload += f'{metric}{{image="{image}"}} {row[sev]}\n'
 
-print("[+] Sending metrics to Pushgateway...")
-res = requests.post(gateway, data=payload)
-if res.status_code == 200:
-    print("[✓] Metrics pushed successfully")
-else:
-    print(f"[!] Failed to push metrics: {res.status_code} {res.text}")
+print("[+] Pushing metrics...")
+requests.post(gateway, data=payload)
 
-
-# Sla op als CSV en Markdown
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-csv_file = os.path.join(REPORT_DIR, f"trivy_severity_{timestamp}.csv")
-md_file = os.path.join(REPORT_DIR, f"trivy_severity_{timestamp}.md")
+
+csv_file = f"{REPORT_DIR}/trivy_severity_{timestamp}.csv"
+md_file = f"{REPORT_DIR}/trivy_severity_{timestamp}.md"
+html_file = f"{HTML_DIR}/trivy_severity_{timestamp}.html"
 
 df.to_csv(csv_file, index=False)
 df.to_markdown(md_file, index=False)
+df.to_html(html_file, index=False)
 
-print(f"[✓] Severity tabel opgeslagen als CSV: {csv_file}")
-print(f"[✓] Severity tabel opgeslagen als Markdown: {md_file}")
+print("[✓] CSV opgeslagen:", csv_file)
+print("[✓] Markdown opgeslagen:", md_file)
+print("[✓] HTML opgeslagen:", html_file)
+print("[✓] Metrics gepushed naar Prometheus")
 

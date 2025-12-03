@@ -2,7 +2,8 @@
 set -euo pipefail
 
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-outdir="secops-automation/scans/trivy/$timestamp"
+PROJECT_ROOT="/home/cedric/Documents/4dejaar/securityExp/GIP/microservices-demo-security/secops-automation"
+outdir="$PROJECT_ROOT/scans/trivy/$timestamp"
 mkdir -p "$outdir"
 
 echo "[*] Ophalen images uit Kubernetes..."
