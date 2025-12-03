@@ -31,5 +31,9 @@ resources:
 - prometheus-alerting-rules.yaml
 - alertmanager.yaml
 - alert-webhook.yaml
+- mailhog.yaml
 - loki.yaml
 - promtail.yaml
+- tempo.yaml
+- opentelemetry-collector.yaml
+- pushgateway.yaml

@@ -1,0 +1,195 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opentelemetry-collector-config
+  labels:
+    app: opentelemetry-collector
+data:
+  collector.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: 'otel-collector'
+              static_configs:
+                - targets: ['0.0.0.0:8888']
+
+    processors:
+      batch:
+        timeout: 1s
+        send_batch_size: 1024
+        send_batch_max_size: 2048
+
+      memory_limiter:
+        limit_mib: 512
+        spike_limit_mib: 128
+        check_interval: 5s
+
+      attributes:
+        actions:
+          - key: cluster
+            value: microservices-demo
+            action: upsert
+          - key: environment
+            value: development
+            action: upsert
+
+    exporters:
+      otlp/tempo:
+        endpoint: http://tempo:4317
+        tls:
+          insecure: true
+
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        namespace: otel
+
+      debug:
+        verbosity: detailed
+
+    extensions:
+      health_check:
+        endpoint: 0.0.0.0:13133
+      pprof:
+        endpoint: :1777
+      zpages:
+        endpoint: :55679
+
+    service:
+      extensions: [health_check, pprof, zpages]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch, attributes]
+          exporters: [otlp/tempo, debug]
+        metrics:
+          receivers: [otlp, prometheus]
+          processors: [memory_limiter, batch, attributes]
+          exporters: [prometheus, debug]
+      telemetry:
+        logs:
+          level: "debug"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opentelemetry-collector
+  labels:
+    app: opentelemetry-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opentelemetry-collector
+  template:
+    metadata:
+      labels:
+        app: opentelemetry-collector
+    spec:
+      containers:
+      - name: opentelemetry-collector
+        image: otel/opentelemetry-collector-contrib:0.139.0
+        args:
+          - "--config=/etc/otelcol-contrib/collector.yaml"
+        ports:
+        - containerPort: 4317
+          name: otlp-grpc
+          protocol: TCP
+        - containerPort: 4318
+          name: otlp-http
+          protocol: TCP
+        - containerPort: 8888
+          name: metrics
+          protocol: TCP
+        - containerPort: 8889
+          name: prometheus
+          protocol: TCP
+        - containerPort: 13133
+          name: health-check
+          protocol: TCP
+        - containerPort: 1777
+          name: pprof
+          protocol: TCP
+        - containerPort: 55679
+          name: zpages
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: opentelemetry-collector-config
+          mountPath: /etc/otelcol-contrib/
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 13133
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 13133
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: "service.name=opentelemetry-collector,service.version=1.0.0"
+      volumes:
+      - name: opentelemetry-collector-config
+        configMap:
+          name: opentelemetry-collector-config
+          items:
+          - key: collector.yaml
+            path: collector.yaml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opentelemetry-collector
+  labels:
+    app: opentelemetry-collector
+spec:
+  selector:
+    app: opentelemetry-collector
+  type: ClusterIP
+  ports:
+  - name: otlp-grpc
+    port: 4317
+    targetPort: 4317
+    protocol: TCP
+  - name: otlp-http
+    port: 4318
+    targetPort: 4318
+    protocol: TCP
+  - name: metrics
+    port: 8888
+    targetPort: 8888
+    protocol: TCP
+  - name: prometheus
+    port: 8889
+    targetPort: 8889
+    protocol: TCP
+  - name: health-check
+    port: 13133
+    targetPort: 13133
+    protocol: TCP
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: opentelemetry-collector
+  labels:
+    app: opentelemetry-collector

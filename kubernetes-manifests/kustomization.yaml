@@ -29,7 +29,7 @@ resources:
  - grafana.yaml
  - prometheus.yaml
  - prometheus-alerting-rules.yaml
- - alertmanager-minimal.yaml
+ - alertmanager.yaml
  - mailhog.yaml
  - loki.yaml
  - promtail.yaml
