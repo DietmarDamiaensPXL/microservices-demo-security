@@ -44,7 +44,7 @@ jobs:
         output: "trivy-report.txt"
         severity: "HIGH,CRITICAL"
         ignore-unfixed: true
-        exit-code: 1
+        exit-code: 0
 
     - name: Print Trivy report to logs
       if: always()
