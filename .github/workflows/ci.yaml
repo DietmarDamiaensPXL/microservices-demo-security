@@ -1,0 +1,151 @@
+name: "Continuous Integration Pipeline"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  code-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-dotnet@v5
+      env:
+        DOTNET_INSTALL_DIR: "./.dotnet"
+      with:
+        dotnet-version: '9.0'
+    - uses: actions/setup-go@v6
+      with:
+        go-version: '1.25'
+    - name: Go unit tests
+      timeout-minutes: 10
+      run: |
+        for SERVICE in "shippingservice" "productcatalogservice"; do
+          echo "testing $SERVICE..."
+          pushd src/$SERVICE
+          go test
+          popd
+        done
+    - name: C# Unit Tests
+      timeout-minutes: 10
+      run: |
+        dotnet test src/cartservice/
+
+  security-tests:
+    runs-on: ubuntu-latest
+    needs: code-tests
+    steps:
+    - uses: actions/checkout@v5
+    - name: Trivy security scan
+      id: trivy
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        scan-type: "fs"
+        format: "table"
+        output: "trivy-report.txt"
+        severity: "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN"
+        ignore-unfixed: true
+        exit-code: 0
+
+    - name: Print Trivy report to logs
+      if: always()
+      run: |
+        echo "============ Trivy Report (backend) ============"
+        if [ -f trivy-report.txt ]; then
+          cat trivy-report.txt
+        else
+          echo "No trivy-report.txt found"
+        fi
+
+    - name: Upload Trivy report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-report
+        path: trivy-report.txt
+
+  smoke-tests:
+    runs-on: ubuntu-latest
+    needs: security-tests
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install k3d
+      run: |
+        curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+    - name: Deploy app
+      run: |
+        k3d cluster create test-cluster --timeout 2m
+        kubectl apply -k ./kustomize
+
+    - name: Wait for pods
+      run: |
+        set -x
+        kubectl wait --for=condition=available --timeout=300s deployment/redis-cart
+        kubectl wait --for=condition=available --timeout=300s deployment/adservice
+        kubectl wait --for=condition=available --timeout=300s deployment/cartservice
+        kubectl wait --for=condition=available --timeout=300s deployment/checkoutservice
+        kubectl wait --for=condition=available --timeout=300s deployment/currencyservice
+        kubectl wait --for=condition=available --timeout=300s deployment/emailservice
+        kubectl wait --for=condition=available --timeout=300s deployment/frontend
+        kubectl wait --for=condition=available --timeout=300s deployment/loadgenerator
+        kubectl wait --for=condition=available --timeout=300s deployment/paymentservice
+        kubectl wait --for=condition=available --timeout=300s deployment/productcatalogservice
+        kubectl wait --for=condition=available --timeout=300s deployment/recommendationservice
+        kubectl wait --for=condition=available --timeout=300s deployment/shippingservice
+
+    - name: Smoke Test
+      run: |
+        set -x
+        # restart loadgenerator pod to get fresh logs
+        kubectl delete pod -l app=loadgenerator
+        kubectl wait --for=condition=ready --timeout=120s pod -l app=loadgenerator
+
+        # wait for requests to come in
+        REQUEST_COUNT="0"
+        ATTEMPTS=0
+        MAX_ATTEMPTS=60
+        while [[ "$REQUEST_COUNT"  -lt "50" ]] && [[ "$ATTEMPTS" -lt "$MAX_ATTEMPTS" ]]; do
+            sleep 5
+            REQUEST_COUNT=$(kubectl logs -l app=loadgenerator | grep Aggregated | awk '{print $2}' || echo "0")
+            ATTEMPTS=$((ATTEMPTS + 1))
+            echo "Attempt $ATTEMPTS: Request count = $REQUEST_COUNT"
+        done
+
+        if [[ "$ATTEMPTS" -ge "$MAX_ATTEMPTS" ]]; then
+          echo "Timeout waiting for requests. Only got $REQUEST_COUNT requests."
+          kubectl logs -l app=loadgenerator
+          exit 1
+        fi
+        # ensure there are no errors hitting endpoints
+        ERROR_COUNT=$(kubectl logs -l app=loadgenerator | grep Aggregated | awk '{print $3}' | sed "s/[(][^)]*[)]//g")
+
+        # Generate smoke test report
+        echo "============ Smoke Test Report ============" > smoke-test-report.txt
+        echo "Date: $(date)" >> smoke-test-report.txt
+        echo "Total Requests: $REQUEST_COUNT" >> smoke-test-report.txt
+        echo "Total Errors: $ERROR_COUNT" >> smoke-test-report.txt
+        echo "" >> smoke-test-report.txt
+        echo "Test Result: " >> smoke-test-report.txt
+        if [[ "$ERROR_COUNT" -gt "0" ]]; then
+          echo "FAILED - Errors detected in loadgenerator" >> smoke-test-report.txt
+          cat smoke-test-report.txt
+          exit 1
+        else
+          echo "PASSED - No errors detected" >> smoke-test-report.txt
+          cat smoke-test-report.txt
+        fi
+
+    - name: Upload Smoke Test report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: smoke-test-report
+        path: smoke-test-report.txt
+
+    - name: Cleanup cluster
+      if: always()
+      run: |
+        echo "Cleaning up k3d cluster"
+        k3d cluster delete test-cluster
