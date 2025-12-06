@@ -75,44 +75,48 @@ jobs:
 
     - name: Deploy app
       run: |
-        k3d cluster create mycluster --wait 2m
+        k3d cluster create test-cluster --timeout 2m
         kubectl apply -k ./kustomize
-
-    - name: Forwarding ports
-      run: |
-        kubectl port-forward deployment/frontend 8080:8080
-        kubectl port-forward service/grafana 3000:3000
-        kubectl port-forward service/prometheus 9090:9090
-        kubectl port-forward service/mailhog 8025:8025
 
     - name: Wait for pods
       run: |
         set -x
-        kubectl config set-context --current --namespace=$NAMESPACE
-        kubectl wait --for=condition=available --timeout=30s deployment/redis-cart
-        kubectl wait --for=condition=available --timeout=30s deployment/adservice
-        kubectl wait --for=condition=available --timeout=30s deployment/cartservice
-        kubectl wait --for=condition=available --timeout=30s deployment/checkoutservice
-        kubectl wait --for=condition=available --timeout=30s deployment/currencyservice
-        kubectl wait --for=condition=available --timeout=30s deployment/emailservice
-        kubectl wait --for=condition=available --timeout=30s deployment/frontend
-        kubectl wait --for=condition=available --timeout=30s deployment/loadgenerator
-        kubectl wait --for=condition=available --timeout=30s deployment/paymentservice
-        kubectl wait --for=condition=available --timeout=30s deployment/productcatalogservice
-        kubectl wait --for=condition=available --timeout=30s deployment/recommendationservice
-        kubectl wait --for=condition=available --timeout=30s deployment/shippingservice
+        kubectl wait --for=condition=available --timeout=300s deployment/redis-cart
+        kubectl wait --for=condition=available --timeout=300s deployment/adservice
+        kubectl wait --for=condition=available --timeout=300s deployment/cartservice
+        kubectl wait --for=condition=available --timeout=300s deployment/checkoutservice
+        kubectl wait --for=condition=available --timeout=300s deployment/currencyservice
+        kubectl wait --for=condition=available --timeout=300s deployment/emailservice
+        kubectl wait --for=condition=available --timeout=300s deployment/frontend
+        kubectl wait --for=condition=available --timeout=300s deployment/loadgenerator
+        kubectl wait --for=condition=available --timeout=300s deployment/paymentservice
+        kubectl wait --for=condition=available --timeout=300s deployment/productcatalogservice
+        kubectl wait --for=condition=available --timeout=300s deployment/recommendationservice
+        kubectl wait --for=condition=available --timeout=300s deployment/shippingservice
 
     - name: Smoke Test
       run: |
         set -x
-        # start loadgenerator pod
+        # restart loadgenerator pod to get fresh logs
         kubectl delete pod -l app=loadgenerator
+        kubectl wait --for=condition=ready --timeout=120s pod -l app=loadgenerator
+
         # wait for requests to come in
         REQUEST_COUNT="0"
-        while [[ "$REQUEST_COUNT"  -lt "50"  ]]; do
+        ATTEMPTS=0
+        MAX_ATTEMPTS=60
+        while [[ "$REQUEST_COUNT"  -lt "50" ]] && [[ "$ATTEMPTS" -lt "$MAX_ATTEMPTS" ]]; do
             sleep 5
-            REQUEST_COUNT=$(kubectl logs -l app=loadgenerator | grep Aggregated | awk '{print $2}')
+            REQUEST_COUNT=$(kubectl logs -l app=loadgenerator | grep Aggregated | awk '{print $2}' || echo "0")
+            ATTEMPTS=$((ATTEMPTS + 1))
+            echo "Attempt $ATTEMPTS: Request count = $REQUEST_COUNT"
         done
+
+        if [[ "$ATTEMPTS" -ge "$MAX_ATTEMPTS" ]]; then
+          echo "Timeout waiting for requests. Only got $REQUEST_COUNT requests."
+          kubectl logs -l app=loadgenerator
+          exit 1
+        fi
         # ensure there are no errors hitting endpoints
         ERROR_COUNT=$(kubectl logs -l app=loadgenerator | grep Aggregated | awk '{print $3}' | sed "s/[(][^)]*[)]//g")
 
@@ -143,4 +147,4 @@ jobs:
       if: always()
       run: |
         echo "Cleaning up k3d cluster"
-        k3d cluster delete mycluster
+        k3d cluster delete test-cluster
