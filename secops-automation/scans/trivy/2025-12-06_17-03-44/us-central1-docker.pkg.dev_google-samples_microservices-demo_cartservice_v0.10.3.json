@@ -1,0 +1,1387 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2025-12-06T17:04:37.725296882+01:00",
+  "ArtifactName": "us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.3",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 43492864,
+    "OS": {
+      "Family": "ubuntu",
+      "Name": "24.04"
+    },
+    "ImageID": "sha256:74e28b2a2ffada58359fdc81575496ff32a7faae08c83be615d964a44be5593c",
+    "DiffIDs": [
+      "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:9478f75fd9d601affffaceb4c4191e1583eba804024b9064d601d12e7d05192e",
+      "sha256:ccf8e4c06a5be504b5a3e39371c87a68582415e0cc399c3013e60923530f00f6"
+    ],
+    "RepoTags": [
+      "us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.3"
+    ],
+    "RepoDigests": [
+      "us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice@sha256:598efe871d0251cbd35729972acb23c0723cb7aca451503ba10fb8116aecb958"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "container": "9d65f0482f07bb1b30ce82d7dd16aef3180208e0cc207f03d92343077845a5fa",
+      "created": "2025-06-02T03:59:26.580666518Z",
+      "docker_version": "20.10.24",
+      "history": [
+        {
+          "created": "2024-11-12T18:42:03.665539391Z",
+          "created_by": "COPY /rootfs / # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2024-11-12T18:42:03.997621507Z",
+          "created_by": "ENV APP_UID=1654 ASPNETCORE_HTTP_PORTS=8080 DOTNET_RUNNING_IN_CONTAINER=true DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2024-11-12T18:42:03.997621507Z",
+          "created_by": "COPY --chown=1654:1654 /rootfs/home/app /home/app # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2024-11-12T18:42:03.997621507Z",
+          "created_by": "USER 1654",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-06-02T03:59:25.289229494Z",
+          "created_by": "/bin/sh -c #(nop) WORKDIR /app"
+        },
+        {
+          "created": "2025-06-02T03:59:25.885792013Z",
+          "created_by": "/bin/sh -c #(nop) COPY dir:b7954ad8511f9816b155a2574f5fc1ee52b66e2162a791e6f2fbc1a2cecd0005 in . "
+        },
+        {
+          "created": "2025-06-02T03:59:26.175184678Z",
+          "created_by": "/bin/sh -c #(nop)  EXPOSE 7070",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-06-02T03:59:26.317899719Z",
+          "created_by": "/bin/sh -c #(nop)  ENV DOTNET_EnableDiagnostics=0 ASPNETCORE_HTTP_PORTS=7070",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-06-02T03:59:26.455324842Z",
+          "created_by": "/bin/sh -c #(nop)  USER 1000",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-06-02T03:59:26.580666518Z",
+          "created_by": "/bin/sh -c #(nop)  ENTRYPOINT [\"/app/cartservice\"]",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522",
+          "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "sha256:9478f75fd9d601affffaceb4c4191e1583eba804024b9064d601d12e7d05192e",
+          "sha256:ccf8e4c06a5be504b5a3e39371c87a68582415e0cc399c3013e60923530f00f6"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "/app/cartservice"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "APP_UID=1654",
+          "ASPNETCORE_HTTP_PORTS=7070",
+          "DOTNET_RUNNING_IN_CONTAINER=true",
+          "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true",
+          "DOTNET_EnableDiagnostics=0"
+        ],
+        "Image": "sha256:6a6e3dd94f404e5453b4f741eca0eb3ac8e646fe7378c087e579bacfaad13c76",
+        "User": "1000",
+        "WorkingDir": "/app",
+        "ExposedPorts": {
+          "7070/tcp": {}
+        }
+      }
+    },
+    "Layers": [
+      {
+        "Size": 14247936,
+        "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+        "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+      },
+      {
+        "Size": 1024,
+        "Digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "DiffID": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "Size": 2048,
+        "Digest": "sha256:250fe373226f23f935ebd78bf6089bd353bc89ac8b815b61ee17fe78db69133c",
+        "DiffID": "sha256:9478f75fd9d601affffaceb4c4191e1583eba804024b9064d601d12e7d05192e"
+      },
+      {
+        "Size": 29241856,
+        "Digest": "sha256:f0a9bd8f97863b158e3ca0da2aca8cf6479b4548199e0cd33439790d4c810050",
+        "DiffID": "sha256:ccf8e4c06a5be504b5a3e39371c87a68582415e0cc399c3013e60923530f00f6"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice:v0.10.3 (ubuntu 24.04)",
+      "Class": "os-pkgs",
+      "Type": "ubuntu",
+      "Packages": [
+        {
+          "ID": "base-files@13ubuntu10.1",
+          "Name": "base-files",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/base-files@13ubuntu10.1?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "9c63c702a869505d"
+          },
+          "Version": "13ubuntu10.1",
+          "Arch": "amd64",
+          "SrcName": "base-files",
+          "SrcVersion": "13ubuntu10.1",
+          "Licenses": [
+            "GPL-2.0-or-later"
+          ],
+          "Maintainer": "Ubuntu Developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "libc6@2.39-0ubuntu8.3"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "ca-certificates@20240203",
+          "Name": "ca-certificates",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/ca-certificates@20240203?arch=all\u0026distro=ubuntu-24.04",
+            "UID": "8c05eecb8bdaf2be"
+          },
+          "Version": "20240203",
+          "Arch": "all",
+          "SrcName": "ca-certificates",
+          "SrcVersion": "20240203",
+          "Licenses": [
+            "GPL-2.0-or-later",
+            "GPL-2.0-only",
+            "MPL-2.0"
+          ],
+          "Maintainer": "Ubuntu Developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "openssl@3.0.13-0ubuntu3.4"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "gcc-14-base@14.2.0-4ubuntu2~24.04",
+          "Name": "gcc-14-base",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/gcc-14-base@14.2.0-4ubuntu2~24.04?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "4297dc9a07a70f4a"
+          },
+          "Version": "14.2.0",
+          "Release": "4ubuntu2~24.04",
+          "Arch": "amd64",
+          "SrcName": "gcc-14",
+          "SrcVersion": "14.2.0",
+          "SrcRelease": "4ubuntu2~24.04",
+          "Licenses": [
+            "GPL-2.0-or-later",
+            "GPL-3.0-only",
+            "GFDL-1.2-only",
+            "Artistic-2.0",
+            "LGPL-2.0-or-later"
+          ],
+          "Maintainer": "Ubuntu Core developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "libc6@2.39-0ubuntu8.3",
+          "Name": "libc6",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/libc6@2.39-0ubuntu8.3?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "6d9feb7927145822"
+          },
+          "Version": "2.39",
+          "Release": "0ubuntu8.3",
+          "Arch": "amd64",
+          "SrcName": "glibc",
+          "SrcVersion": "2.39",
+          "SrcRelease": "0ubuntu8.3",
+          "Licenses": [
+            "LGPL-2.1-only",
+            "GPL-2.0-only",
+            "GFDL-1.3-only"
+          ],
+          "Maintainer": "Ubuntu Developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "libgcc-s1@14.2.0-4ubuntu2~24.04"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "libgcc-s1@14.2.0-4ubuntu2~24.04",
+          "Name": "libgcc-s1",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/libgcc-s1@14.2.0-4ubuntu2~24.04?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "6f154c2fc9290c51"
+          },
+          "Version": "14.2.0",
+          "Release": "4ubuntu2~24.04",
+          "Arch": "amd64",
+          "SrcName": "gcc-14",
+          "SrcVersion": "14.2.0",
+          "SrcRelease": "4ubuntu2~24.04",
+          "Maintainer": "Ubuntu Core developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "gcc-14-base@14.2.0-4ubuntu2~24.04",
+            "libc6@2.39-0ubuntu8.3"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "libssl3t64@3.0.13-0ubuntu3.4",
+          "Name": "libssl3t64",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "39b009225c8dbe18"
+          },
+          "Version": "3.0.13",
+          "Release": "0ubuntu3.4",
+          "Arch": "amd64",
+          "SrcName": "openssl",
+          "SrcVersion": "3.0.13",
+          "SrcRelease": "0ubuntu3.4",
+          "Licenses": [
+            "Apache-2.0",
+            "Artistic-2.0",
+            "GPL-1.0-or-later",
+            "GPL-1.0-only"
+          ],
+          "Maintainer": "Ubuntu Developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "libc6@2.39-0ubuntu8.3"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "libstdc++6@14.2.0-4ubuntu2~24.04",
+          "Name": "libstdc++6",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/libstdc%2B%2B6@14.2.0-4ubuntu2~24.04?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "13491825a5bb061d"
+          },
+          "Version": "14.2.0",
+          "Release": "4ubuntu2~24.04",
+          "Arch": "amd64",
+          "SrcName": "gcc-14",
+          "SrcVersion": "14.2.0",
+          "SrcRelease": "4ubuntu2~24.04",
+          "Maintainer": "Ubuntu Core developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "gcc-14-base@14.2.0-4ubuntu2~24.04",
+            "libc6@2.39-0ubuntu8.3",
+            "libgcc-s1@14.2.0-4ubuntu2~24.04"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        },
+        {
+          "ID": "openssl@3.0.13-0ubuntu3.4",
+          "Name": "openssl",
+          "Identifier": {
+            "PURL": "pkg:deb/ubuntu/openssl@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "1780fb178a679d10"
+          },
+          "Version": "3.0.13",
+          "Release": "0ubuntu3.4",
+          "Arch": "amd64",
+          "SrcName": "openssl",
+          "SrcVersion": "3.0.13",
+          "SrcRelease": "0ubuntu3.4",
+          "Maintainer": "Ubuntu Developers \u003cubuntu-devel-discuss@lists.ubuntu.com\u003e",
+          "DependsOn": [
+            "libc6@2.39-0ubuntu8.3",
+            "libssl3t64@3.0.13-0ubuntu3.4"
+          ],
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          }
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2025-0395",
+          "PkgID": "libc6@2.39-0ubuntu8.3",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libc6@2.39-0ubuntu8.3?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "6d9feb7927145822"
+          },
+          "InstalledVersion": "2.39-0ubuntu8.3",
+          "FixedVersion": "2.39-0ubuntu8.4",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-0395",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "glibc: buffer overflow in the GNU C Library's assert()",
+          "Description": "When the assert() function in the GNU C Library versions 2.13 to 2.40 fails, it does not allocate enough space for the assertion failure message string and size information, which may lead to a buffer overflow if the message string size aligns to page size.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-131"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 1,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:H",
+              "V3Score": 5.5
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/01/22/4",
+            "http://www.openwall.com/lists/oss-security/2025/01/23/2",
+            "http://www.openwall.com/lists/oss-security/2025/04/13/1",
+            "http://www.openwall.com/lists/oss-security/2025/04/24/7",
+            "https://access.redhat.com/errata/RHSA-2025:4244",
+            "https://access.redhat.com/security/cve/CVE-2025-0395",
+            "https://bugzilla.redhat.com/2339460",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2339460",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-0395",
+            "https://errata.almalinux.org/9/ALSA-2025-4244.html",
+            "https://errata.rockylinux.org/RLSA-2025:4244",
+            "https://linux.oracle.com/cve/CVE-2025-0395.html",
+            "https://linux.oracle.com/errata/ELSA-2025-4244.html",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00039.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-0395",
+            "https://security.netapp.com/advisory/ntap-20250228-0006/",
+            "https://sourceware.org/bugzilla/show_bug.cgi?id=32582",
+            "https://sourceware.org/git/?p=glibc.git;a=blob;f=advisories/GLIBC-SA-2025-0001",
+            "https://sourceware.org/pipermail/libc-announce/2025/000044.html",
+            "https://ubuntu.com/security/notices/USN-7259-1",
+            "https://ubuntu.com/security/notices/USN-7259-2",
+            "https://ubuntu.com/security/notices/USN-7259-3",
+            "https://www.cve.org/CVERecord?id=CVE-2025-0395",
+            "https://www.openwall.com/lists/oss-security/2025/01/22/4"
+          ],
+          "PublishedDate": "2025-01-22T13:15:20.933Z",
+          "LastModifiedDate": "2025-04-30T05:15:46.707Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-5702",
+          "PkgID": "libc6@2.39-0ubuntu8.3",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libc6@2.39-0ubuntu8.3?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "6d9feb7927145822"
+          },
+          "InstalledVersion": "2.39-0ubuntu8.3",
+          "FixedVersion": "2.39-0ubuntu8.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-5702",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "glibc: Vector register overwrite bug in glibc",
+          "Description": "The strcmp implementation optimized for the Power10 processor in the GNU C Library version 2.39 and later writes to vector registers v20 to v31 without saving contents from the caller (those registers are defined as non-volatile registers by the powerpc64le ABI), resulting in overwriting of its contents and potentially altering control flow of the caller, or leaking the input strings to the function to other parts of the program.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-665"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "oracle-oval": 2,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 5.6
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:9877",
+            "https://access.redhat.com/security/cve/CVE-2025-5702",
+            "https://bugzilla.redhat.com/2370472",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2370472",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-5702",
+            "https://errata.almalinux.org/9/ALSA-2025-9877.html",
+            "https://errata.rockylinux.org/RLSA-2025:11066",
+            "https://linux.oracle.com/cve/CVE-2025-5702.html",
+            "https://linux.oracle.com/errata/ELSA-2025-9877.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-5702",
+            "https://sourceware.org/bugzilla/show_bug.cgi?id=33056",
+            "https://sourceware.org/pipermail/libc-alpha/2025-June/167381.html",
+            "https://ubuntu.com/security/notices/USN-7634-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-5702"
+          ],
+          "PublishedDate": "2025-06-05T19:15:31.073Z",
+          "LastModifiedDate": "2025-10-01T15:37:50.07Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-8058",
+          "PkgID": "libc6@2.39-0ubuntu8.3",
+          "PkgName": "libc6",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libc6@2.39-0ubuntu8.3?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "6d9feb7927145822"
+          },
+          "InstalledVersion": "2.39-0ubuntu8.3",
+          "FixedVersion": "2.39-0ubuntu8.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-8058",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "glibc: Double free in glibc",
+          "Description": "The regcomp function in the GNU C library version from 2.4 to 2.41 is \nsubject to a double free if some previous allocation fails. It can be \naccomplished either by a malloc failure or by using an interposed malloc\n that injects random malloc failures. The double free can allow buffer \nmanipulation depending of how the regex is constructed. This issue \naffects all architectures and ABIs supported by the GNU C library.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-415"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 2,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:L",
+              "V3Score": 4.2
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/07/23/1",
+            "https://access.redhat.com/errata/RHSA-2025:12980",
+            "https://access.redhat.com/security/cve/CVE-2025-8058",
+            "https://bugzilla.redhat.com/2383146",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2383146",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-8058",
+            "https://errata.almalinux.org/8/ALSA-2025-12980.html",
+            "https://errata.rockylinux.org/RLSA-2025:12980",
+            "https://linux.oracle.com/cve/CVE-2025-8058.html",
+            "https://linux.oracle.com/errata/ELSA-2025-28003.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-8058",
+            "https://sourceware.org/bugzilla/show_bug.cgi?id=33185",
+            "https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=advisories/GLIBC-SA-2025-0005",
+            "https://sourceware.org/git/?p=glibc.git;a=commit;h=3ff17af18c38727b88d9115e536c069e6b5d601f",
+            "https://ubuntu.com/security/notices/USN-7760-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-8058"
+          ],
+          "PublishedDate": "2025-07-23T20:15:27.747Z",
+          "LastModifiedDate": "2025-11-04T22:16:44.44Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-9230",
+          "PkgID": "libssl3t64@3.0.13-0ubuntu3.4",
+          "PkgName": "libssl3t64",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "39b009225c8dbe18"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-9230",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Out-of-bounds read \u0026 write in RFC 3211 KEK Unwrap",
+          "Description": "Issue summary: An application trying to decrypt CMS messages encrypted using\npassword based encryption can trigger an out-of-bounds read and write.\n\nImpact summary: This out-of-bounds read may trigger a crash which leads to\nDenial of Service for an application. The out-of-bounds write can cause\na memory corruption which can have various consequences including\na Denial of Service or Execution of attacker-supplied code.\n\nAlthough the consequences of a successful exploit of this vulnerability\ncould be severe, the probability that the attacker would be able to\nperform it is low. Besides, password based (PWRI) encryption support in CMS\nmessages is very rarely used. For that reason the issue was assessed as\nModerate severity according to our Security Policy.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the CMS implementation is outside the OpenSSL FIPS module\nboundary.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 5.6
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/09/30/5",
+            "https://access.redhat.com/errata/RHSA-2025:21255",
+            "https://access.redhat.com/security/cve/CVE-2025-9230",
+            "https://bugzilla.redhat.com/2396054",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2396054",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-9230",
+            "https://errata.almalinux.org/9/ALSA-2025-21255.html",
+            "https://errata.rockylinux.org/RLSA-2025:21255",
+            "https://github.com/openssl/openssl/commit/5965ea5dd6960f36d8b7f74f8eac67a8eb8f2b45",
+            "https://github.com/openssl/openssl/commit/9e91358f365dee6c446dcdcdb01c04d2743fd280",
+            "https://github.com/openssl/openssl/commit/a79c4ce559c6a3a8fd4109e9f33c1185d5bf2def",
+            "https://github.com/openssl/openssl/commit/b5282d677551afda7d20e9c00e09561b547b2dfd",
+            "https://github.com/openssl/openssl/commit/bae259a211ada6315dc50900686daaaaaa55f482",
+            "https://github.openssl.org/openssl/extended-releases/commit/c2b96348bfa662f25f4fabf81958ae822063dae3",
+            "https://github.openssl.org/openssl/extended-releases/commit/dfbaf161d8dafc1132dd88cd48ad990ed9b4c8ba",
+            "https://linux.oracle.com/cve/CVE-2025-9230.html",
+            "https://linux.oracle.com/errata/ELSA-2025-28020.html",
+            "https://lists.debian.org/debian-lts-announce/2025/10/msg00001.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-9230",
+            "https://openssl-library.org/news/secadv/20250930.txt",
+            "https://ubuntu.com/security/notices/USN-7786-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-9230"
+          ],
+          "PublishedDate": "2025-09-30T14:15:41.05Z",
+          "LastModifiedDate": "2025-11-04T22:16:45.36Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-13176",
+          "PkgID": "libssl3t64@3.0.13-0ubuntu3.4",
+          "PkgName": "libssl3t64",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "39b009225c8dbe18"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-13176",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Timing side-channel in ECDSA signature computation",
+          "Description": "Issue summary: A timing side-channel which could potentially allow recovering\nthe private key exists in the ECDSA signature computation.\n\nImpact summary: A timing side-channel in ECDSA signature computations\ncould allow recovering the private key by an attacker. However, measuring\nthe timing would require either local access to the signing application or\na very fast network connection with low latency.\n\nThere is a timing signal of around 300 nanoseconds when the top word of\nthe inverted ECDSA nonce value is zero. This can happen with significant\nprobability only for some of the supported elliptic curves. In particular\nthe NIST P-521 curve is affected. To be able to measure this leak, the attacker\nprocess must either be located in the same physical computer or must\nhave a very fast network connection with low latency. For that reason\nthe severity of this vulnerability is Low.\n\nThe FIPS modules in 3.4, 3.3, 3.2, 3.1 and 3.0 are affected by this issue.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-385"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 2,
+            "cbl-mariner": 2,
+            "oracle-oval": 2,
+            "redhat": 1,
+            "rocky": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 4.7
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/01/20/2",
+            "https://access.redhat.com/errata/RHSA-2025:16046",
+            "https://access.redhat.com/security/cve/CVE-2024-13176",
+            "https://bugzilla.redhat.com/2359885",
+            "https://bugzilla.redhat.com/2359888",
+            "https://bugzilla.redhat.com/2359892",
+            "https://bugzilla.redhat.com/2359894",
+            "https://bugzilla.redhat.com/2359895",
+            "https://bugzilla.redhat.com/2359899",
+            "https://bugzilla.redhat.com/2359900",
+            "https://bugzilla.redhat.com/2359902",
+            "https://bugzilla.redhat.com/2359903",
+            "https://bugzilla.redhat.com/2359911",
+            "https://bugzilla.redhat.com/2359918",
+            "https://bugzilla.redhat.com/2359920",
+            "https://bugzilla.redhat.com/2359924",
+            "https://bugzilla.redhat.com/2359928",
+            "https://bugzilla.redhat.com/2359930",
+            "https://bugzilla.redhat.com/2359932",
+            "https://bugzilla.redhat.com/2359934",
+            "https://bugzilla.redhat.com/2359938",
+            "https://bugzilla.redhat.com/2359940",
+            "https://bugzilla.redhat.com/2359943",
+            "https://bugzilla.redhat.com/2359944",
+            "https://bugzilla.redhat.com/2359945",
+            "https://bugzilla.redhat.com/2359947",
+            "https://bugzilla.redhat.com/2359950",
+            "https://bugzilla.redhat.com/2359963",
+            "https://bugzilla.redhat.com/2359964",
+            "https://bugzilla.redhat.com/2359972",
+            "https://bugzilla.redhat.com/2370920",
+            "https://bugzilla.redhat.com/2380264",
+            "https://bugzilla.redhat.com/2380273",
+            "https://bugzilla.redhat.com/2380274",
+            "https://bugzilla.redhat.com/2380278",
+            "https://bugzilla.redhat.com/2380280",
+            "https://bugzilla.redhat.com/2380283",
+            "https://bugzilla.redhat.com/2380284",
+            "https://bugzilla.redhat.com/2380290",
+            "https://bugzilla.redhat.com/2380291",
+            "https://bugzilla.redhat.com/2380295",
+            "https://bugzilla.redhat.com/2380298",
+            "https://bugzilla.redhat.com/2380306",
+            "https://bugzilla.redhat.com/2380308",
+            "https://bugzilla.redhat.com/2380309",
+            "https://bugzilla.redhat.com/2380310",
+            "https://bugzilla.redhat.com/2380312",
+            "https://bugzilla.redhat.com/2380313",
+            "https://bugzilla.redhat.com/2380320",
+            "https://bugzilla.redhat.com/2380321",
+            "https://bugzilla.redhat.com/2380322",
+            "https://bugzilla.redhat.com/2380326",
+            "https://bugzilla.redhat.com/2380327",
+            "https://bugzilla.redhat.com/2380334",
+            "https://bugzilla.redhat.com/2380335",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2338999",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359885",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359888",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359892",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359894",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359895",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359899",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359900",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359902",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359903",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359918",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359920",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359924",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359928",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359930",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359932",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359934",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359938",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359940",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359943",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359944",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359945",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359947",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359950",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359963",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359964",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359972",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2370920",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380264",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380273",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380274",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380278",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380280",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380283",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380284",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380290",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380291",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380295",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380298",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380306",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380308",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380309",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380310",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380312",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380313",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380320",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380321",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380322",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380326",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380327",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380334",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380335",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-13176",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21574",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21575",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21577",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21579",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21580",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21581",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21584",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21585",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21588",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30681",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30682",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30683",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30684",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30685",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30687",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30688",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30689",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30693",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30695",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30696",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30699",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30703",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30704",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30705",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30715",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30721",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30722",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50077",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50078",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50079",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50080",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50081",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50082",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50083",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50084",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50085",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50086",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50087",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50088",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50091",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50092",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50093",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50094",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50096",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50097",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50098",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50099",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50100",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50101",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50102",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50104",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-5399",
+            "https://errata.almalinux.org/9/ALSA-2025-16046.html",
+            "https://errata.rockylinux.org/RLSA-2025:15699",
+            "https://github.com/openssl/openssl/commit/07272b05b04836a762b4baa874958af51d513844",
+            "https://github.com/openssl/openssl/commit/2af62e74fb59bc469506bc37eb2990ea408d9467",
+            "https://github.com/openssl/openssl/commit/392dcb336405a0c94486aa6655057f59fd3a0902",
+            "https://github.com/openssl/openssl/commit/4b1cb94a734a7d4ec363ac0a215a25c181e11f65",
+            "https://github.com/openssl/openssl/commit/77c608f4c8857e63e98e66444e2e761c9627916f",
+            "https://github.openssl.org/openssl/extended-releases/commit/0d5fd1ab987f7571e2c955d8d8b638fc0fb54ded",
+            "https://github.openssl.org/openssl/extended-releases/commit/a2639000db19878d5d89586ae7b725080592ae86",
+            "https://linux.oracle.com/cve/CVE-2024-13176.html",
+            "https://linux.oracle.com/errata/ELSA-2025-16046.html",
+            "https://lists.debian.org/debian-lts-announce/2025/05/msg00028.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-13176",
+            "https://openssl-library.org/news/secadv/20250120.txt",
+            "https://security.netapp.com/advisory/ntap-20250124-0005/",
+            "https://security.netapp.com/advisory/ntap-20250418-0010/",
+            "https://security.netapp.com/advisory/ntap-20250502-0006/",
+            "https://ubuntu.com/security/notices/USN-7264-1",
+            "https://ubuntu.com/security/notices/USN-7278-1",
+            "https://ubuntu.com/security/notices/USN-7894-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-13176",
+            "https://www.oracle.com/security-alerts/cpuapr2025.html#AppendixMSQL"
+          ],
+          "PublishedDate": "2025-01-20T14:15:26.247Z",
+          "LastModifiedDate": "2025-11-03T20:16:08.203Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-41996",
+          "PkgID": "libssl3t64@3.0.13-0ubuntu3.4",
+          "PkgName": "libssl3t64",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "39b009225c8dbe18"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "Status": "affected",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-41996",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: remote attackers (from the client side) to trigger unnecessarily expensive server-side DHE modular-exponentiation calculations",
+          "Description": "Validating the order of the public keys in the Diffie-Hellman Key Agreement Protocol, when an approved safe prime is used, allows remote attackers (from the client side) to trigger unnecessarily expensive server-side DHE modular-exponentiation calculations. The client may cause asymmetric resource consumption. The basic attack scenario is that the client must claim that it can only communicate with DHE, and the server must be configured to allow DHE and validate the order of the public key.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-295"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2024-41996",
+            "https://dheatattack.gitlab.io/details/",
+            "https://dheatattack.gitlab.io/faq/",
+            "https://gist.github.com/c0r0n3r/abccc14d4d96c0442f3a77fa5ca255d1",
+            "https://github.com/openssl/openssl/issues/17374",
+            "https://github.com/openssl/openssl/pull/25088",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-41996",
+            "https://openssl-library.org/post/2022-10-21-tls-groups-configuration/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-41996"
+          ],
+          "PublishedDate": "2024-08-26T06:15:04.603Z",
+          "LastModifiedDate": "2024-08-26T16:35:11.247Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-9143",
+          "PkgID": "libssl3t64@3.0.13-0ubuntu3.4",
+          "PkgName": "libssl3t64",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/libssl3t64@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "39b009225c8dbe18"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-9143",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Low-level invalid GF(2^m) parameters lead to OOB memory access",
+          "Description": "Issue summary: Use of the low-level GF(2^m) elliptic curve APIs with untrusted\nexplicit values for the field polynomial can lead to out-of-bounds memory reads\nor writes.\n\nImpact summary: Out of bound memory writes can lead to an application crash or\neven a possibility of a remote code execution, however, in all the protocols\ninvolving Elliptic Curve Cryptography that we're aware of, either only \"named\ncurves\" are supported, or, if explicit curve parameters are supported, they\nspecify an X9.62 encoding of binary (GF(2^m)) curves that can't represent\nproblematic input values. Thus the likelihood of existence of a vulnerable\napplication is low.\n\nIn particular, the X9.62 encoding is used for ECC keys in X.509 certificates,\nso problematic inputs cannot occur in the context of processing X.509\ncertificates.  Any problematic use-cases would have to be using an \"exotic\"\ncurve encoding.\n\nThe affected APIs include: EC_GROUP_new_curve_GF2m(), EC_GROUP_new_from_params(),\nand various supporting BN_GF2m_*() functions.\n\nApplications working with \"exotic\" explicit binary (GF(2^m)) curve parameters,\nthat make it possible to represent invalid field polynomials with a zero\nconstant term, via the above or similar APIs, may terminate abruptly as a\nresult of reading or writing outside of array bounds.  Remote code execution\ncannot easily be ruled out.\n\nThe FIPS modules in 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "photon": 2,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 3.7
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/10/16/1",
+            "http://www.openwall.com/lists/oss-security/2024/10/23/1",
+            "http://www.openwall.com/lists/oss-security/2024/10/24/1",
+            "https://access.redhat.com/security/cve/CVE-2024-9143",
+            "https://github.com/openssl/openssl/commit/72ae83ad214d2eef262461365a1975707f862712",
+            "https://github.com/openssl/openssl/commit/bc7e04d7c8d509fb78fc0e285aa948fb0da04700",
+            "https://github.com/openssl/openssl/commit/c0d3e4d32d2805f49bec30547f225bc4d092e1f4",
+            "https://github.com/openssl/openssl/commit/fdf6723362ca51bd883295efe206cb5b1cfa5154",
+            "https://github.openssl.org/openssl/extended-releases/commit/8efc0cbaa8ebba8e116f7b81a876a4123594d86a",
+            "https://github.openssl.org/openssl/extended-releases/commit/9d576994cec2b7aa37a91740ea7e680810957e41",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00033.html",
+            "https://lists.debian.org/debian-lts-announce/2024/11/msg00000.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-9143",
+            "https://openssl-library.org/news/secadv/20241016.txt",
+            "https://security.netapp.com/advisory/ntap-20241101-0001/",
+            "https://ubuntu.com/security/notices/USN-7264-1",
+            "https://ubuntu.com/security/notices/USN-7278-1",
+            "https://ubuntu.com/security/notices/USN-7894-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-9143"
+          ],
+          "PublishedDate": "2024-10-16T17:15:18.13Z",
+          "LastModifiedDate": "2025-11-03T23:17:33.46Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-9230",
+          "PkgID": "openssl@3.0.13-0ubuntu3.4",
+          "PkgName": "openssl",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/openssl@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "1780fb178a679d10"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.6",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-9230",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Out-of-bounds read \u0026 write in RFC 3211 KEK Unwrap",
+          "Description": "Issue summary: An application trying to decrypt CMS messages encrypted using\npassword based encryption can trigger an out-of-bounds read and write.\n\nImpact summary: This out-of-bounds read may trigger a crash which leads to\nDenial of Service for an application. The out-of-bounds write can cause\na memory corruption which can have various consequences including\na Denial of Service or Execution of attacker-supplied code.\n\nAlthough the consequences of a successful exploit of this vulnerability\ncould be severe, the probability that the attacker would be able to\nperform it is low. Besides, password based (PWRI) encryption support in CMS\nmessages is very rarely used. For that reason the issue was assessed as\nModerate severity according to our Security Policy.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the CMS implementation is outside the OpenSSL FIPS module\nboundary.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "oracle-oval": 2,
+            "photon": 3,
+            "redhat": 2,
+            "rocky": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+              "V3Score": 5.6
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/09/30/5",
+            "https://access.redhat.com/errata/RHSA-2025:21255",
+            "https://access.redhat.com/security/cve/CVE-2025-9230",
+            "https://bugzilla.redhat.com/2396054",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2396054",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-9230",
+            "https://errata.almalinux.org/9/ALSA-2025-21255.html",
+            "https://errata.rockylinux.org/RLSA-2025:21255",
+            "https://github.com/openssl/openssl/commit/5965ea5dd6960f36d8b7f74f8eac67a8eb8f2b45",
+            "https://github.com/openssl/openssl/commit/9e91358f365dee6c446dcdcdb01c04d2743fd280",
+            "https://github.com/openssl/openssl/commit/a79c4ce559c6a3a8fd4109e9f33c1185d5bf2def",
+            "https://github.com/openssl/openssl/commit/b5282d677551afda7d20e9c00e09561b547b2dfd",
+            "https://github.com/openssl/openssl/commit/bae259a211ada6315dc50900686daaaaaa55f482",
+            "https://github.openssl.org/openssl/extended-releases/commit/c2b96348bfa662f25f4fabf81958ae822063dae3",
+            "https://github.openssl.org/openssl/extended-releases/commit/dfbaf161d8dafc1132dd88cd48ad990ed9b4c8ba",
+            "https://linux.oracle.com/cve/CVE-2025-9230.html",
+            "https://linux.oracle.com/errata/ELSA-2025-28020.html",
+            "https://lists.debian.org/debian-lts-announce/2025/10/msg00001.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-9230",
+            "https://openssl-library.org/news/secadv/20250930.txt",
+            "https://ubuntu.com/security/notices/USN-7786-1",
+            "https://www.cve.org/CVERecord?id=CVE-2025-9230"
+          ],
+          "PublishedDate": "2025-09-30T14:15:41.05Z",
+          "LastModifiedDate": "2025-11-04T22:16:45.36Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-13176",
+          "PkgID": "openssl@3.0.13-0ubuntu3.4",
+          "PkgName": "openssl",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/openssl@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "1780fb178a679d10"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-13176",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Timing side-channel in ECDSA signature computation",
+          "Description": "Issue summary: A timing side-channel which could potentially allow recovering\nthe private key exists in the ECDSA signature computation.\n\nImpact summary: A timing side-channel in ECDSA signature computations\ncould allow recovering the private key by an attacker. However, measuring\nthe timing would require either local access to the signing application or\na very fast network connection with low latency.\n\nThere is a timing signal of around 300 nanoseconds when the top word of\nthe inverted ECDSA nonce value is zero. This can happen with significant\nprobability only for some of the supported elliptic curves. In particular\nthe NIST P-521 curve is affected. To be able to measure this leak, the attacker\nprocess must either be located in the same physical computer or must\nhave a very fast network connection with low latency. For that reason\nthe severity of this vulnerability is Low.\n\nThe FIPS modules in 3.4, 3.3, 3.2, 3.1 and 3.0 are affected by this issue.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-385"
+          ],
+          "VendorSeverity": {
+            "alma": 2,
+            "amazon": 2,
+            "azure": 2,
+            "cbl-mariner": 2,
+            "oracle-oval": 2,
+            "redhat": 1,
+            "rocky": 2,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 4.7
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/01/20/2",
+            "https://access.redhat.com/errata/RHSA-2025:16046",
+            "https://access.redhat.com/security/cve/CVE-2024-13176",
+            "https://bugzilla.redhat.com/2359885",
+            "https://bugzilla.redhat.com/2359888",
+            "https://bugzilla.redhat.com/2359892",
+            "https://bugzilla.redhat.com/2359894",
+            "https://bugzilla.redhat.com/2359895",
+            "https://bugzilla.redhat.com/2359899",
+            "https://bugzilla.redhat.com/2359900",
+            "https://bugzilla.redhat.com/2359902",
+            "https://bugzilla.redhat.com/2359903",
+            "https://bugzilla.redhat.com/2359911",
+            "https://bugzilla.redhat.com/2359918",
+            "https://bugzilla.redhat.com/2359920",
+            "https://bugzilla.redhat.com/2359924",
+            "https://bugzilla.redhat.com/2359928",
+            "https://bugzilla.redhat.com/2359930",
+            "https://bugzilla.redhat.com/2359932",
+            "https://bugzilla.redhat.com/2359934",
+            "https://bugzilla.redhat.com/2359938",
+            "https://bugzilla.redhat.com/2359940",
+            "https://bugzilla.redhat.com/2359943",
+            "https://bugzilla.redhat.com/2359944",
+            "https://bugzilla.redhat.com/2359945",
+            "https://bugzilla.redhat.com/2359947",
+            "https://bugzilla.redhat.com/2359950",
+            "https://bugzilla.redhat.com/2359963",
+            "https://bugzilla.redhat.com/2359964",
+            "https://bugzilla.redhat.com/2359972",
+            "https://bugzilla.redhat.com/2370920",
+            "https://bugzilla.redhat.com/2380264",
+            "https://bugzilla.redhat.com/2380273",
+            "https://bugzilla.redhat.com/2380274",
+            "https://bugzilla.redhat.com/2380278",
+            "https://bugzilla.redhat.com/2380280",
+            "https://bugzilla.redhat.com/2380283",
+            "https://bugzilla.redhat.com/2380284",
+            "https://bugzilla.redhat.com/2380290",
+            "https://bugzilla.redhat.com/2380291",
+            "https://bugzilla.redhat.com/2380295",
+            "https://bugzilla.redhat.com/2380298",
+            "https://bugzilla.redhat.com/2380306",
+            "https://bugzilla.redhat.com/2380308",
+            "https://bugzilla.redhat.com/2380309",
+            "https://bugzilla.redhat.com/2380310",
+            "https://bugzilla.redhat.com/2380312",
+            "https://bugzilla.redhat.com/2380313",
+            "https://bugzilla.redhat.com/2380320",
+            "https://bugzilla.redhat.com/2380321",
+            "https://bugzilla.redhat.com/2380322",
+            "https://bugzilla.redhat.com/2380326",
+            "https://bugzilla.redhat.com/2380327",
+            "https://bugzilla.redhat.com/2380334",
+            "https://bugzilla.redhat.com/2380335",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2338999",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359885",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359888",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359892",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359894",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359895",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359899",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359900",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359902",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359903",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359911",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359918",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359920",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359924",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359928",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359930",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359932",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359934",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359938",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359940",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359943",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359944",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359945",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359947",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359950",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359963",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359964",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2359972",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2370920",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380264",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380273",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380274",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380278",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380280",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380283",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380284",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380290",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380291",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380295",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380298",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380306",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380308",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380309",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380310",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380312",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380313",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380320",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380321",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380322",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380326",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380327",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380334",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2380335",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-13176",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21574",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21575",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21577",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21579",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21580",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21581",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21584",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21585",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-21588",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30681",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30682",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30683",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30684",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30685",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30687",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30688",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30689",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30693",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30695",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30696",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30699",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30703",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30704",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30705",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30715",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30721",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-30722",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50077",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50078",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50079",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50080",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50081",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50082",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50083",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50084",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50085",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50086",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50087",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50088",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50091",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50092",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50093",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50094",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50096",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50097",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50098",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50099",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50100",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50101",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50102",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-50104",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-5399",
+            "https://errata.almalinux.org/9/ALSA-2025-16046.html",
+            "https://errata.rockylinux.org/RLSA-2025:15699",
+            "https://github.com/openssl/openssl/commit/07272b05b04836a762b4baa874958af51d513844",
+            "https://github.com/openssl/openssl/commit/2af62e74fb59bc469506bc37eb2990ea408d9467",
+            "https://github.com/openssl/openssl/commit/392dcb336405a0c94486aa6655057f59fd3a0902",
+            "https://github.com/openssl/openssl/commit/4b1cb94a734a7d4ec363ac0a215a25c181e11f65",
+            "https://github.com/openssl/openssl/commit/77c608f4c8857e63e98e66444e2e761c9627916f",
+            "https://github.openssl.org/openssl/extended-releases/commit/0d5fd1ab987f7571e2c955d8d8b638fc0fb54ded",
+            "https://github.openssl.org/openssl/extended-releases/commit/a2639000db19878d5d89586ae7b725080592ae86",
+            "https://linux.oracle.com/cve/CVE-2024-13176.html",
+            "https://linux.oracle.com/errata/ELSA-2025-16046.html",
+            "https://lists.debian.org/debian-lts-announce/2025/05/msg00028.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-13176",
+            "https://openssl-library.org/news/secadv/20250120.txt",
+            "https://security.netapp.com/advisory/ntap-20250124-0005/",
+            "https://security.netapp.com/advisory/ntap-20250418-0010/",
+            "https://security.netapp.com/advisory/ntap-20250502-0006/",
+            "https://ubuntu.com/security/notices/USN-7264-1",
+            "https://ubuntu.com/security/notices/USN-7278-1",
+            "https://ubuntu.com/security/notices/USN-7894-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-13176",
+            "https://www.oracle.com/security-alerts/cpuapr2025.html#AppendixMSQL"
+          ],
+          "PublishedDate": "2025-01-20T14:15:26.247Z",
+          "LastModifiedDate": "2025-11-03T20:16:08.203Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-41996",
+          "PkgID": "openssl@3.0.13-0ubuntu3.4",
+          "PkgName": "openssl",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/openssl@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "1780fb178a679d10"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "Status": "affected",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-41996",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: remote attackers (from the client side) to trigger unnecessarily expensive server-side DHE modular-exponentiation calculations",
+          "Description": "Validating the order of the public keys in the Diffie-Hellman Key Agreement Protocol, when an approved safe prime is used, allows remote attackers (from the client side) to trigger unnecessarily expensive server-side DHE modular-exponentiation calculations. The client may cause asymmetric resource consumption. The basic attack scenario is that the client must claim that it can only communicate with DHE, and the server must be configured to allow DHE and validate the order of the public key.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-295"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2024-41996",
+            "https://dheatattack.gitlab.io/details/",
+            "https://dheatattack.gitlab.io/faq/",
+            "https://gist.github.com/c0r0n3r/abccc14d4d96c0442f3a77fa5ca255d1",
+            "https://github.com/openssl/openssl/issues/17374",
+            "https://github.com/openssl/openssl/pull/25088",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-41996",
+            "https://openssl-library.org/post/2022-10-21-tls-groups-configuration/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-41996"
+          ],
+          "PublishedDate": "2024-08-26T06:15:04.603Z",
+          "LastModifiedDate": "2024-08-26T16:35:11.247Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-9143",
+          "PkgID": "openssl@3.0.13-0ubuntu3.4",
+          "PkgName": "openssl",
+          "PkgIdentifier": {
+            "PURL": "pkg:deb/ubuntu/openssl@3.0.13-0ubuntu3.4?arch=amd64\u0026distro=ubuntu-24.04",
+            "UID": "1780fb178a679d10"
+          },
+          "InstalledVersion": "3.0.13-0ubuntu3.4",
+          "FixedVersion": "3.0.13-0ubuntu3.5",
+          "Status": "fixed",
+          "Layer": {
+            "Digest": "sha256:5a832261cd45328a290047ab9cb4f25c222ccd3eef3956c63ab7c2ed620dd0fe",
+            "DiffID": "sha256:9a9801db78639389468d8236d35fdb60709dfe8c4fa8c3158f5e45cec2917522"
+          },
+          "SeveritySource": "ubuntu",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-9143",
+          "DataSource": {
+            "ID": "ubuntu",
+            "Name": "Ubuntu CVE Tracker",
+            "URL": "https://git.launchpad.net/ubuntu-cve-tracker"
+          },
+          "Title": "openssl: Low-level invalid GF(2^m) parameters lead to OOB memory access",
+          "Description": "Issue summary: Use of the low-level GF(2^m) elliptic curve APIs with untrusted\nexplicit values for the field polynomial can lead to out-of-bounds memory reads\nor writes.\n\nImpact summary: Out of bound memory writes can lead to an application crash or\neven a possibility of a remote code execution, however, in all the protocols\ninvolving Elliptic Curve Cryptography that we're aware of, either only \"named\ncurves\" are supported, or, if explicit curve parameters are supported, they\nspecify an X9.62 encoding of binary (GF(2^m)) curves that can't represent\nproblematic input values. Thus the likelihood of existence of a vulnerable\napplication is low.\n\nIn particular, the X9.62 encoding is used for ECC keys in X.509 certificates,\nso problematic inputs cannot occur in the context of processing X.509\ncertificates.  Any problematic use-cases would have to be using an \"exotic\"\ncurve encoding.\n\nThe affected APIs include: EC_GROUP_new_curve_GF2m(), EC_GROUP_new_from_params(),\nand various supporting BN_GF2m_*() functions.\n\nApplications working with \"exotic\" explicit binary (GF(2^m)) curve parameters,\nthat make it possible to represent invalid field polynomials with a zero\nconstant term, via the above or similar APIs, may terminate abruptly as a\nresult of reading or writing outside of array bounds.  Remote code execution\ncannot easily be ruled out.\n\nThe FIPS modules in 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-125",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "photon": 2,
+            "redhat": 1,
+            "ubuntu": 1
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 3.7
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/10/16/1",
+            "http://www.openwall.com/lists/oss-security/2024/10/23/1",
+            "http://www.openwall.com/lists/oss-security/2024/10/24/1",
+            "https://access.redhat.com/security/cve/CVE-2024-9143",
+            "https://github.com/openssl/openssl/commit/72ae83ad214d2eef262461365a1975707f862712",
+            "https://github.com/openssl/openssl/commit/bc7e04d7c8d509fb78fc0e285aa948fb0da04700",
+            "https://github.com/openssl/openssl/commit/c0d3e4d32d2805f49bec30547f225bc4d092e1f4",
+            "https://github.com/openssl/openssl/commit/fdf6723362ca51bd883295efe206cb5b1cfa5154",
+            "https://github.openssl.org/openssl/extended-releases/commit/8efc0cbaa8ebba8e116f7b81a876a4123594d86a",
+            "https://github.openssl.org/openssl/extended-releases/commit/9d576994cec2b7aa37a91740ea7e680810957e41",
+            "https://lists.debian.org/debian-lts-announce/2024/10/msg00033.html",
+            "https://lists.debian.org/debian-lts-announce/2024/11/msg00000.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-9143",
+            "https://openssl-library.org/news/secadv/20241016.txt",
+            "https://security.netapp.com/advisory/ntap-20241101-0001/",
+            "https://ubuntu.com/security/notices/USN-7264-1",
+            "https://ubuntu.com/security/notices/USN-7278-1",
+            "https://ubuntu.com/security/notices/USN-7894-1",
+            "https://www.cve.org/CVERecord?id=CVE-2024-9143"
+          ],
+          "PublishedDate": "2024-10-16T17:15:18.13Z",
+          "LastModifiedDate": "2025-11-03T23:17:33.46Z"
+        }
+      ]
+    }
+  ]
+}
