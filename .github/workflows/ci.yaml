@@ -30,6 +30,7 @@ jobs:
       timeout-minutes: 10
       run: |
         dotnet test src/cartservice/
+
   security-tests:
     runs-on: ubuntu-latest
     needs: code-tests
@@ -42,7 +43,7 @@ jobs:
         scan-type: "fs"
         format: "table"
         output: "trivy-report.txt"
-        severity: "HIGH,CRITICAL"
+        severity: "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN"
         ignore-unfixed: true
         exit-code: 0
 
