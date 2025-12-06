@@ -17,6 +17,9 @@ data:
               endpoint: 0.0.0.0:4317
             http:
               endpoint: 0.0.0.0:4318
+      ring:
+        kvstore:
+          store: inmemory
 
     ingester:
       trace_idle_period: 10s
@@ -42,7 +45,15 @@ data:
       trace_by_id:
         duration_slo: 5s
 
+    overrides:
+      defaults:
+        metrics_generator:
+          processors: [service-graphs, span-metrics]
+
     metrics_generator:
+      ring:
+        kvstore:
+          store: inmemory
       registry:
         external_labels:
           source: tempo
@@ -57,18 +68,20 @@ data:
       processor:
         service_graphs:
           histogram_buckets: [0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4, 12.8]
-          dimensions:
-            - server
-            - client
-            - service_name
-            - service.name
+          max_items: 10000
+          wait: 10s
+          peer_attributes:
+            - peer.service
+            - db.name
+            - db.system
         span_metrics:
-          histogram_buckets: [0.002, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]
           dimensions:
             - service.name
             - span.name
             - span.kind
             - status.code
+          histogram_buckets: [0.002, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]
+          enable_target_info: true
 
 ---
 apiVersion: apps/v1

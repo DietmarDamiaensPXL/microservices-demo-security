@@ -34,6 +34,7 @@ from opentelemetry import trace
 from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.resources import Resource
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
 import googlecloudprofiler
@@ -52,7 +53,7 @@ class BaseEmailService(demo_pb2_grpc.EmailServiceServicer):
   def Check(self, request, context):
     return health_pb2.HealthCheckResponse(
       status=health_pb2.HealthCheckResponse.SERVING)
-  
+
   def Watch(self, request, context):
     return health_pb2.HealthCheckResponse(
       status=health_pb2.HealthCheckResponse.UNIMPLEMENTED)
@@ -178,7 +179,8 @@ if __name__ == '__main__':
   try:
     if os.environ["ENABLE_TRACING"] == "1":
       otel_endpoint = os.getenv("COLLECTOR_SERVICE_ADDR", "localhost:4317")
-      trace.set_tracer_provider(TracerProvider())
+      resource = Resource.create({"service.name": "emailservice"})
+      trace.set_tracer_provider(TracerProvider(resource=resource))
       trace.get_tracer_provider().add_span_processor(
         BatchSpanProcessor(
             OTLPSpanExporter(
@@ -193,6 +195,6 @@ if __name__ == '__main__':
   except (KeyError, DefaultCredentialsError):
       logger.info("Tracing disabled.")
   except Exception as e:
-      logger.warn(f"Exception on Cloud Trace setup: {traceback.format_exc()}, tracing disabled.") 
-  
+      logger.warn(f"Exception on Cloud Trace setup: {traceback.format_exc()}, tracing disabled.")
+
   start(dummy_mode = True)

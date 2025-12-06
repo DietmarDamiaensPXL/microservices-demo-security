@@ -61,13 +61,28 @@ data:
                         ],
                         "queries": [
                             {
-                                "name": "Sample query",
-                                "query": "sum(rate(traces_service_graph_request_total{}[5m]))"
+                                "name": "Request rate",
+                                "query": "sum(rate(traces_service_graph_request_total{$__tags}[5m]))"
+                            },
+                            {
+                                "name": "Request histogram",
+                                "query": "histogram_quantile(0.9, sum(rate(traces_span_metrics_duration_seconds_bucket{$__tags}[5m])) by (le))"
                             }
                         ]
                     },
                     "serviceMap": {
                         "datasourceUid": "prometheus"
+                    },
+                    "spanmetrics": {
+                        "datasourceUid": "prometheus",
+                        "tags": [
+                            {
+                                "key": "service.name"
+                            },
+                            {
+                                "key": "span.name"
+                            }
+                        ]
                     },
                     "nodeGraph": {
                         "enabled": true
@@ -527,6 +542,243 @@ data:
       "title": "SecOps dashboard",
       "uid": "adlv859",
       "version": 7
+    }
+  microservices-traces-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 0,
+      "links": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 18,
+            "w": 23,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "edges": {},
+            "layoutAlgorithm": "layered",
+            "nodes": {},
+            "zoomMode": "cooperative"
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "tempo",
+                "uid": "tempo"
+              },
+              "limit": 20,
+              "metricsQueryType": "range",
+              "queryType": "serviceMap",
+              "refId": "A",
+              "serviceMapUseNativeHistograms": false,
+              "tableType": "traces"
+            }
+          ],
+          "title": "Service graph",
+          "type": "nodeGraph"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 23,
+            "x": 0,
+            "y": 18
+          },
+          "id": 2,
+          "options": {
+            "cellHeight": "sm",
+            "showHeader": true
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "tempo",
+                "uid": "tempo"
+              },
+              "filters": [
+                {
+                  "id": "26aae179",
+                  "operator": "=",
+                  "scope": "span"
+                },
+                {
+                  "id": "service-name",
+                  "operator": "=~",
+                  "scope": "resource",
+                  "tag": "service.name"
+                }
+              ],
+              "limit": 20,
+              "metricsQueryType": "range",
+              "query": "{}",
+              "queryType": "traceqlSearch",
+              "refId": "A",
+              "serviceMapUseNativeHistograms": false,
+              "tableType": "traces"
+            }
+          ],
+          "title": "All traces",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 23,
+            "x": 0,
+            "y": 26
+          },
+          "id": 3,
+          "options": {
+            "cellHeight": "sm",
+            "showHeader": true
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "tempo",
+                "uid": "tempo"
+              },
+              "filters": [
+                {
+                  "id": "66f2d8d7",
+                  "operator": "=",
+                  "scope": "span"
+                },
+                {
+                  "id": "status",
+                  "isCustomValue": false,
+                  "operator": "=",
+                  "scope": "intrinsic",
+                  "tag": "status",
+                  "value": "error",
+                  "valueType": "keyword"
+                }
+              ],
+              "limit": 20,
+              "metricsQueryType": "range",
+              "queryType": "traceqlSearch",
+              "refId": "A",
+              "serviceMapUseNativeHistograms": false,
+              "tableType": "traces"
+            }
+          ],
+          "title": "Error traces",
+          "type": "table"
+        }
+      ],
+      "preload": false,
+      "schemaVersion": 42,
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "browser",
+      "title": "Microservices Traces",
+      "uid": "adpzrcx",
+      "version": 5
     }
 ---
 apiVersion: apps/v1

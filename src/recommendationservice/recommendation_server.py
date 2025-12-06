@@ -33,6 +33,7 @@ from opentelemetry import trace
 from opentelemetry.instrumentation.grpc import GrpcInstrumentorClient, GrpcInstrumentorServer
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.resources import Resource
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
 from logger import getJSONLogger
@@ -109,7 +110,8 @@ if __name__ == "__main__":
       grpc_server_instrumentor = GrpcInstrumentorServer()
       grpc_server_instrumentor.instrument()
       if os.environ["ENABLE_TRACING"] == "1":
-        trace.set_tracer_provider(TracerProvider())
+        resource = Resource.create({"service.name": "recommendationservice"})
+        trace.set_tracer_provider(TracerProvider(resource=resource))
         otel_endpoint = os.getenv("COLLECTOR_SERVICE_ADDR", "localhost:4317")
         trace.get_tracer_provider().add_span_processor(
           BatchSpanProcessor(
@@ -122,7 +124,7 @@ if __name__ == "__main__":
     except (KeyError, DefaultCredentialsError):
         logger.info("Tracing disabled.")
     except Exception as e:
-        logger.warn(f"Exception on Cloud Trace setup: {traceback.format_exc()}, tracing disabled.") 
+        logger.warn(f"Exception on Cloud Trace setup: {traceback.format_exc()}, tracing disabled.")
 
     port = os.environ.get('PORT', "8080")
     catalog_addr = os.environ.get('PRODUCT_CATALOG_SERVICE_ADDR', '')

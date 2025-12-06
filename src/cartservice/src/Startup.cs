@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using cartservice.cartstore;
 using cartservice.services;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 namespace cartservice
 {
@@ -21,7 +23,7 @@ namespace cartservice
         }
 
         public IConfiguration Configuration { get; }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -57,6 +59,26 @@ namespace cartservice
 
 
             services.AddGrpc();
+
+            // Configure OpenTelemetry tracing
+            if (Configuration["ENABLE_TRACING"] == "1")
+            {
+                string serviceName = Configuration["OTEL_SERVICE_NAME"] ?? "cartservice";
+                string otlpEndpoint = Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? "http://opentelemetry-collector:4317";
+
+                services.AddOpenTelemetry()
+                    .WithTracing(builder => builder
+                        .AddSource(serviceName)
+                        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
+                        .AddAspNetCoreInstrumentation()
+                        .AddGrpcClientInstrumentation()
+                        .AddOtlpExporter(options =>
+                        {
+                            options.Endpoint = new Uri(otlpEndpoint);
+                        }));
+
+                Console.WriteLine($"OpenTelemetry tracing enabled for {serviceName}, exporting to {otlpEndpoint}");
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

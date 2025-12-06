@@ -30,6 +30,11 @@ import (
 
 	pb "github.com/GoogleCloudPlatform/microservices-demo/src/shippingservice/genproto"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
+
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
 const (
@@ -53,10 +58,9 @@ func init() {
 }
 
 func main() {
-	if os.Getenv("DISABLE_TRACING") == "" {
-		log.Info("Tracing enabled, but temporarily unavailable")
-		log.Info("See https://github.com/GoogleCloudPlatform/microservices-demo/issues/422 for more info.")
-		go initTracing()
+	if os.Getenv("ENABLE_TRACING") == "1" {
+		log.Info("Tracing enabled.")
+		initTracing()
 	} else {
 		log.Info("Tracing disabled.")
 	}
@@ -80,11 +84,11 @@ func main() {
 	}
 
 	var srv *grpc.Server
-	if os.Getenv("DISABLE_STATS") == "" {
-		log.Info("Stats enabled, but temporarily unavailable")
-		srv = grpc.NewServer()
+	if os.Getenv("ENABLE_TRACING") == "1" {
+		srv = grpc.NewServer(
+			grpc.StatsHandler(otelgrpc.NewServerHandler()),
+		)
 	} else {
-		log.Info("Stats disabled.")
 		srv = grpc.NewServer()
 	}
 	svc := &server{}
@@ -146,12 +150,49 @@ func (s *server) ShipOrder(ctx context.Context, in *pb.ShipOrderRequest) (*pb.Sh
 	}, nil
 }
 
-func initStats() {
-	//TODO(arbrown) Implement OpenTelemetry stats
+func initTracing() {
+	var (
+		collectorAddr string
+		collectorConn *grpc.ClientConn
+	)
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, time.Second*3)
+	defer cancel()
+
+	mustMapEnv(&collectorAddr, "COLLECTOR_SERVICE_ADDR")
+	mustConnGRPC(ctx, &collectorConn, collectorAddr)
+
+	exporter, err := otlptracegrpc.New(
+		ctx,
+		otlptracegrpc.WithGRPCConn(collectorConn))
+	if err != nil {
+		log.Warnf("warn: Failed to create trace exporter: %v", err)
+	}
+	tp := sdktrace.NewTracerProvider(
+		sdktrace.WithBatcher(exporter),
+		sdktrace.WithSampler(sdktrace.AlwaysSample()))
+	otel.SetTracerProvider(tp)
+
+	log.Info("OpenTelemetry tracing initialized")
 }
 
-func initTracing() {
-	// TODO(arbrown) Implement OpenTelemetry tracing
+func mustMapEnv(target *string, envKey string) {
+	v := os.Getenv(envKey)
+	if v == "" {
+		log.Fatalf("environment variable %q not set", envKey)
+	}
+	*target = v
+}
+
+func mustConnGRPC(ctx context.Context, conn **grpc.ClientConn, addr string) {
+	var err error
+	*conn, err = grpc.NewClient(addr,
+		grpc.WithInsecure(),
+		grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	if err != nil {
+		log.Fatalf("failed to connect to %s: %v", addr, err)
+	}
 }
 
 func initProfiling(service, version string) {

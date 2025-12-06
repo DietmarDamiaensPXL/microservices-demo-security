@@ -19,8 +19,9 @@ WORKDIR /src
 
 # restore dependencies
 COPY go.mod go.sum ./
-RUN go mod download
 COPY . .
+RUN go mod download
+RUN go mod tidy
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
