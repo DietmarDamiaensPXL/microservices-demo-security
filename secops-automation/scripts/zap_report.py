@@ -47,7 +47,7 @@ for site in data.get("site", []):
 df = pd.DataFrame([counts])
 
 # Pushgateway payload
-gateway = "http://pushgateway:9091/metrics/job/zap_scan"
+gateway = "http://localhost:9091/metrics/job/zap_scan"
 payload = ""
 
 for sev in ["High", "Medium", "Low", "Informational"]:

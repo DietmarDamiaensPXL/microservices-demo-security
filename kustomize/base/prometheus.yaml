@@ -24,6 +24,10 @@ data:
         static_configs:
           - targets: ['pushgateway:9091']
         metrics_path: /metrics
+      - job_name: 'pushgateway-zap'
+        static_configs:
+          - targets: ['pushgateway:9091']
+        metrics_path: /metrics
       - job_name: 'prometheus'
         static_configs:
           - targets: ['localhost:9090']
