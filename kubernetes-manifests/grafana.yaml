@@ -271,40 +271,40 @@ data:
     {
       "annotations": {
       "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
     },
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 3,
+      "id": 0,
       "links": [],
       "panels": [
       {
         "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "critical issues by image.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "critical issues by image.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
             "steps": [
               {
                 "color": "green",
@@ -411,7 +411,7 @@ data:
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "maxVizHeight": 300,
         "minVizHeight": 16,
@@ -507,26 +507,26 @@ data:
           "range": true,
           "refId": "A"
         }
+        ],
+        "title": "top 5 images with most issues",
+        "type": "stat"
+      }
       ],
-      "title": "top 5 images with most issues",
-      "type": "stat"
-    }
-    ],
-    "preload": false,
-    "schemaVersion": 42,
-    "tags": [],
-    "templating": {
+      "preload": false,
+      "schemaVersion": 42,
+      "tags": [],
+      "templating": {
       "list": []
-    },
-    "time": {
-      "from": "now-15m",
-      "to": "now"
-    },
-    "timepicker": {},
-    "timezone": "browser",
-    "title": "SecOps dashboard",
-    "uid": "adlv859",
-    "version": 1
+      },
+      "time": {
+        "from": "now-15m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "browser",
+      "title": "SecOps dashboard",
+      "uid": "adlv859",
+      "version": 7
     }
 ---
 apiVersion: apps/v1
@@ -562,11 +562,11 @@ spec:
           value: "admin"
         volumeMounts:
           - name: grafana-datasources
-            mountPath: /etc/grafana/provisioning/datasources
+            mountPath: /etc/grafana/provisioning/datasources/
           - name: grafana-provisioning-dashboards
-            mountPath: /etc/grafana/provisioning/dashboards
+            mountPath: /etc/grafana/provisioning/dashboards/
           - name: grafana-dashboards
-            mountPath: /var/lib/grafana/dashboards
+            mountPath: /var/lib/grafana/dashboards/
       volumes:
         - name: grafana-datasources
           configMap:
