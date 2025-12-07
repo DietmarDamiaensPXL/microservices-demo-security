@@ -53,10 +53,6 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Setup OWASP ZAP
-      run: |
-        docker pull ghcr.io/zaproxy/zaproxy:stable
-
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -66,9 +62,6 @@ jobs:
       run: |
         pip install pandas reportlab matplotlib
 
-    # ------------------------------
-    # TRIVY SCAN
-    # ------------------------------
     - name: Trivy security scan
       id: trivy
       uses: aquasecurity/trivy-action@0.28.0
@@ -105,9 +98,6 @@ jobs:
       run: |
         echo "============ Trivy Report (JSON) ============"
         if [ -f trivy-report.json ]; then cat trivy-report.json; fi
-        echo ""
-        echo "============ Trivy Report (CSV) ============"
-        if [ -f trivy-report.csv ]; then cat trivy-report.csv; fi
 
     - name: Upload Trivy reports as artifacts
       if: always()
@@ -116,32 +106,7 @@ jobs:
         name: trivy-reports
         path: |
           trivy-report.json
-          trivy-report.csv
           trivy-report.html
-
-    # ------------------------------
-    # ZAP SCAN
-    # ------------------------------
-    - name: Run OWASP ZAP Baseline Scan
-      if: always()
-      run: |
-        docker run --rm -v $(pwd):/zap/wrk/:rw \
-          ghcr.io/zaproxy/zaproxy:stable \
-          zap-baseline.py -t https://your-app-url.com \
-          -r zap-report.html \
-          -J zap-report.json \
-          -x zap-report.xml \
-          -I || true
-
-    - name: Upload ZAP reports as artifacts
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: zap-reports
-        path: |
-          zap-report.html
-          zap-report.json
-          zap-report.xml
 
     # ------------------------------
     # COLLECT + COMMIT EVERYTHING AT ONCE
@@ -155,13 +120,6 @@ jobs:
         # Trivy reports
         cp trivy-report.json trivy-report.csv secops-automation/scans/ || true
         cp trivy-report.html secops-automation/reports/ || true
-
-        # ZAP reports
-        cp zap-report.json zap-report.xml secops-automation/scans/ || true
-        cp zap-report.html secops-automation/reports/ || true
-
-        # PDF report (copy also to reports folder for convenience)
-        cp secops-automation/pdf/security-report.pdf secops-automation/reports/ || true
 
     - name: Commit and Push All Security Reports
       if: always()
