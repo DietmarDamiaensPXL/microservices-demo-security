@@ -86,9 +86,40 @@ jobs:
       run: |
         curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
-    - name: Deploy app
+    - name: Create k3d cluster
       run: |
         k3d cluster create test-cluster --timeout 2m
+
+    - name: Build and load images
+      run: |
+        # Build all service images
+        docker build -t emailservice:latest ./src/emailservice
+        docker build -t productcatalogservice:latest ./src/productcatalogservice
+        docker build -t recommendationservice:latest ./src/recommendationservice
+        docker build -t shippingservice:latest ./src/shippingservice
+        docker build -t checkoutservice:latest ./src/checkoutservice
+        docker build -t paymentservice:latest ./src/paymentservice
+        docker build -t currencyservice:latest ./src/currencyservice
+        docker build -t cartservice:latest ./src/cartservice/src
+        docker build -t frontend:latest ./src/frontend
+        docker build -t adservice:latest ./src/adservice
+        docker build -t loadgenerator:latest ./src/loadgenerator
+
+        # Load images into k3d cluster
+        k3d image import emailservice:latest -c test-cluster
+        k3d image import productcatalogservice:latest -c test-cluster
+        k3d image import recommendationservice:latest -c test-cluster
+        k3d image import shippingservice:latest -c test-cluster
+        k3d image import checkoutservice:latest -c test-cluster
+        k3d image import paymentservice:latest -c test-cluster
+        k3d image import currencyservice:latest -c test-cluster
+        k3d image import cartservice:latest -c test-cluster
+        k3d image import frontend:latest -c test-cluster
+        k3d image import adservice:latest -c test-cluster
+        k3d image import loadgenerator:latest -c test-cluster
+
+    - name: Deploy app
+      run: |
         kubectl apply -k ./kustomize
 
     - name: Wait for pods
