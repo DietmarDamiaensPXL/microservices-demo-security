@@ -17,6 +17,17 @@ jobs:
     - uses: actions/setup-go@v6
       with:
         go-version: '1.25'
+
+    - name: Download Go dependencies
+      run: |
+        for SERVICE in "shippingservice" "productcatalogservice"; do
+          echo "downloading dependencies for $SERVICE..."
+          pushd src/$SERVICE
+          go mod download
+          go mod tidy
+          popd
+        done
+
     - name: Go unit tests
       timeout-minutes: 10
       run: |
@@ -26,6 +37,7 @@ jobs:
           go test
           popd
         done
+
     - name: C# Unit Tests
       timeout-minutes: 10
       run: |
