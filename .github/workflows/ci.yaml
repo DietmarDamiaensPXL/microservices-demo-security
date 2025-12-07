@@ -104,12 +104,12 @@ jobs:
     - name: Collect all reports before commit
       if: always()
       run: |
-        mkdir -p secops-automation/scans
-        mkdir -p secops-automation/reports
+        mkdir -p secops-automation/scans/trivy
+        mkdir -p ssecops-automation/reports/html
 
         # Trivy reports
-        cp trivy-report.json trivy-report.csv secops-automation/scans/ || true
-        cp trivy-report.html secops-automation/reports/ || true
+        cp trivy-report.json secops-automation/scans/trivy || true
+        cp trivy-report.html secops-automation/reports/html || true
 
     - name: Commit and Push All Security Reports
       if: always()
@@ -117,8 +117,8 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
 
-        git add secops-automation/scans/
-        git add secops-automation/reports/
+        git add secops-automation/scans/trivy
+        git add secops-automation/reports/html
 
         git diff --staged --quiet || git commit -m "Update all security reports [skip ci]"
         git push
