@@ -73,16 +73,6 @@ jobs:
         ignore-unfixed: true
         exit-code: 0
 
-    - name: Generate Trivy CSV report
-      if: always()
-      run: |
-        docker run --rm -v $(pwd):/workspace ghcr.io/aquasecurity/trivy:latest \
-          fs --format template --template "@/contrib/csv.tpl" \
-          --severity "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN" \
-          --ignore-unfixed \
-          --output /workspace/trivy-report.csv \
-          /workspace
-
     - name: Generate Trivy HTML report
       if: always()
       run: |
