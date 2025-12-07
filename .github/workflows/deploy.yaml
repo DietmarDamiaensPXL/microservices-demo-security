@@ -1,0 +1,44 @@
+name: "Deploy online boutique"
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install kind
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+        chmod +x ./kind
+        sudo mv ./kind /usr/local/bin/kind
+
+    - name: Create kind cluster
+      run: |
+        kind create cluster --wait 2m
+
+    - name: Install Skaffold
+      run: |
+        curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+        chmod +x skaffold
+        sudo mv skaffold /usr/local/bin
+
+    - name: Deploy app with Skaffold
+      run: |
+        skaffold run
+
+    - name: Wait for pods
+      run: |
+        set -x
+        kubectl wait --for=condition=available --timeout=300s deployment/redis-cart
+        kubectl wait --for=condition=available --timeout=300s deployment/adservice
+        kubectl wait --for=condition=available --timeout=300s deployment/cartservice
+        kubectl wait --for=condition=available --timeout=300s deployment/checkoutservice
+        kubectl wait --for=condition=available --timeout=300s deployment/currencyservice
+        kubectl wait --for=condition=available --timeout=300s deployment/emailservice
+        kubectl wait --for=condition=available --timeout=300s deployment/frontend
+        kubectl wait --for=condition=available --timeout=300s deployment/loadgenerator
+        kubectl wait --for=condition=available --timeout=300s deployment/paymentservice
+        kubectl wait --for=condition=available --timeout=300s deployment/productcatalogservice
+        kubectl wait --for=condition=available --timeout=300s deployment/recommendationservice
+        kubectl wait --for=condition=available --timeout=300s deployment/shippingservice

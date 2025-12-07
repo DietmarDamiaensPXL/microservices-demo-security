@@ -46,35 +46,31 @@ jobs:
   security-tests:
     runs-on: ubuntu-latest
     needs: code-tests
+    permissions:
+      contents: write 
     steps:
     - uses: actions/checkout@v5
-    - name: Trivy security scan
-      id: trivy
-      uses: aquasecurity/trivy-action@0.28.0
       with:
-        scan-type: "fs"
-        format: "table"
-        output: "trivy-report.txt"
-        severity: "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN"
-        ignore-unfixed: true
-        exit-code: 0
+        fetch-depth: 0
 
-    - name: Print Trivy report to logs
-      if: always()
+    - name: Run trivy scan
+      run: ./secops-automation/scripts/scan_trivy_k8s.sh
+    
+    - name: Run owasp zap
+      run: ./secops-automation/scripts/scan_zap_baseline.sh
+
+    - name: Commit and push security scan results
       run: |
-        echo "============ Trivy Report (backend) ============"
-        if [ -f trivy-report.txt ]; then
-          cat trivy-report.txt
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add secops-automation/scans/
+        git add secops-automation/reports/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
         else
-          echo "No trivy-report.txt found"
+          git commit -m "chore: add security scan results [skip ci]"
+          git push
         fi
-
-    - name: Upload Trivy report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: trivy-report
-        path: trivy-report.txt
 
   smoke-tests:
     runs-on: ubuntu-latest

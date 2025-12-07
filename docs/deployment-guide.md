@@ -12,24 +12,13 @@ This doc explains how to build and run the Online Boutique source code locally u
     git clone https://github.com/GoogleCloudPlatform/microservices-demo
     cd microservices-demo/
     ```
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/) (optional for Option 2 - Local Cluster)
-- [Kind](https://kind.sigs.k8s.io/) (optional for Option 2 - Local Cluster)
+- [Kind](https://kind.sigs.k8s.io/)
 
 ## Local Cluster
 
 1. Launch a local Kubernetes cluster with one of the following tools:
 
-    - To launch **Minikube** (tested with Ubuntu Linux). Please, ensure that the
-       local Kubernetes cluster has at least:
-        - 4 CPUs
-        - 4.0 GiB memory
-        - 32 GB disk space
-
-      ```shell
-      minikube start --cpus=4 --memory 4096 --disk-size 32g
-      ```
-
-    - To launch **Docker for Desktop** (tested with Mac/Windows). Go to Preferences:
+    - To launch **Docker for Desktop** (tested with Windows). Go to Preferences:
         - choose “Enable Kubernetes”,
         - set CPUs to at least 3, and Memory to at least 6.0 GiB
         - on the "Disk" tab, set at least 32 GB disk space
