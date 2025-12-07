@@ -2,7 +2,8 @@
 set -euo pipefail
 
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-PROJECT_ROOT="/home/cedric/Documents/4dejaar/securityExp/GIP/microservices-demo-security/secops-automation"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 outdir="$PROJECT_ROOT/scans/trivy/$timestamp"
 mkdir -p "$outdir"
 

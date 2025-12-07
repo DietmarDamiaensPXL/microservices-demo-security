@@ -43,11 +43,13 @@ This doc explains how to build and run the Online Boutique source code locally u
 
 7. Run `kubectl port-forward service/mailhog 8025:8025` to forward a port to mailhog.
 
-8. Navigate to `localhost:8080` to access the web frontend.
+8. Run `kubectl port-forward svc/pushgateway 9091:9091` to forward a port to mailhog.
 
-9. Navigate to `localhost:3000` to acces grafana.
+9. Navigate to `localhost:8080` to access the web frontend.
 
-10. Navigate to `localhost:8025` to acces mailhog.
+10. Navigate to `localhost:3000` to acces grafana.
+
+11. Navigate to `localhost:8025` to acces mailhog.
 
 ## Cleanup
 

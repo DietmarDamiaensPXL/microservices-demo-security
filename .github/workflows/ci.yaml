@@ -53,11 +53,39 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Setup Trivy
+      uses: aquasecurity/setup-trivy@v0.1.0
+      with:
+        version: 'latest'
+    
+    - name: Setup OWASP ZAP
+      run: |
+        docker pull ghcr.io/zaproxy/zaproxy:stable
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+  
+    - name: Install Python dependencies
+      run: |
+        pip install pandas reportlab matplotlib
+
     - name: Run trivy scan
       run: ./secops-automation/scripts/scan_trivy_k8s.sh
     
     - name: Run owasp zap
       run: ./secops-automation/scripts/scan_zap_baseline.sh
+    
+    - name: Generate PDF Report
+      run: |
+        python3 generate_pdf_pipeline.py
+
+    - name: Upload PDF Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-report-pdf
+        path: secops-automation/pdf/security-report.pdf
 
     - name: Commit and push security scan results
       run: |
@@ -65,6 +93,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add secops-automation/scans/
         git add secops-automation/reports/
+        git add secops-automation/pdf/
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else

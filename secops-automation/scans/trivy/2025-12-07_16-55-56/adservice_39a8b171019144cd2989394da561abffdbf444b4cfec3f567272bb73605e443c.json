@@ -1,0 +1,4224 @@
+{
+  "SchemaVersion": 2,
+  "ReportID": "019af988-13ef-7496-b2fc-a809afbae975",
+  "CreatedAt": "2025-12-07T16:57:16.143303342+01:00",
+  "ArtifactID": "sha256:afc4f5a62108fa6300b19d85aaa4096a67af39914ddcfc89e3d36eefd32ed8e4",
+  "ArtifactName": "adservice:39a8b171019144cd2989394da561abffdbf444b4cfec3f567272bb73605e443c",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 266682368,
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.22.2"
+    },
+    "ImageID": "sha256:39a8b171019144cd2989394da561abffdbf444b4cfec3f567272bb73605e443c",
+    "DiffIDs": [
+      "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1",
+      "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812",
+      "sha256:63f3f05ceb360876a6cbe54b9eb967cc6c68c08937e898e5891f60e407e253e6",
+      "sha256:7d769e41d6749c45100355df6a1b2edc229dad1ef1a79b6bb9c9463f5d159880",
+      "sha256:9d1118728c7fbff9e3ee9538c430d33204f28030f7a3e93514a776c3fad11f85",
+      "sha256:d54411456bb567d05b84d019dc6766cfeceed73e4e16afa228585acaa855de54",
+      "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+    ],
+    "RepoTags": [
+      "adservice:39a8b171019144cd2989394da561abffdbf444b4cfec3f567272bb73605e443c",
+      "adservice:9b939cba"
+    ],
+    "Reference": "adservice:39a8b171019144cd2989394da561abffdbf444b4cfec3f567272bb73605e443c",
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2025-12-07T15:54:11.971046887+01:00",
+      "history": [
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ADD alpine-minirootfs-3.22.2-x86_64.tar.gz / # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "CMD [\"/bin/sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ENV JAVA_HOME=/opt/java/openjdk",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ENV PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "RUN /bin/sh -c set -eux;     apk add --no-cache         fontconfig ttf-dejavu         ca-certificates p11-kit-trust         musl-locales musl-locales-lang         tzdata         coreutils         openssl     ;     rm -rf /var/cache/apk/* # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ENV JAVA_VERSION=jdk-25+36",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "RUN /bin/sh -c set -eux;     ARCH=\"$(apk --print-arch)\";     case \"${ARCH}\" in        aarch64)          ESUM='e88496ca31d2e0a0cdeeba385ab4ea668bbb53a03018f30c8933e97f4f9fda47';          BINARY_URL='https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jre_aarch64_alpine-linux_hotspot_25_36.tar.gz';          ;;        x86_64)          ESUM='aa5160aa130f0f0b4379fc62a0d5198c065815224e01318272864e56f260de34';          BINARY_URL='https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jre_x64_alpine-linux_hotspot_25_36.tar.gz';          ;;        *)          echo \"Unsupported arch: ${ARCH}\";          exit 1;          ;;     esac;     apk add --no-cache --virtual .fetch-deps gnupg;     wget -O /tmp/openjdk.tar.gz ${BINARY_URL};     wget -O /tmp/openjdk.tar.gz.sig ${BINARY_URL}.sig;     export GNUPGHOME=\"$(mktemp -d)\";     gpg --batch --keyserver keyserver.ubuntu.com --recv-keys 3B04D753C9050D9A5D343F39843C48A565F8F04B;     gpg --batch --verify /tmp/openjdk.tar.gz.sig /tmp/openjdk.tar.gz;     rm -rf \"${GNUPGHOME}\" /tmp/openjdk.tar.gz.sig;     echo \"${ESUM} */tmp/openjdk.tar.gz\" | sha256sum -c -;     mkdir -p \"$JAVA_HOME\";     tar --extract         --file /tmp/openjdk.tar.gz         --directory \"$JAVA_HOME\"         --strip-components 1         --no-same-owner     ;     rm -f /tmp/openjdk.tar.gz;     apk del --no-network .fetch-deps; # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "RUN /bin/sh -c set -eux;     echo \"Verifying install ...\";     echo \"java --version\"; java --version;     echo \"Complete.\" # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "COPY --chmod=755 entrypoint.sh /__cacert_entrypoint.sh # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-09-25T19:59:06Z",
+          "created_by": "ENTRYPOINT [\"/__cacert_entrypoint.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-12-07T14:53:21Z",
+          "created_by": "WORKDIR /app",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-12-07T14:54:11Z",
+          "created_by": "COPY /app . # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2025-12-07T14:54:11Z",
+          "created_by": "EXPOSE map[9555/tcp:{}]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2025-12-07T14:54:11Z",
+          "created_by": "ENTRYPOINT [\"/app/build/install/hipstershop/bin/AdService\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1",
+          "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812",
+          "sha256:63f3f05ceb360876a6cbe54b9eb967cc6c68c08937e898e5891f60e407e253e6",
+          "sha256:7d769e41d6749c45100355df6a1b2edc229dad1ef1a79b6bb9c9463f5d159880",
+          "sha256:9d1118728c7fbff9e3ee9538c430d33204f28030f7a3e93514a776c3fad11f85",
+          "sha256:d54411456bb567d05b84d019dc6766cfeceed73e4e16afa228585acaa855de54",
+          "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "/app/build/install/hipstershop/bin/AdService"
+        ],
+        "Env": [
+          "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "JAVA_HOME=/opt/java/openjdk",
+          "LANG=en_US.UTF-8",
+          "LANGUAGE=en_US:en",
+          "LC_ALL=en_US.UTF-8",
+          "JAVA_VERSION=jdk-25+36"
+        ],
+        "WorkingDir": "/app",
+        "ExposedPorts": {
+          "9555/tcp": {}
+        }
+      }
+    },
+    "Layers": [
+      {
+        "Size": 8607232,
+        "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+      },
+      {
+        "Size": 19961344,
+        "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+      },
+      {
+        "Size": 197534720,
+        "DiffID": "sha256:63f3f05ceb360876a6cbe54b9eb967cc6c68c08937e898e5891f60e407e253e6"
+      },
+      {
+        "Size": 2048,
+        "DiffID": "sha256:7d769e41d6749c45100355df6a1b2edc229dad1ef1a79b6bb9c9463f5d159880"
+      },
+      {
+        "Size": 7168,
+        "DiffID": "sha256:9d1118728c7fbff9e3ee9538c430d33204f28030f7a3e93514a776c3fad11f85"
+      },
+      {
+        "Size": 1536,
+        "DiffID": "sha256:d54411456bb567d05b84d019dc6766cfeceed73e4e16afa228585acaa855de54"
+      },
+      {
+        "Size": 40568320,
+        "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "adservice:39a8b171019144cd2989394da561abffdbf444b4cfec3f567272bb73605e443c (alpine 3.22.2)",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Packages": [
+        {
+          "ID": "acl-libs@2.3.2-r1",
+          "Name": "acl-libs",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/acl-libs@2.3.2-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "905e422c67139f55"
+          },
+          "Version": "2.3.2-r1",
+          "Arch": "x86_64",
+          "SrcName": "acl",
+          "SrcVersion": "2.3.2-r1",
+          "Licenses": [
+            "LGPL-2.1-or-later",
+            "GPL-2.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:5540e9809794ace9f83b7e193a2848988f61622b",
+          "InstalledFiles": [
+            "usr/lib/libacl.so.1",
+            "usr/lib/libacl.so.1.1.2302"
+          ]
+        },
+        {
+          "ID": "alpine-baselayout@3.7.0-r0",
+          "Name": "alpine-baselayout",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/alpine-baselayout@3.7.0-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "cf99a0742a931dd7"
+          },
+          "Version": "3.7.0-r0",
+          "Arch": "x86_64",
+          "SrcName": "alpine-baselayout",
+          "SrcVersion": "3.7.0-r0",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "alpine-baselayout-data@3.7.0-r0",
+            "busybox-binsh@1.37.0-r19"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:29f99748eea1ffe01f70b34024dc45c46d211f8d",
+          "InstalledFiles": [
+            "etc/motd",
+            "etc/crontabs/root",
+            "etc/modprobe.d/aliases.conf",
+            "etc/modprobe.d/blacklist.conf",
+            "etc/modprobe.d/i386.conf",
+            "etc/profile.d/20locale.sh",
+            "etc/profile.d/README",
+            "etc/profile.d/color_prompt.sh.disabled",
+            "usr/lib/sysctl.d/00-alpine.conf",
+            "var/lock",
+            "var/run",
+            "var/spool/mail",
+            "var/spool/cron/crontabs"
+          ]
+        },
+        {
+          "ID": "alpine-baselayout-data@3.7.0-r0",
+          "Name": "alpine-baselayout-data",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/alpine-baselayout-data@3.7.0-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "f5b86fea926440c2"
+          },
+          "Version": "3.7.0-r0",
+          "Arch": "x86_64",
+          "SrcName": "alpine-baselayout",
+          "SrcVersion": "3.7.0-r0",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:73f5ef65f8333a1784102df973c076d5a7d5b5fe",
+          "InstalledFiles": [
+            "etc/fstab",
+            "etc/group",
+            "etc/hostname",
+            "etc/hosts",
+            "etc/inittab",
+            "etc/modules",
+            "etc/mtab",
+            "etc/nsswitch.conf",
+            "etc/passwd",
+            "etc/profile",
+            "etc/protocols",
+            "etc/services",
+            "etc/shadow",
+            "etc/shells",
+            "etc/sysctl.conf"
+          ]
+        },
+        {
+          "ID": "alpine-keys@2.5-r0",
+          "Name": "alpine-keys",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/alpine-keys@2.5-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "81813228b0ffdc30"
+          },
+          "Version": "2.5-r0",
+          "Arch": "x86_64",
+          "SrcName": "alpine-keys",
+          "SrcVersion": "2.5-r0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:b175e48144ebad03d6ba11d45b25aafc2de310c1",
+          "InstalledFiles": [
+            "etc/apk/keys/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub",
+            "etc/apk/keys/alpine-devel@lists.alpinelinux.org-5243ef4b.rsa.pub",
+            "etc/apk/keys/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub",
+            "etc/apk/keys/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub",
+            "etc/apk/keys/alpine-devel@lists.alpinelinux.org-61666e3f.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-5243ef4b.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-524d27bb.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-58cbb476.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-58e4f17d.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-5e69ca50.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-60ac2099.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-61666e3f.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616a9724.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616abc23.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616ac3bc.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616adfeb.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616db30d.rsa.pub",
+            "usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-66ba20fe.rsa.pub",
+            "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-58199dcc.rsa.pub",
+            "usr/share/apk/keys/aarch64/alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+            "usr/share/apk/keys/armhf/alpine-devel@lists.alpinelinux.org-524d27bb.rsa.pub",
+            "usr/share/apk/keys/armhf/alpine-devel@lists.alpinelinux.org-616a9724.rsa.pub",
+            "usr/share/apk/keys/armv7/alpine-devel@lists.alpinelinux.org-524d27bb.rsa.pub",
+            "usr/share/apk/keys/armv7/alpine-devel@lists.alpinelinux.org-616adfeb.rsa.pub",
+            "usr/share/apk/keys/loongarch64/alpine-devel@lists.alpinelinux.org-66ba20fe.rsa.pub",
+            "usr/share/apk/keys/mips64/alpine-devel@lists.alpinelinux.org-5e69ca50.rsa.pub",
+            "usr/share/apk/keys/ppc64le/alpine-devel@lists.alpinelinux.org-58cbb476.rsa.pub",
+            "usr/share/apk/keys/ppc64le/alpine-devel@lists.alpinelinux.org-616abc23.rsa.pub",
+            "usr/share/apk/keys/riscv64/alpine-devel@lists.alpinelinux.org-60ac2099.rsa.pub",
+            "usr/share/apk/keys/riscv64/alpine-devel@lists.alpinelinux.org-616db30d.rsa.pub",
+            "usr/share/apk/keys/s390x/alpine-devel@lists.alpinelinux.org-58e4f17d.rsa.pub",
+            "usr/share/apk/keys/s390x/alpine-devel@lists.alpinelinux.org-616ac3bc.rsa.pub",
+            "usr/share/apk/keys/x86/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub",
+            "usr/share/apk/keys/x86/alpine-devel@lists.alpinelinux.org-5243ef4b.rsa.pub",
+            "usr/share/apk/keys/x86/alpine-devel@lists.alpinelinux.org-61666e3f.rsa.pub",
+            "usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub",
+            "usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub",
+            "usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub"
+          ]
+        },
+        {
+          "ID": "alpine-release@3.22.2-r0",
+          "Name": "alpine-release",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/alpine-release@3.22.2-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7d4257c820bacdf2"
+          },
+          "Version": "3.22.2-r0",
+          "Arch": "x86_64",
+          "SrcName": "alpine-base",
+          "SrcVersion": "3.22.2-r0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "alpine-keys@2.5-r0"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:1a214b8ece57fc0cfa65a1576b24cf30015d3acd",
+          "InstalledFiles": [
+            "etc/alpine-release",
+            "etc/issue",
+            "etc/os-release",
+            "etc/secfixes.d/alpine",
+            "usr/lib/os-release"
+          ]
+        },
+        {
+          "ID": "apk-tools@2.14.9-r3",
+          "Name": "apk-tools",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/apk-tools@2.14.9-r3?arch=x86_64\u0026distro=3.22.2",
+            "UID": "f0b893fe434d9e67"
+          },
+          "Version": "2.14.9-r3",
+          "Arch": "x86_64",
+          "SrcName": "apk-tools",
+          "SrcVersion": "2.14.9-r3",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "ca-certificates-bundle@20250911-r0",
+            "libapk2@2.14.9-r3",
+            "libcrypto3@3.5.4-r0",
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:992f5e39b0d45f326c9ed2e9b1fe737809c23ed9",
+          "InstalledFiles": [
+            "sbin/apk"
+          ]
+        },
+        {
+          "ID": "brotli-libs@1.1.0-r2",
+          "Name": "brotli-libs",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/brotli-libs@1.1.0-r2?arch=x86_64\u0026distro=3.22.2",
+            "UID": "d1b0cbfc86c6ec8c"
+          },
+          "Version": "1.1.0-r2",
+          "Arch": "x86_64",
+          "SrcName": "brotli",
+          "SrcVersion": "1.1.0-r2",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "prspkt \u003cprspkt@protonmail.com\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:889fa02c5f7cdd90283ce2b68959e9c44e5dfbf2",
+          "InstalledFiles": [
+            "usr/lib/libbrotlicommon.so.1",
+            "usr/lib/libbrotlicommon.so.1.1.0",
+            "usr/lib/libbrotlidec.so.1",
+            "usr/lib/libbrotlidec.so.1.1.0",
+            "usr/lib/libbrotlienc.so.1",
+            "usr/lib/libbrotlienc.so.1.1.0"
+          ]
+        },
+        {
+          "ID": "busybox@1.37.0-r19",
+          "Name": "busybox",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/busybox@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5158911d21d1c608"
+          },
+          "Version": "1.37.0-r19",
+          "Arch": "x86_64",
+          "SrcName": "busybox",
+          "SrcVersion": "1.37.0-r19",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Sören Tempel \u003csoeren+alpine@soeren-tempel.net\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:b1022a4c14e9025701fbad10b66f8bb3b98dbaea",
+          "InstalledFiles": [
+            "bin/busybox",
+            "etc/securetty",
+            "etc/busybox-paths.d/busybox",
+            "etc/logrotate.d/acpid",
+            "etc/network/if-up.d/dad",
+            "etc/udhcpc/udhcpc.conf",
+            "usr/share/udhcpc/default.script"
+          ]
+        },
+        {
+          "ID": "busybox-binsh@1.37.0-r19",
+          "Name": "busybox-binsh",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/busybox-binsh@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7150d5a240bb77cc"
+          },
+          "Version": "1.37.0-r19",
+          "Arch": "x86_64",
+          "SrcName": "busybox",
+          "SrcVersion": "1.37.0-r19",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Sören Tempel \u003csoeren+alpine@soeren-tempel.net\u003e",
+          "DependsOn": [
+            "busybox@1.37.0-r19"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:d580ccf710ae083332df5eb8813735faa076d87e",
+          "InstalledFiles": [
+            "bin/sh"
+          ]
+        },
+        {
+          "ID": "ca-certificates@20250911-r0",
+          "Name": "ca-certificates",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/ca-certificates@20250911-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "11629aa971714b5f"
+          },
+          "Version": "20250911-r0",
+          "Arch": "x86_64",
+          "SrcName": "ca-certificates",
+          "SrcVersion": "20250911-r0",
+          "Licenses": [
+            "MPL-2.0",
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "busybox-binsh@1.37.0-r19",
+            "libcrypto3@3.5.4-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:04905c8ed0de23926e7f151791fb17503e6ebf16",
+          "InstalledFiles": [
+            "etc/ca-certificates.conf",
+            "etc/apk/protected_paths.d/ca-certificates.list",
+            "etc/ca-certificates/update.d/certhash",
+            "usr/bin/c_rehash",
+            "usr/sbin/update-ca-certificates",
+            "usr/share/ca-certificates/mozilla/ACCVRAIZ1.crt",
+            "usr/share/ca-certificates/mozilla/AC_RAIZ_FNMT-RCM.crt",
+            "usr/share/ca-certificates/mozilla/AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.crt",
+            "usr/share/ca-certificates/mozilla/ANF_Secure_Server_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/Actalis_Authentication_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/AffirmTrust_Commercial.crt",
+            "usr/share/ca-certificates/mozilla/AffirmTrust_Networking.crt",
+            "usr/share/ca-certificates/mozilla/AffirmTrust_Premium.crt",
+            "usr/share/ca-certificates/mozilla/AffirmTrust_Premium_ECC.crt",
+            "usr/share/ca-certificates/mozilla/Amazon_Root_CA_1.crt",
+            "usr/share/ca-certificates/mozilla/Amazon_Root_CA_2.crt",
+            "usr/share/ca-certificates/mozilla/Amazon_Root_CA_3.crt",
+            "usr/share/ca-certificates/mozilla/Amazon_Root_CA_4.crt",
+            "usr/share/ca-certificates/mozilla/Atos_TrustedRoot_2011.crt",
+            "usr/share/ca-certificates/mozilla/Atos_TrustedRoot_Root_CA_ECC_TLS_2021.crt",
+            "usr/share/ca-certificates/mozilla/Atos_TrustedRoot_Root_CA_RSA_TLS_2021.crt",
+            "usr/share/ca-certificates/mozilla/Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.crt",
+            "usr/share/ca-certificates/mozilla/BJCA_Global_Root_CA1.crt",
+            "usr/share/ca-certificates/mozilla/BJCA_Global_Root_CA2.crt",
+            "usr/share/ca-certificates/mozilla/Buypass_Class_2_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/Buypass_Class_3_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/CA_Disig_Root_R2.crt",
+            "usr/share/ca-certificates/mozilla/CFCA_EV_ROOT.crt",
+            "usr/share/ca-certificates/mozilla/COMODO_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/COMODO_ECC_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/COMODO_RSA_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/Certainly_Root_E1.crt",
+            "usr/share/ca-certificates/mozilla/Certainly_Root_R1.crt",
+            "usr/share/ca-certificates/mozilla/Certigna.crt",
+            "usr/share/ca-certificates/mozilla/Certigna_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/Certum_EC-384_CA.crt",
+            "usr/share/ca-certificates/mozilla/Certum_Trusted_Network_CA.crt",
+            "usr/share/ca-certificates/mozilla/Certum_Trusted_Network_CA_2.crt",
+            "usr/share/ca-certificates/mozilla/Certum_Trusted_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/CommScope_Public_Trust_ECC_Root-01.crt",
+            "usr/share/ca-certificates/mozilla/CommScope_Public_Trust_ECC_Root-02.crt",
+            "usr/share/ca-certificates/mozilla/CommScope_Public_Trust_RSA_Root-01.crt",
+            "usr/share/ca-certificates/mozilla/CommScope_Public_Trust_RSA_Root-02.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_BR_Root_CA_1_2020.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_BR_Root_CA_2_2023.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_EV_Root_CA_1_2020.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_EV_Root_CA_2_2023.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_Root_Class_3_CA_2_2009.crt",
+            "usr/share/ca-certificates/mozilla/D-TRUST_Root_Class_3_CA_2_EV_2009.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Assured_ID_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Assured_ID_Root_G2.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Assured_ID_Root_G3.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Global_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Global_Root_G2.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Global_Root_G3.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_High_Assurance_EV_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_TLS_ECC_P384_Root_G5.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_TLS_RSA4096_Root_G5.crt",
+            "usr/share/ca-certificates/mozilla/DigiCert_Trusted_Root_G4.crt",
+            "usr/share/ca-certificates/mozilla/Entrust_Root_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/Entrust_Root_Certification_Authority_-_EC1.crt",
+            "usr/share/ca-certificates/mozilla/Entrust_Root_Certification_Authority_-_G2.crt",
+            "usr/share/ca-certificates/mozilla/FIRMAPROFESIONAL_CA_ROOT-A_WEB.crt",
+            "usr/share/ca-certificates/mozilla/GDCA_TrustAUTH_R5_ROOT.crt",
+            "usr/share/ca-certificates/mozilla/GLOBALTRUST_2020.crt",
+            "usr/share/ca-certificates/mozilla/GTS_Root_R1.crt",
+            "usr/share/ca-certificates/mozilla/GTS_Root_R2.crt",
+            "usr/share/ca-certificates/mozilla/GTS_Root_R3.crt",
+            "usr/share/ca-certificates/mozilla/GTS_Root_R4.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_ECC_Root_CA_-_R4.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_ECC_Root_CA_-_R5.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_Root_CA_-_R3.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_Root_CA_-_R6.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_Root_E46.crt",
+            "usr/share/ca-certificates/mozilla/GlobalSign_Root_R46.crt",
+            "usr/share/ca-certificates/mozilla/Go_Daddy_Root_Certificate_Authority_-_G2.crt",
+            "usr/share/ca-certificates/mozilla/HARICA_TLS_ECC_Root_CA_2021.crt",
+            "usr/share/ca-certificates/mozilla/HARICA_TLS_RSA_Root_CA_2021.crt",
+            "usr/share/ca-certificates/mozilla/Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.crt",
+            "usr/share/ca-certificates/mozilla/Hellenic_Academic_and_Research_Institutions_RootCA_2015.crt",
+            "usr/share/ca-certificates/mozilla/HiPKI_Root_CA_-_G1.crt",
+            "usr/share/ca-certificates/mozilla/Hongkong_Post_Root_CA_3.crt",
+            "usr/share/ca-certificates/mozilla/ISRG_Root_X1.crt",
+            "usr/share/ca-certificates/mozilla/ISRG_Root_X2.crt",
+            "usr/share/ca-certificates/mozilla/IdenTrust_Commercial_Root_CA_1.crt",
+            "usr/share/ca-certificates/mozilla/IdenTrust_Public_Sector_Root_CA_1.crt",
+            "usr/share/ca-certificates/mozilla/Izenpe.com.crt",
+            "usr/share/ca-certificates/mozilla/Microsec_e-Szigno_Root_CA_2009.crt",
+            "usr/share/ca-certificates/mozilla/Microsoft_ECC_Root_Certificate_Authority_2017.crt",
+            "usr/share/ca-certificates/mozilla/Microsoft_RSA_Root_Certificate_Authority_2017.crt",
+            "usr/share/ca-certificates/mozilla/NAVER_Global_Root_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/NetLock_Arany_=Class_Gold=_Főtanúsítvány.crt",
+            "usr/share/ca-certificates/mozilla/OISTE_WISeKey_Global_Root_GB_CA.crt",
+            "usr/share/ca-certificates/mozilla/OISTE_WISeKey_Global_Root_GC_CA.crt",
+            "usr/share/ca-certificates/mozilla/QuoVadis_Root_CA_1_G3.crt",
+            "usr/share/ca-certificates/mozilla/QuoVadis_Root_CA_2.crt",
+            "usr/share/ca-certificates/mozilla/QuoVadis_Root_CA_2_G3.crt",
+            "usr/share/ca-certificates/mozilla/QuoVadis_Root_CA_3.crt",
+            "usr/share/ca-certificates/mozilla/QuoVadis_Root_CA_3_G3.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_EV_Root_Certification_Authority_ECC.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_EV_Root_Certification_Authority_RSA_R2.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_Root_Certification_Authority_ECC.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_Root_Certification_Authority_RSA.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_TLS_ECC_Root_CA_2022.crt",
+            "usr/share/ca-certificates/mozilla/SSL.com_TLS_RSA_Root_CA_2022.crt",
+            "usr/share/ca-certificates/mozilla/SZAFIR_ROOT_CA2.crt",
+            "usr/share/ca-certificates/mozilla/Sectigo_Public_Server_Authentication_Root_E46.crt",
+            "usr/share/ca-certificates/mozilla/Sectigo_Public_Server_Authentication_Root_R46.crt",
+            "usr/share/ca-certificates/mozilla/SecureSign_Root_CA12.crt",
+            "usr/share/ca-certificates/mozilla/SecureSign_Root_CA14.crt",
+            "usr/share/ca-certificates/mozilla/SecureSign_Root_CA15.crt",
+            "usr/share/ca-certificates/mozilla/SecureTrust_CA.crt",
+            "usr/share/ca-certificates/mozilla/Secure_Global_CA.crt",
+            "usr/share/ca-certificates/mozilla/Security_Communication_ECC_RootCA1.crt",
+            "usr/share/ca-certificates/mozilla/Security_Communication_RootCA2.crt",
+            "usr/share/ca-certificates/mozilla/Starfield_Root_Certificate_Authority_-_G2.crt",
+            "usr/share/ca-certificates/mozilla/Starfield_Services_Root_Certificate_Authority_-_G2.crt",
+            "usr/share/ca-certificates/mozilla/SwissSign_Gold_CA_-_G2.crt",
+            "usr/share/ca-certificates/mozilla/SwissSign_RSA_TLS_Root_CA_2022_-_1.crt",
+            "usr/share/ca-certificates/mozilla/T-TeleSec_GlobalRoot_Class_2.crt",
+            "usr/share/ca-certificates/mozilla/T-TeleSec_GlobalRoot_Class_3.crt",
+            "usr/share/ca-certificates/mozilla/TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.crt",
+            "usr/share/ca-certificates/mozilla/TWCA_CYBER_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/TWCA_Global_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/TWCA_Root_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/Telekom_Security_TLS_ECC_Root_2020.crt",
+            "usr/share/ca-certificates/mozilla/Telekom_Security_TLS_RSA_Root_2023.crt",
+            "usr/share/ca-certificates/mozilla/TeliaSonera_Root_CA_v1.crt",
+            "usr/share/ca-certificates/mozilla/Telia_Root_CA_v2.crt",
+            "usr/share/ca-certificates/mozilla/TrustAsia_Global_Root_CA_G3.crt",
+            "usr/share/ca-certificates/mozilla/TrustAsia_Global_Root_CA_G4.crt",
+            "usr/share/ca-certificates/mozilla/TrustAsia_TLS_ECC_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/TrustAsia_TLS_RSA_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/Trustwave_Global_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/Trustwave_Global_ECC_P256_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/Trustwave_Global_ECC_P384_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/TunTrust_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/UCA_Extended_Validation_Root.crt",
+            "usr/share/ca-certificates/mozilla/UCA_Global_G2_Root.crt",
+            "usr/share/ca-certificates/mozilla/USERTrust_ECC_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/USERTrust_RSA_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/certSIGN_ROOT_CA.crt",
+            "usr/share/ca-certificates/mozilla/certSIGN_Root_CA_G2.crt",
+            "usr/share/ca-certificates/mozilla/e-Szigno_Root_CA_2017.crt",
+            "usr/share/ca-certificates/mozilla/ePKI_Root_Certification_Authority.crt",
+            "usr/share/ca-certificates/mozilla/emSign_ECC_Root_CA_-_C3.crt",
+            "usr/share/ca-certificates/mozilla/emSign_ECC_Root_CA_-_G3.crt",
+            "usr/share/ca-certificates/mozilla/emSign_Root_CA_-_C1.crt",
+            "usr/share/ca-certificates/mozilla/emSign_Root_CA_-_G1.crt",
+            "usr/share/ca-certificates/mozilla/vTrus_ECC_Root_CA.crt",
+            "usr/share/ca-certificates/mozilla/vTrus_Root_CA.crt"
+          ]
+        },
+        {
+          "ID": "ca-certificates-bundle@20250911-r0",
+          "Name": "ca-certificates-bundle",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/ca-certificates-bundle@20250911-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "fea22b420974c6ba"
+          },
+          "Version": "20250911-r0",
+          "Arch": "x86_64",
+          "SrcName": "ca-certificates",
+          "SrcVersion": "20250911-r0",
+          "Licenses": [
+            "MPL-2.0",
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:8c7ee968419fcd92d5342cde0c5540a695a4ac2d",
+          "InstalledFiles": [
+            "etc/ssl/cert.pem",
+            "etc/ssl/certs/ca-certificates.crt",
+            "etc/ssl1.1/cert.pem",
+            "etc/ssl1.1/certs"
+          ]
+        },
+        {
+          "ID": "coreutils@9.7-r1",
+          "Name": "coreutils",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/coreutils@9.7-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "8cc9b0cb25323766"
+          },
+          "Version": "9.7-r1",
+          "Arch": "x86_64",
+          "SrcName": "coreutils",
+          "SrcVersion": "9.7-r1",
+          "Licenses": [
+            "GPL-3.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "acl-libs@2.3.2-r1",
+            "busybox-binsh@1.37.0-r19",
+            "coreutils-env@9.7-r1",
+            "coreutils-fmt@9.7-r1",
+            "coreutils-sha512sum@9.7-r1",
+            "libattr@2.5.2-r2",
+            "libcrypto3@3.5.4-r0",
+            "musl@1.2.5-r10",
+            "utmps-libs@0.1.3.1-r0"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:cf9819d86e6177fd1c6463f33db6993facc5f458",
+          "InstalledFiles": [
+            "bin/base64",
+            "bin/cat",
+            "bin/chgrp",
+            "bin/chmod",
+            "bin/chown",
+            "bin/coreutils",
+            "bin/cp",
+            "bin/date",
+            "bin/dd",
+            "bin/df",
+            "bin/echo",
+            "bin/false",
+            "bin/link",
+            "bin/ln",
+            "bin/ls",
+            "bin/mkdir",
+            "bin/mknod",
+            "bin/mktemp",
+            "bin/mv",
+            "bin/nice",
+            "bin/printenv",
+            "bin/pwd",
+            "bin/rm",
+            "bin/rmdir",
+            "bin/sleep",
+            "bin/stat",
+            "bin/stty",
+            "bin/sync",
+            "bin/touch",
+            "bin/true",
+            "bin/uname",
+            "usr/bin/[",
+            "usr/bin/b2sum",
+            "usr/bin/base32",
+            "usr/bin/basename",
+            "usr/bin/basenc",
+            "usr/bin/chcon",
+            "usr/bin/cksum",
+            "usr/bin/comm",
+            "usr/bin/csplit",
+            "usr/bin/cut",
+            "usr/bin/dir",
+            "usr/bin/dircolors",
+            "usr/bin/dirname",
+            "usr/bin/du",
+            "usr/bin/expand",
+            "usr/bin/expr",
+            "usr/bin/factor",
+            "usr/bin/fold",
+            "usr/bin/head",
+            "usr/bin/hostid",
+            "usr/bin/id",
+            "usr/bin/install",
+            "usr/bin/join",
+            "usr/bin/logname",
+            "usr/bin/md5sum",
+            "usr/bin/mkfifo",
+            "usr/bin/nl",
+            "usr/bin/nohup",
+            "usr/bin/nproc",
+            "usr/bin/numfmt",
+            "usr/bin/od",
+            "usr/bin/paste",
+            "usr/bin/pathchk",
+            "usr/bin/pinky",
+            "usr/bin/pr",
+            "usr/bin/printf",
+            "usr/bin/ptx",
+            "usr/bin/readlink",
+            "usr/bin/realpath",
+            "usr/bin/runcon",
+            "usr/bin/seq",
+            "usr/bin/sha1sum",
+            "usr/bin/sha224sum",
+            "usr/bin/sha256sum",
+            "usr/bin/sha384sum",
+            "usr/bin/shred",
+            "usr/bin/shuf",
+            "usr/bin/sort",
+            "usr/bin/split",
+            "usr/bin/stdbuf",
+            "usr/bin/sum",
+            "usr/bin/tac",
+            "usr/bin/tail",
+            "usr/bin/tee",
+            "usr/bin/test",
+            "usr/bin/timeout",
+            "usr/bin/tr",
+            "usr/bin/truncate",
+            "usr/bin/tsort",
+            "usr/bin/tty",
+            "usr/bin/unexpand",
+            "usr/bin/uniq",
+            "usr/bin/unlink",
+            "usr/bin/users",
+            "usr/bin/vdir",
+            "usr/bin/wc",
+            "usr/bin/who",
+            "usr/bin/whoami",
+            "usr/bin/yes",
+            "usr/libexec/coreutils/libstdbuf.so",
+            "usr/sbin/chroot"
+          ]
+        },
+        {
+          "ID": "coreutils-env@9.7-r1",
+          "Name": "coreutils-env",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/coreutils-env@9.7-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "379f04429ba9061d"
+          },
+          "Version": "9.7-r1",
+          "Arch": "x86_64",
+          "SrcName": "coreutils",
+          "SrcVersion": "9.7-r1",
+          "Licenses": [
+            "GPL-3.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:44c47a3b0b09042ea0c6b289d60489e51c144c8c",
+          "InstalledFiles": [
+            "usr/bin/env"
+          ]
+        },
+        {
+          "ID": "coreutils-fmt@9.7-r1",
+          "Name": "coreutils-fmt",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/coreutils-fmt@9.7-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "17d7228c03a505ad"
+          },
+          "Version": "9.7-r1",
+          "Arch": "x86_64",
+          "SrcName": "coreutils",
+          "SrcVersion": "9.7-r1",
+          "Licenses": [
+            "GPL-3.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:148f79a11fb7c68aea7a5f5a4f88834a1318b653",
+          "InstalledFiles": [
+            "usr/bin/fmt"
+          ]
+        },
+        {
+          "ID": "coreutils-sha512sum@9.7-r1",
+          "Name": "coreutils-sha512sum",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/coreutils-sha512sum@9.7-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "82d7e0a868795d5d"
+          },
+          "Version": "9.7-r1",
+          "Arch": "x86_64",
+          "SrcName": "coreutils",
+          "SrcVersion": "9.7-r1",
+          "Licenses": [
+            "GPL-3.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "libcrypto3@3.5.4-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:a66a399a6f3a8f9b94f50ba65a975ab1f3295b99",
+          "InstalledFiles": [
+            "usr/bin/sha512sum"
+          ]
+        },
+        {
+          "ID": "encodings@1.0.7-r1",
+          "Name": "encodings",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/encodings@1.0.7-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "1ab5801b9026df93"
+          },
+          "Version": "1.0.7-r1",
+          "Arch": "x86_64",
+          "SrcName": "encodings",
+          "SrcVersion": "1.0.7-r1",
+          "Licenses": [
+            "Public",
+            "Domain"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:b596474f35274940cbebbed5f58766fd67f90714",
+          "InstalledFiles": [
+            "usr/share/fonts/encodings/adobe-dingbats.enc.gz",
+            "usr/share/fonts/encodings/adobe-standard.enc.gz",
+            "usr/share/fonts/encodings/adobe-symbol.enc.gz",
+            "usr/share/fonts/encodings/armscii-8.enc.gz",
+            "usr/share/fonts/encodings/ascii-0.enc.gz",
+            "usr/share/fonts/encodings/dec-special.enc.gz",
+            "usr/share/fonts/encodings/encodings.dir",
+            "usr/share/fonts/encodings/ibm-cp437.enc.gz",
+            "usr/share/fonts/encodings/ibm-cp850.enc.gz",
+            "usr/share/fonts/encodings/ibm-cp852.enc.gz",
+            "usr/share/fonts/encodings/ibm-cp866.enc.gz",
+            "usr/share/fonts/encodings/iso8859-11.enc.gz",
+            "usr/share/fonts/encodings/iso8859-13.enc.gz",
+            "usr/share/fonts/encodings/iso8859-16.enc.gz",
+            "usr/share/fonts/encodings/iso8859-6.16.enc.gz",
+            "usr/share/fonts/encodings/iso8859-6.8x.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1250.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1251.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1252.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1253.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1254.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1255.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1256.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1257.enc.gz",
+            "usr/share/fonts/encodings/microsoft-cp1258.enc.gz",
+            "usr/share/fonts/encodings/microsoft-win3.1.enc.gz",
+            "usr/share/fonts/encodings/mulearabic-0.enc.gz",
+            "usr/share/fonts/encodings/mulearabic-1.enc.gz",
+            "usr/share/fonts/encodings/mulearabic-2.enc.gz",
+            "usr/share/fonts/encodings/mulelao-1.enc.gz",
+            "usr/share/fonts/encodings/suneu-greek.enc.gz",
+            "usr/share/fonts/encodings/tcvn-0.enc.gz",
+            "usr/share/fonts/encodings/tis620-2.enc.gz",
+            "usr/share/fonts/encodings/viscii1.1-1.enc.gz",
+            "usr/share/fonts/encodings/large/big5.eten-0.enc.gz",
+            "usr/share/fonts/encodings/large/big5hkscs-0.enc.gz",
+            "usr/share/fonts/encodings/large/cns11643-1.enc.gz",
+            "usr/share/fonts/encodings/large/cns11643-2.enc.gz",
+            "usr/share/fonts/encodings/large/cns11643-3.enc.gz",
+            "usr/share/fonts/encodings/large/encodings.dir",
+            "usr/share/fonts/encodings/large/gb18030-0.enc.gz",
+            "usr/share/fonts/encodings/large/gb18030.2000-0.enc.gz",
+            "usr/share/fonts/encodings/large/gb18030.2000-1.enc.gz",
+            "usr/share/fonts/encodings/large/gb2312.1980-0.enc.gz",
+            "usr/share/fonts/encodings/large/gbk-0.enc.gz",
+            "usr/share/fonts/encodings/large/jisx0201.1976-0.enc.gz",
+            "usr/share/fonts/encodings/large/jisx0208.1990-0.enc.gz",
+            "usr/share/fonts/encodings/large/jisx0212.1990-0.enc.gz",
+            "usr/share/fonts/encodings/large/ksc5601.1987-0.enc.gz",
+            "usr/share/fonts/encodings/large/ksc5601.1992-3.enc.gz",
+            "usr/share/fonts/encodings/large/sun.unicode.india-0.enc.gz"
+          ]
+        },
+        {
+          "ID": "font-dejavu@2.37-r6",
+          "Name": "font-dejavu",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/font-dejavu@2.37-r6?arch=x86_64\u0026distro=3.22.2",
+            "UID": "d550987eb69418d4"
+          },
+          "Version": "2.37-r6",
+          "Arch": "x86_64",
+          "SrcName": "font-dejavu",
+          "SrcVersion": "2.37-r6",
+          "Licenses": [
+            "Bitstream-Vera"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "encodings@1.0.7-r1",
+            "fontconfig@2.15.0-r3",
+            "mkfontscale@1.2.3-r1"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:9ccd0fd220fc56957f4c6f5f7fdd923224002587",
+          "InstalledFiles": [
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans-mono.conf",
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans.conf",
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-serif.conf",
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+            "etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+            "etc/fonts/conf.avail/45-dejavu.conf",
+            "etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+            "etc/fonts/conf.avail/57-dejavu-sans.conf",
+            "etc/fonts/conf.avail/57-dejavu-serif.conf",
+            "etc/fonts/conf.avail/58-dejavu-lgc-sans-mono.conf",
+            "etc/fonts/conf.avail/58-dejavu-lgc-sans.conf",
+            "etc/fonts/conf.avail/58-dejavu-lgc-serif.conf",
+            "etc/fonts/conf.avail/90-tt-dejavu.conf",
+            "etc/fonts/conf.d/45-dejavu.conf",
+            "etc/fonts/conf.d/90-tt-dejavu.conf",
+            "usr/share/fonts/dejavu/DejaVuMathTeXGyre.ttf",
+            "usr/share/fonts/dejavu/DejaVuSans-Bold.ttf",
+            "usr/share/fonts/dejavu/DejaVuSans-BoldOblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSans-ExtraLight.ttf",
+            "usr/share/fonts/dejavu/DejaVuSans-Oblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSans.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansCondensed-Bold.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansCondensed-BoldOblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansCondensed-Oblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansCondensed.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansMono-Bold.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansMono-BoldOblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansMono-Oblique.ttf",
+            "usr/share/fonts/dejavu/DejaVuSansMono.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerif-Bold.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerif-BoldItalic.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerif-Italic.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerif.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerifCondensed-Bold.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerifCondensed-BoldItalic.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerifCondensed-Italic.ttf",
+            "usr/share/fonts/dejavu/DejaVuSerifCondensed.ttf"
+          ]
+        },
+        {
+          "ID": "fontconfig@2.15.0-r3",
+          "Name": "fontconfig",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/fontconfig@2.15.0-r3?arch=x86_64\u0026distro=3.22.2",
+            "UID": "67c1c93642c7c9bb"
+          },
+          "Version": "2.15.0-r3",
+          "Arch": "x86_64",
+          "SrcName": "fontconfig",
+          "SrcVersion": "2.15.0-r3",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "busybox-binsh@1.37.0-r19",
+            "freetype@2.13.3-r0",
+            "libexpat@2.7.3-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:f8a4adf353c174e5287521b7893ce54b4c5f4d86",
+          "InstalledFiles": [
+            "etc/fonts/fonts.conf",
+            "etc/fonts/conf.d/10-hinting-slight.conf",
+            "etc/fonts/conf.d/10-scale-bitmap-fonts.conf",
+            "etc/fonts/conf.d/10-sub-pixel-none.conf",
+            "etc/fonts/conf.d/10-yes-antialias.conf",
+            "etc/fonts/conf.d/11-lcdfilter-default.conf",
+            "etc/fonts/conf.d/20-unhint-small-vera.conf",
+            "etc/fonts/conf.d/30-metric-aliases.conf",
+            "etc/fonts/conf.d/40-nonlatin.conf",
+            "etc/fonts/conf.d/45-generic.conf",
+            "etc/fonts/conf.d/45-latin.conf",
+            "etc/fonts/conf.d/48-spacing.conf",
+            "etc/fonts/conf.d/49-sansserif.conf",
+            "etc/fonts/conf.d/50-user.conf",
+            "etc/fonts/conf.d/51-local.conf",
+            "etc/fonts/conf.d/60-generic.conf",
+            "etc/fonts/conf.d/60-latin.conf",
+            "etc/fonts/conf.d/65-fonts-persian.conf",
+            "etc/fonts/conf.d/65-nonlatin.conf",
+            "etc/fonts/conf.d/69-unifont.conf",
+            "etc/fonts/conf.d/80-delicious.conf",
+            "etc/fonts/conf.d/90-synthetic.conf",
+            "etc/fonts/conf.d/README",
+            "usr/bin/fc-cache",
+            "usr/bin/fc-cat",
+            "usr/bin/fc-conflist",
+            "usr/bin/fc-list",
+            "usr/bin/fc-match",
+            "usr/bin/fc-pattern",
+            "usr/bin/fc-query",
+            "usr/bin/fc-scan",
+            "usr/bin/fc-validate",
+            "usr/lib/libfontconfig.so.1",
+            "usr/lib/libfontconfig.so.1.12.1",
+            "usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf",
+            "usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf",
+            "usr/share/fontconfig/conf.avail/10-autohint.conf",
+            "usr/share/fontconfig/conf.avail/10-hinting-full.conf",
+            "usr/share/fontconfig/conf.avail/10-hinting-medium.conf",
+            "usr/share/fontconfig/conf.avail/10-hinting-none.conf",
+            "usr/share/fontconfig/conf.avail/10-hinting-slight.conf",
+            "usr/share/fontconfig/conf.avail/10-no-antialias.conf",
+            "usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf",
+            "usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf",
+            "usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf",
+            "usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf",
+            "usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf",
+            "usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf",
+            "usr/share/fontconfig/conf.avail/10-unhinted.conf",
+            "usr/share/fontconfig/conf.avail/10-yes-antialias.conf",
+            "usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf",
+            "usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf",
+            "usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf",
+            "usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf",
+            "usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf",
+            "usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf",
+            "usr/share/fontconfig/conf.avail/30-metric-aliases.conf",
+            "usr/share/fontconfig/conf.avail/35-lang-normalize.conf",
+            "usr/share/fontconfig/conf.avail/40-nonlatin.conf",
+            "usr/share/fontconfig/conf.avail/45-generic.conf",
+            "usr/share/fontconfig/conf.avail/45-latin.conf",
+            "usr/share/fontconfig/conf.avail/48-spacing.conf",
+            "usr/share/fontconfig/conf.avail/49-sansserif.conf",
+            "usr/share/fontconfig/conf.avail/50-user.conf",
+            "usr/share/fontconfig/conf.avail/51-local.conf",
+            "usr/share/fontconfig/conf.avail/60-generic.conf",
+            "usr/share/fontconfig/conf.avail/60-latin.conf",
+            "usr/share/fontconfig/conf.avail/65-fonts-persian.conf",
+            "usr/share/fontconfig/conf.avail/65-khmer.conf",
+            "usr/share/fontconfig/conf.avail/65-nonlatin.conf",
+            "usr/share/fontconfig/conf.avail/69-unifont.conf",
+            "usr/share/fontconfig/conf.avail/70-no-bitmaps.conf",
+            "usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf",
+            "usr/share/fontconfig/conf.avail/80-delicious.conf",
+            "usr/share/fontconfig/conf.avail/90-synthetic.conf",
+            "usr/share/xml/fontconfig/fonts.dtd"
+          ]
+        },
+        {
+          "ID": "freetype@2.13.3-r0",
+          "Name": "freetype",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/freetype@2.13.3-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "2b174ea1b11a449c"
+          },
+          "Version": "2.13.3-r0",
+          "Arch": "x86_64",
+          "SrcName": "freetype",
+          "SrcVersion": "2.13.3-r0",
+          "Licenses": [
+            "FTL",
+            "GPL-2.0-or-later"
+          ],
+          "Maintainer": "Carlo Landmeter \u003cclandmeter@alpinelinux.org\u003e",
+          "DependsOn": [
+            "brotli-libs@1.1.0-r2",
+            "libbz2@1.0.8-r6",
+            "libpng@1.6.47-r0",
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:bf31020f338d745eda4d86c72190cbe0b5d58bbf",
+          "InstalledFiles": [
+            "usr/lib/libfreetype.so.6",
+            "usr/lib/libfreetype.so.6.20.2"
+          ]
+        },
+        {
+          "ID": "libapk2@2.14.9-r3",
+          "Name": "libapk2",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libapk2@2.14.9-r3?arch=x86_64\u0026distro=3.22.2",
+            "UID": "a92e20ce302d4d4d"
+          },
+          "Version": "2.14.9-r3",
+          "Arch": "x86_64",
+          "SrcName": "apk-tools",
+          "SrcVersion": "2.14.9-r3",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "ca-certificates-bundle@20250911-r0",
+            "libcrypto3@3.5.4-r0",
+            "libssl3@3.5.4-r0",
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:902fd71646d6e087e472c67b0f634c043a2195bc",
+          "InstalledFiles": [
+            "usr/lib/libapk.so.2.14.9"
+          ]
+        },
+        {
+          "ID": "libattr@2.5.2-r2",
+          "Name": "libattr",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libattr@2.5.2-r2?arch=x86_64\u0026distro=3.22.2",
+            "UID": "eb188c04cc7d4afc"
+          },
+          "Version": "2.5.2-r2",
+          "Arch": "x86_64",
+          "SrcName": "attr",
+          "SrcVersion": "2.5.2-r2",
+          "Licenses": [
+            "LGPL-2.1-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:12498a454cbd3ecf0ed1d65e3c5b546d569bf34d",
+          "InstalledFiles": [
+            "usr/lib/libattr.so.1",
+            "usr/lib/libattr.so.1.1.2502"
+          ]
+        },
+        {
+          "ID": "libbz2@1.0.8-r6",
+          "Name": "libbz2",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libbz2@1.0.8-r6?arch=x86_64\u0026distro=3.22.2",
+            "UID": "3169dfbec474ca60"
+          },
+          "Version": "1.0.8-r6",
+          "Arch": "x86_64",
+          "SrcName": "bzip2",
+          "SrcVersion": "1.0.8-r6",
+          "Licenses": [
+            "bzip-2-1.0.6"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:1c8732214d0947cdbca8b7905576c0d0bc3deb3b",
+          "InstalledFiles": [
+            "usr/lib/libbz2.so.1",
+            "usr/lib/libbz2.so.1.0.8"
+          ]
+        },
+        {
+          "ID": "libcrypto3@3.5.4-r0",
+          "Name": "libcrypto3",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libcrypto3@3.5.4-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "f58e56ef5c63f37f"
+          },
+          "Version": "3.5.4-r0",
+          "Arch": "x86_64",
+          "SrcName": "openssl",
+          "SrcVersion": "3.5.4-r0",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:814a132b631e919ef418475879e7bcec216a0a62",
+          "InstalledFiles": [
+            "etc/ssl/ct_log_list.cnf",
+            "etc/ssl/ct_log_list.cnf.dist",
+            "etc/ssl/openssl.cnf",
+            "etc/ssl/openssl.cnf.dist",
+            "usr/lib/libcrypto.so.3",
+            "usr/lib/engines-3/afalg.so",
+            "usr/lib/engines-3/capi.so",
+            "usr/lib/engines-3/loader_attic.so",
+            "usr/lib/engines-3/padlock.so",
+            "usr/lib/ossl-modules/legacy.so"
+          ]
+        },
+        {
+          "ID": "libexpat@2.7.3-r0",
+          "Name": "libexpat",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libexpat@2.7.3-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "b6f41d4008d39405"
+          },
+          "Version": "2.7.3-r0",
+          "Arch": "x86_64",
+          "SrcName": "expat",
+          "SrcVersion": "2.7.3-r0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Carlo Landmeter \u003cclandmeter@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:071003d14b18ec974b86a1e1318149e28bc51d53",
+          "InstalledFiles": [
+            "usr/lib/libexpat.so.1",
+            "usr/lib/libexpat.so.1.11.1"
+          ]
+        },
+        {
+          "ID": "libffi@3.4.8-r0",
+          "Name": "libffi",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libffi@3.4.8-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5d75f056e5a99cc0"
+          },
+          "Version": "3.4.8-r0",
+          "Arch": "x86_64",
+          "SrcName": "libffi",
+          "SrcVersion": "3.4.8-r0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:e5d01118f5ad008bb2df07635af364933b4ff20f",
+          "InstalledFiles": [
+            "usr/lib/libffi.so.8",
+            "usr/lib/libffi.so.8.1.4"
+          ]
+        },
+        {
+          "ID": "libfontenc@1.1.8-r0",
+          "Name": "libfontenc",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libfontenc@1.1.8-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5b76f995eaee0deb"
+          },
+          "Version": "1.1.8-r0",
+          "Arch": "x86_64",
+          "SrcName": "libfontenc",
+          "SrcVersion": "1.1.8-r0",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:390c046748f0dc272986f78edf32b9d1dc341ca6",
+          "InstalledFiles": [
+            "usr/lib/libfontenc.so.1",
+            "usr/lib/libfontenc.so.1.0.0"
+          ]
+        },
+        {
+          "ID": "libintl@0.24.1-r0",
+          "Name": "libintl",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libintl@0.24.1-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "20a24a0240d6f4b"
+          },
+          "Version": "0.24.1-r0",
+          "Arch": "x86_64",
+          "SrcName": "gettext",
+          "SrcVersion": "0.24.1-r0",
+          "Licenses": [
+            "LGPL-2.1-or-later"
+          ],
+          "Maintainer": "Carlo Landmeter \u003cclandmeter@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:8f44275c3149194ffa1b7bae29469289f758ed3d",
+          "InstalledFiles": [
+            "usr/lib/libintl.so.8",
+            "usr/lib/libintl.so.8.4.3"
+          ]
+        },
+        {
+          "ID": "libpng@1.6.47-r0",
+          "Name": "libpng",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libpng@1.6.47-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "dc7943769b551d5b"
+          },
+          "Version": "1.6.47-r0",
+          "Arch": "x86_64",
+          "SrcName": "libpng",
+          "SrcVersion": "1.6.47-r0",
+          "Licenses": [
+            "Libpng"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:40a4d0e8c5e7cb6f8858b30a4ff9da1770b32604",
+          "InstalledFiles": [
+            "usr/lib/libpng16.so.16",
+            "usr/lib/libpng16.so.16.47.0"
+          ]
+        },
+        {
+          "ID": "libssl3@3.5.4-r0",
+          "Name": "libssl3",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libssl3@3.5.4-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "34d76910cb64da71"
+          },
+          "Version": "3.5.4-r0",
+          "Arch": "x86_64",
+          "SrcName": "openssl",
+          "SrcVersion": "3.5.4-r0",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "libcrypto3@3.5.4-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:f8c18645483723a9416218a52eba3d34c86858cf",
+          "InstalledFiles": [
+            "usr/lib/libssl.so.3"
+          ]
+        },
+        {
+          "ID": "libtasn1@4.20.0-r0",
+          "Name": "libtasn1",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/libtasn1@4.20.0-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "ad592d4e3fb9400b"
+          },
+          "Version": "4.20.0-r0",
+          "Arch": "x86_64",
+          "SrcName": "libtasn1",
+          "SrcVersion": "4.20.0-r0",
+          "Licenses": [
+            "LGPL-2.1-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:43abd20a6ba135ba60effda46f0a0e0ebbc5c413",
+          "InstalledFiles": [
+            "usr/lib/libtasn1.so.6",
+            "usr/lib/libtasn1.so.6.6.4"
+          ]
+        },
+        {
+          "ID": "mkfontscale@1.2.3-r1",
+          "Name": "mkfontscale",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/mkfontscale@1.2.3-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "f509dd58362227ee"
+          },
+          "Version": "1.2.3-r1",
+          "Arch": "x86_64",
+          "SrcName": "mkfontscale",
+          "SrcVersion": "1.2.3-r1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "busybox-binsh@1.37.0-r19",
+            "freetype@2.13.3-r0",
+            "libfontenc@1.1.8-r0",
+            "musl@1.2.5-r10",
+            "zlib@1.3.1-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:dac589135508a7898ce2e37e552d59c8016a2ca6",
+          "InstalledFiles": [
+            "usr/bin/mkfontdir",
+            "usr/bin/mkfontscale"
+          ]
+        },
+        {
+          "ID": "musl@1.2.5-r10",
+          "Name": "musl",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/musl@1.2.5-r10?arch=x86_64\u0026distro=3.22.2",
+            "UID": "df3a33abddfcb855"
+          },
+          "Version": "1.2.5-r10",
+          "Arch": "x86_64",
+          "SrcName": "musl",
+          "SrcVersion": "1.2.5-r10",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:59283b61db830a0a0309c98f4db906a2d8fa342b",
+          "InstalledFiles": [
+            "lib/ld-musl-x86_64.so.1",
+            "lib/libc.musl-x86_64.so.1"
+          ]
+        },
+        {
+          "ID": "musl-locales@0.1.0-r1",
+          "Name": "musl-locales",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/musl-locales@0.1.0-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "ef65d652f16b6551"
+          },
+          "Version": "0.1.0-r1",
+          "Arch": "x86_64",
+          "SrcName": "musl-locales",
+          "SrcVersion": "0.1.0-r1",
+          "Licenses": [
+            "LGPL-3.0-only"
+          ],
+          "Maintainer": "TBK \u003calpine@jjtc.eu\u003e",
+          "DependsOn": [
+            "libintl@0.24.1-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:cac621add175f28ca9c2f08154a477db893ab507",
+          "InstalledFiles": [
+            "etc/profile.d/00locale.sh",
+            "usr/bin/locale",
+            "usr/share/i18n/locales/musl/cs_CZ.UTF-8",
+            "usr/share/i18n/locales/musl/de_CH.UTF-8",
+            "usr/share/i18n/locales/musl/de_DE.UTF-8",
+            "usr/share/i18n/locales/musl/en_GB.UTF-8",
+            "usr/share/i18n/locales/musl/en_US.UTF-8",
+            "usr/share/i18n/locales/musl/es_ES.UTF-8",
+            "usr/share/i18n/locales/musl/fi_FI.UTF-8",
+            "usr/share/i18n/locales/musl/fr_FR.UTF-8",
+            "usr/share/i18n/locales/musl/it_IT.UTF-8",
+            "usr/share/i18n/locales/musl/nb_NO.UTF-8",
+            "usr/share/i18n/locales/musl/nl_NL.UTF-8",
+            "usr/share/i18n/locales/musl/pt_BR.UTF-8",
+            "usr/share/i18n/locales/musl/pt_PT.UTF-8",
+            "usr/share/i18n/locales/musl/ru_RU.UTF-8",
+            "usr/share/i18n/locales/musl/sr_RS.UTF-8",
+            "usr/share/i18n/locales/musl/sv_SE.UTF-8"
+          ]
+        },
+        {
+          "ID": "musl-locales-lang@0.1.0-r1",
+          "Name": "musl-locales-lang",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/musl-locales-lang@0.1.0-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "550ef55231355516"
+          },
+          "Version": "0.1.0-r1",
+          "Arch": "x86_64",
+          "SrcName": "musl-locales",
+          "SrcVersion": "0.1.0-r1",
+          "Licenses": [
+            "MIT"
+          ],
+          "Maintainer": "TBK \u003calpine@jjtc.eu\u003e",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:83e28bda07ff9b51e782f178ad131c97efe5eada",
+          "InstalledFiles": [
+            "usr/share/locale/cs_CZ/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/de_CH/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/de_DE/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/en_GB/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/en_US/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/es_ES/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/fi_FI/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/fr_FR/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/it_IT/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/nb_NO/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/nl_NL/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/pt_BR/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/pt_PT/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/ru_RU/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/sr_RS/LC_MESSAGES/musl-locales.mo",
+            "usr/share/locale/sv_SE/LC_MESSAGES/musl-locales.mo"
+          ]
+        },
+        {
+          "ID": "musl-utils@1.2.5-r10",
+          "Name": "musl-utils",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/musl-utils@1.2.5-r10?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5d2cabc1c2603ddb"
+          },
+          "Version": "1.2.5-r10",
+          "Arch": "x86_64",
+          "SrcName": "musl",
+          "SrcVersion": "1.2.5-r10",
+          "Licenses": [
+            "MIT",
+            "BSD-2-Clause",
+            "GPL-2.0-or-later"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10",
+            "scanelf@1.3.8-r1"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:7e60d0820813baa8ac266bee158394c0a69f104a",
+          "InstalledFiles": [
+            "sbin/ldconfig",
+            "usr/bin/getconf",
+            "usr/bin/getent",
+            "usr/bin/iconv",
+            "usr/bin/ldd"
+          ]
+        },
+        {
+          "ID": "openssl@3.5.4-r0",
+          "Name": "openssl",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/openssl@3.5.4-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7991df372c6a7d49"
+          },
+          "Version": "3.5.4-r0",
+          "Arch": "x86_64",
+          "SrcName": "openssl",
+          "SrcVersion": "3.5.4-r0",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "libcrypto3@3.5.4-r0",
+            "libssl3@3.5.4-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:886b38018c15a06954914c7484254a5091bc75fe",
+          "InstalledFiles": [
+            "usr/bin/openssl"
+          ]
+        },
+        {
+          "ID": "p11-kit@0.25.5-r2",
+          "Name": "p11-kit",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/p11-kit@0.25.5-r2?arch=x86_64\u0026distro=3.22.2",
+            "UID": "c359d3f0bbb38727"
+          },
+          "Version": "0.25.5-r2",
+          "Arch": "x86_64",
+          "SrcName": "p11-kit",
+          "SrcVersion": "0.25.5-r2",
+          "Licenses": [
+            "BSD-3-Clause"
+          ],
+          "Maintainer": "Patrycja Rosa \u003calpine@ptrcnull.me\u003e",
+          "DependsOn": [
+            "libffi@3.4.8-r0",
+            "libtasn1@4.20.0-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:755b408e886fdbf4428612a6f47dfadf9a8513f7",
+          "InstalledFiles": [
+            "etc/pkcs11/pkcs11.conf.example",
+            "usr/bin/p11-kit",
+            "usr/lib/libp11-kit.so.0",
+            "usr/lib/libp11-kit.so.0.4.1",
+            "usr/libexec/p11-kit/p11-kit-remote",
+            "usr/libexec/p11-kit/trust-extract-compat"
+          ]
+        },
+        {
+          "ID": "p11-kit-trust@0.25.5-r2",
+          "Name": "p11-kit-trust",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/p11-kit-trust@0.25.5-r2?arch=x86_64\u0026distro=3.22.2",
+            "UID": "1bb918a447907abb"
+          },
+          "Version": "0.25.5-r2",
+          "Arch": "x86_64",
+          "SrcName": "p11-kit",
+          "SrcVersion": "0.25.5-r2",
+          "Licenses": [
+            "BSD-3-Clause"
+          ],
+          "Maintainer": "Patrycja Rosa \u003calpine@ptrcnull.me\u003e",
+          "DependsOn": [
+            "libtasn1@4.20.0-r0",
+            "musl@1.2.5-r10",
+            "p11-kit@0.25.5-r2"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:db8e9d67e1bf044bd257d52fcea1f701e3a60980",
+          "InstalledFiles": [
+            "usr/bin/trust",
+            "usr/lib/pkcs11/p11-kit-trust.so",
+            "usr/share/p11-kit/modules/p11-kit-trust.module"
+          ]
+        },
+        {
+          "ID": "scanelf@1.3.8-r1",
+          "Name": "scanelf",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/scanelf@1.3.8-r1?arch=x86_64\u0026distro=3.22.2",
+            "UID": "c162fa31840265de"
+          },
+          "Version": "1.3.8-r1",
+          "Arch": "x86_64",
+          "SrcName": "pax-utils",
+          "SrcVersion": "1.3.8-r1",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:bd6dd1c820d476bcdf8ee38f003bcf2a73323b13",
+          "InstalledFiles": [
+            "usr/bin/scanelf"
+          ]
+        },
+        {
+          "ID": "skalibs-libs@2.14.4.0-r0",
+          "Name": "skalibs-libs",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/skalibs-libs@2.14.4.0-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "c1a8c19522f3c5dc"
+          },
+          "Version": "2.14.4.0-r0",
+          "Arch": "x86_64",
+          "SrcName": "skalibs",
+          "SrcVersion": "2.14.4.0-r0",
+          "Licenses": [
+            "ISC"
+          ],
+          "Maintainer": "Laurent Bercot \u003cska-devel@skarnet.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:8ca4ae34fad485e55b63727912e5f8f39efb134a",
+          "InstalledFiles": [
+            "usr/lib/libskarnet.so.2.14",
+            "usr/lib/libskarnet.so.2.14.4.0"
+          ]
+        },
+        {
+          "ID": "ssl_client@1.37.0-r19",
+          "Name": "ssl_client",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/ssl_client@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "691bd1fc4de953e2"
+          },
+          "Version": "1.37.0-r19",
+          "Arch": "x86_64",
+          "SrcName": "busybox",
+          "SrcVersion": "1.37.0-r19",
+          "Licenses": [
+            "GPL-2.0-only"
+          ],
+          "Maintainer": "Sören Tempel \u003csoeren+alpine@soeren-tempel.net\u003e",
+          "DependsOn": [
+            "libcrypto3@3.5.4-r0",
+            "libssl3@3.5.4-r0",
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:20dcfaf6d1081b07cd138cabb32d91afe71ad09c",
+          "InstalledFiles": [
+            "usr/bin/ssl_client"
+          ]
+        },
+        {
+          "ID": "tzdata@2025b-r0",
+          "Name": "tzdata",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/tzdata@2025b-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7b70eccd3a32918f"
+          },
+          "Version": "2025b-r0",
+          "Arch": "x86_64",
+          "SrcName": "tzdata",
+          "SrcVersion": "2025b-r0",
+          "Licenses": [
+            "Public-Domain"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:182532a94e272a7ae1d262249729c8bcbb10891d",
+          "InstalledFiles": [
+            "usr/share/zoneinfo/CET",
+            "usr/share/zoneinfo/CST6CDT",
+            "usr/share/zoneinfo/Cuba",
+            "usr/share/zoneinfo/EET",
+            "usr/share/zoneinfo/EST",
+            "usr/share/zoneinfo/EST5EDT",
+            "usr/share/zoneinfo/Egypt",
+            "usr/share/zoneinfo/Eire",
+            "usr/share/zoneinfo/Factory",
+            "usr/share/zoneinfo/GB",
+            "usr/share/zoneinfo/GB-Eire",
+            "usr/share/zoneinfo/GMT",
+            "usr/share/zoneinfo/GMT+0",
+            "usr/share/zoneinfo/GMT-0",
+            "usr/share/zoneinfo/GMT0",
+            "usr/share/zoneinfo/Greenwich",
+            "usr/share/zoneinfo/HST",
+            "usr/share/zoneinfo/Hongkong",
+            "usr/share/zoneinfo/Iceland",
+            "usr/share/zoneinfo/Iran",
+            "usr/share/zoneinfo/Israel",
+            "usr/share/zoneinfo/Jamaica",
+            "usr/share/zoneinfo/Japan",
+            "usr/share/zoneinfo/Kwajalein",
+            "usr/share/zoneinfo/Libya",
+            "usr/share/zoneinfo/MET",
+            "usr/share/zoneinfo/MST",
+            "usr/share/zoneinfo/MST7MDT",
+            "usr/share/zoneinfo/NZ",
+            "usr/share/zoneinfo/NZ-CHAT",
+            "usr/share/zoneinfo/Navajo",
+            "usr/share/zoneinfo/PRC",
+            "usr/share/zoneinfo/PST8PDT",
+            "usr/share/zoneinfo/Poland",
+            "usr/share/zoneinfo/Portugal",
+            "usr/share/zoneinfo/ROC",
+            "usr/share/zoneinfo/ROK",
+            "usr/share/zoneinfo/Singapore",
+            "usr/share/zoneinfo/Turkey",
+            "usr/share/zoneinfo/UCT",
+            "usr/share/zoneinfo/UTC",
+            "usr/share/zoneinfo/Universal",
+            "usr/share/zoneinfo/W-SU",
+            "usr/share/zoneinfo/WET",
+            "usr/share/zoneinfo/Zulu",
+            "usr/share/zoneinfo/iso3166.tab",
+            "usr/share/zoneinfo/leap-seconds.list",
+            "usr/share/zoneinfo/posixrules",
+            "usr/share/zoneinfo/zone.tab",
+            "usr/share/zoneinfo/zone1970.tab",
+            "usr/share/zoneinfo/Africa/Abidjan",
+            "usr/share/zoneinfo/Africa/Accra",
+            "usr/share/zoneinfo/Africa/Addis_Ababa",
+            "usr/share/zoneinfo/Africa/Algiers",
+            "usr/share/zoneinfo/Africa/Asmara",
+            "usr/share/zoneinfo/Africa/Asmera",
+            "usr/share/zoneinfo/Africa/Bamako",
+            "usr/share/zoneinfo/Africa/Bangui",
+            "usr/share/zoneinfo/Africa/Banjul",
+            "usr/share/zoneinfo/Africa/Bissau",
+            "usr/share/zoneinfo/Africa/Blantyre",
+            "usr/share/zoneinfo/Africa/Brazzaville",
+            "usr/share/zoneinfo/Africa/Bujumbura",
+            "usr/share/zoneinfo/Africa/Cairo",
+            "usr/share/zoneinfo/Africa/Casablanca",
+            "usr/share/zoneinfo/Africa/Ceuta",
+            "usr/share/zoneinfo/Africa/Conakry",
+            "usr/share/zoneinfo/Africa/Dakar",
+            "usr/share/zoneinfo/Africa/Dar_es_Salaam",
+            "usr/share/zoneinfo/Africa/Djibouti",
+            "usr/share/zoneinfo/Africa/Douala",
+            "usr/share/zoneinfo/Africa/El_Aaiun",
+            "usr/share/zoneinfo/Africa/Freetown",
+            "usr/share/zoneinfo/Africa/Gaborone",
+            "usr/share/zoneinfo/Africa/Harare",
+            "usr/share/zoneinfo/Africa/Johannesburg",
+            "usr/share/zoneinfo/Africa/Juba",
+            "usr/share/zoneinfo/Africa/Kampala",
+            "usr/share/zoneinfo/Africa/Khartoum",
+            "usr/share/zoneinfo/Africa/Kigali",
+            "usr/share/zoneinfo/Africa/Kinshasa",
+            "usr/share/zoneinfo/Africa/Lagos",
+            "usr/share/zoneinfo/Africa/Libreville",
+            "usr/share/zoneinfo/Africa/Lome",
+            "usr/share/zoneinfo/Africa/Luanda",
+            "usr/share/zoneinfo/Africa/Lubumbashi",
+            "usr/share/zoneinfo/Africa/Lusaka",
+            "usr/share/zoneinfo/Africa/Malabo",
+            "usr/share/zoneinfo/Africa/Maputo",
+            "usr/share/zoneinfo/Africa/Maseru",
+            "usr/share/zoneinfo/Africa/Mbabane",
+            "usr/share/zoneinfo/Africa/Mogadishu",
+            "usr/share/zoneinfo/Africa/Monrovia",
+            "usr/share/zoneinfo/Africa/Nairobi",
+            "usr/share/zoneinfo/Africa/Ndjamena",
+            "usr/share/zoneinfo/Africa/Niamey",
+            "usr/share/zoneinfo/Africa/Nouakchott",
+            "usr/share/zoneinfo/Africa/Ouagadougou",
+            "usr/share/zoneinfo/Africa/Porto-Novo",
+            "usr/share/zoneinfo/Africa/Sao_Tome",
+            "usr/share/zoneinfo/Africa/Timbuktu",
+            "usr/share/zoneinfo/Africa/Tripoli",
+            "usr/share/zoneinfo/Africa/Tunis",
+            "usr/share/zoneinfo/Africa/Windhoek",
+            "usr/share/zoneinfo/America/Adak",
+            "usr/share/zoneinfo/America/Anchorage",
+            "usr/share/zoneinfo/America/Anguilla",
+            "usr/share/zoneinfo/America/Antigua",
+            "usr/share/zoneinfo/America/Araguaina",
+            "usr/share/zoneinfo/America/Aruba",
+            "usr/share/zoneinfo/America/Asuncion",
+            "usr/share/zoneinfo/America/Atikokan",
+            "usr/share/zoneinfo/America/Atka",
+            "usr/share/zoneinfo/America/Bahia",
+            "usr/share/zoneinfo/America/Bahia_Banderas",
+            "usr/share/zoneinfo/America/Barbados",
+            "usr/share/zoneinfo/America/Belem",
+            "usr/share/zoneinfo/America/Belize",
+            "usr/share/zoneinfo/America/Blanc-Sablon",
+            "usr/share/zoneinfo/America/Boa_Vista",
+            "usr/share/zoneinfo/America/Bogota",
+            "usr/share/zoneinfo/America/Boise",
+            "usr/share/zoneinfo/America/Buenos_Aires",
+            "usr/share/zoneinfo/America/Cambridge_Bay",
+            "usr/share/zoneinfo/America/Campo_Grande",
+            "usr/share/zoneinfo/America/Cancun",
+            "usr/share/zoneinfo/America/Caracas",
+            "usr/share/zoneinfo/America/Catamarca",
+            "usr/share/zoneinfo/America/Cayenne",
+            "usr/share/zoneinfo/America/Cayman",
+            "usr/share/zoneinfo/America/Chicago",
+            "usr/share/zoneinfo/America/Chihuahua",
+            "usr/share/zoneinfo/America/Ciudad_Juarez",
+            "usr/share/zoneinfo/America/Coral_Harbour",
+            "usr/share/zoneinfo/America/Cordoba",
+            "usr/share/zoneinfo/America/Costa_Rica",
+            "usr/share/zoneinfo/America/Coyhaique",
+            "usr/share/zoneinfo/America/Creston",
+            "usr/share/zoneinfo/America/Cuiaba",
+            "usr/share/zoneinfo/America/Curacao",
+            "usr/share/zoneinfo/America/Danmarkshavn",
+            "usr/share/zoneinfo/America/Dawson",
+            "usr/share/zoneinfo/America/Dawson_Creek",
+            "usr/share/zoneinfo/America/Denver",
+            "usr/share/zoneinfo/America/Detroit",
+            "usr/share/zoneinfo/America/Dominica",
+            "usr/share/zoneinfo/America/Edmonton",
+            "usr/share/zoneinfo/America/Eirunepe",
+            "usr/share/zoneinfo/America/El_Salvador",
+            "usr/share/zoneinfo/America/Ensenada",
+            "usr/share/zoneinfo/America/Fort_Nelson",
+            "usr/share/zoneinfo/America/Fort_Wayne",
+            "usr/share/zoneinfo/America/Fortaleza",
+            "usr/share/zoneinfo/America/Glace_Bay",
+            "usr/share/zoneinfo/America/Godthab",
+            "usr/share/zoneinfo/America/Goose_Bay",
+            "usr/share/zoneinfo/America/Grand_Turk",
+            "usr/share/zoneinfo/America/Grenada",
+            "usr/share/zoneinfo/America/Guadeloupe",
+            "usr/share/zoneinfo/America/Guatemala",
+            "usr/share/zoneinfo/America/Guayaquil",
+            "usr/share/zoneinfo/America/Guyana",
+            "usr/share/zoneinfo/America/Halifax",
+            "usr/share/zoneinfo/America/Havana",
+            "usr/share/zoneinfo/America/Hermosillo",
+            "usr/share/zoneinfo/America/Indianapolis",
+            "usr/share/zoneinfo/America/Inuvik",
+            "usr/share/zoneinfo/America/Iqaluit",
+            "usr/share/zoneinfo/America/Jamaica",
+            "usr/share/zoneinfo/America/Jujuy",
+            "usr/share/zoneinfo/America/Juneau",
+            "usr/share/zoneinfo/America/Knox_IN",
+            "usr/share/zoneinfo/America/Kralendijk",
+            "usr/share/zoneinfo/America/La_Paz",
+            "usr/share/zoneinfo/America/Lima",
+            "usr/share/zoneinfo/America/Los_Angeles",
+            "usr/share/zoneinfo/America/Louisville",
+            "usr/share/zoneinfo/America/Lower_Princes",
+            "usr/share/zoneinfo/America/Maceio",
+            "usr/share/zoneinfo/America/Managua",
+            "usr/share/zoneinfo/America/Manaus",
+            "usr/share/zoneinfo/America/Marigot",
+            "usr/share/zoneinfo/America/Martinique",
+            "usr/share/zoneinfo/America/Matamoros",
+            "usr/share/zoneinfo/America/Mazatlan",
+            "usr/share/zoneinfo/America/Mendoza",
+            "usr/share/zoneinfo/America/Menominee",
+            "usr/share/zoneinfo/America/Merida",
+            "usr/share/zoneinfo/America/Metlakatla",
+            "usr/share/zoneinfo/America/Mexico_City",
+            "usr/share/zoneinfo/America/Miquelon",
+            "usr/share/zoneinfo/America/Moncton",
+            "usr/share/zoneinfo/America/Monterrey",
+            "usr/share/zoneinfo/America/Montevideo",
+            "usr/share/zoneinfo/America/Montreal",
+            "usr/share/zoneinfo/America/Montserrat",
+            "usr/share/zoneinfo/America/Nassau",
+            "usr/share/zoneinfo/America/New_York",
+            "usr/share/zoneinfo/America/Nipigon",
+            "usr/share/zoneinfo/America/Nome",
+            "usr/share/zoneinfo/America/Noronha",
+            "usr/share/zoneinfo/America/Nuuk",
+            "usr/share/zoneinfo/America/Ojinaga",
+            "usr/share/zoneinfo/America/Panama",
+            "usr/share/zoneinfo/America/Pangnirtung",
+            "usr/share/zoneinfo/America/Paramaribo",
+            "usr/share/zoneinfo/America/Phoenix",
+            "usr/share/zoneinfo/America/Port-au-Prince",
+            "usr/share/zoneinfo/America/Port_of_Spain",
+            "usr/share/zoneinfo/America/Porto_Acre",
+            "usr/share/zoneinfo/America/Porto_Velho",
+            "usr/share/zoneinfo/America/Puerto_Rico",
+            "usr/share/zoneinfo/America/Punta_Arenas",
+            "usr/share/zoneinfo/America/Rainy_River",
+            "usr/share/zoneinfo/America/Rankin_Inlet",
+            "usr/share/zoneinfo/America/Recife",
+            "usr/share/zoneinfo/America/Regina",
+            "usr/share/zoneinfo/America/Resolute",
+            "usr/share/zoneinfo/America/Rio_Branco",
+            "usr/share/zoneinfo/America/Rosario",
+            "usr/share/zoneinfo/America/Santa_Isabel",
+            "usr/share/zoneinfo/America/Santarem",
+            "usr/share/zoneinfo/America/Santiago",
+            "usr/share/zoneinfo/America/Santo_Domingo",
+            "usr/share/zoneinfo/America/Sao_Paulo",
+            "usr/share/zoneinfo/America/Scoresbysund",
+            "usr/share/zoneinfo/America/Shiprock",
+            "usr/share/zoneinfo/America/Sitka",
+            "usr/share/zoneinfo/America/St_Barthelemy",
+            "usr/share/zoneinfo/America/St_Johns",
+            "usr/share/zoneinfo/America/St_Kitts",
+            "usr/share/zoneinfo/America/St_Lucia",
+            "usr/share/zoneinfo/America/St_Thomas",
+            "usr/share/zoneinfo/America/St_Vincent",
+            "usr/share/zoneinfo/America/Swift_Current",
+            "usr/share/zoneinfo/America/Tegucigalpa",
+            "usr/share/zoneinfo/America/Thule",
+            "usr/share/zoneinfo/America/Thunder_Bay",
+            "usr/share/zoneinfo/America/Tijuana",
+            "usr/share/zoneinfo/America/Toronto",
+            "usr/share/zoneinfo/America/Tortola",
+            "usr/share/zoneinfo/America/Vancouver",
+            "usr/share/zoneinfo/America/Virgin",
+            "usr/share/zoneinfo/America/Whitehorse",
+            "usr/share/zoneinfo/America/Winnipeg",
+            "usr/share/zoneinfo/America/Yakutat",
+            "usr/share/zoneinfo/America/Yellowknife",
+            "usr/share/zoneinfo/America/Argentina/Buenos_Aires",
+            "usr/share/zoneinfo/America/Argentina/Catamarca",
+            "usr/share/zoneinfo/America/Argentina/ComodRivadavia",
+            "usr/share/zoneinfo/America/Argentina/Cordoba",
+            "usr/share/zoneinfo/America/Argentina/Jujuy",
+            "usr/share/zoneinfo/America/Argentina/La_Rioja",
+            "usr/share/zoneinfo/America/Argentina/Mendoza",
+            "usr/share/zoneinfo/America/Argentina/Rio_Gallegos",
+            "usr/share/zoneinfo/America/Argentina/Salta",
+            "usr/share/zoneinfo/America/Argentina/San_Juan",
+            "usr/share/zoneinfo/America/Argentina/San_Luis",
+            "usr/share/zoneinfo/America/Argentina/Tucuman",
+            "usr/share/zoneinfo/America/Argentina/Ushuaia",
+            "usr/share/zoneinfo/America/Indiana/Indianapolis",
+            "usr/share/zoneinfo/America/Indiana/Knox",
+            "usr/share/zoneinfo/America/Indiana/Marengo",
+            "usr/share/zoneinfo/America/Indiana/Petersburg",
+            "usr/share/zoneinfo/America/Indiana/Tell_City",
+            "usr/share/zoneinfo/America/Indiana/Vevay",
+            "usr/share/zoneinfo/America/Indiana/Vincennes",
+            "usr/share/zoneinfo/America/Indiana/Winamac",
+            "usr/share/zoneinfo/America/Kentucky/Louisville",
+            "usr/share/zoneinfo/America/Kentucky/Monticello",
+            "usr/share/zoneinfo/America/North_Dakota/Beulah",
+            "usr/share/zoneinfo/America/North_Dakota/Center",
+            "usr/share/zoneinfo/America/North_Dakota/New_Salem",
+            "usr/share/zoneinfo/Antarctica/Casey",
+            "usr/share/zoneinfo/Antarctica/Davis",
+            "usr/share/zoneinfo/Antarctica/DumontDUrville",
+            "usr/share/zoneinfo/Antarctica/Macquarie",
+            "usr/share/zoneinfo/Antarctica/Mawson",
+            "usr/share/zoneinfo/Antarctica/McMurdo",
+            "usr/share/zoneinfo/Antarctica/Palmer",
+            "usr/share/zoneinfo/Antarctica/Rothera",
+            "usr/share/zoneinfo/Antarctica/South_Pole",
+            "usr/share/zoneinfo/Antarctica/Syowa",
+            "usr/share/zoneinfo/Antarctica/Troll",
+            "usr/share/zoneinfo/Antarctica/Vostok",
+            "usr/share/zoneinfo/Arctic/Longyearbyen",
+            "usr/share/zoneinfo/Asia/Aden",
+            "usr/share/zoneinfo/Asia/Almaty",
+            "usr/share/zoneinfo/Asia/Amman",
+            "usr/share/zoneinfo/Asia/Anadyr",
+            "usr/share/zoneinfo/Asia/Aqtau",
+            "usr/share/zoneinfo/Asia/Aqtobe",
+            "usr/share/zoneinfo/Asia/Ashgabat",
+            "usr/share/zoneinfo/Asia/Ashkhabad",
+            "usr/share/zoneinfo/Asia/Atyrau",
+            "usr/share/zoneinfo/Asia/Baghdad",
+            "usr/share/zoneinfo/Asia/Bahrain",
+            "usr/share/zoneinfo/Asia/Baku",
+            "usr/share/zoneinfo/Asia/Bangkok",
+            "usr/share/zoneinfo/Asia/Barnaul",
+            "usr/share/zoneinfo/Asia/Beirut",
+            "usr/share/zoneinfo/Asia/Bishkek",
+            "usr/share/zoneinfo/Asia/Brunei",
+            "usr/share/zoneinfo/Asia/Calcutta",
+            "usr/share/zoneinfo/Asia/Chita",
+            "usr/share/zoneinfo/Asia/Choibalsan",
+            "usr/share/zoneinfo/Asia/Chongqing",
+            "usr/share/zoneinfo/Asia/Chungking",
+            "usr/share/zoneinfo/Asia/Colombo",
+            "usr/share/zoneinfo/Asia/Dacca",
+            "usr/share/zoneinfo/Asia/Damascus",
+            "usr/share/zoneinfo/Asia/Dhaka",
+            "usr/share/zoneinfo/Asia/Dili",
+            "usr/share/zoneinfo/Asia/Dubai",
+            "usr/share/zoneinfo/Asia/Dushanbe",
+            "usr/share/zoneinfo/Asia/Famagusta",
+            "usr/share/zoneinfo/Asia/Gaza",
+            "usr/share/zoneinfo/Asia/Harbin",
+            "usr/share/zoneinfo/Asia/Hebron",
+            "usr/share/zoneinfo/Asia/Ho_Chi_Minh",
+            "usr/share/zoneinfo/Asia/Hong_Kong",
+            "usr/share/zoneinfo/Asia/Hovd",
+            "usr/share/zoneinfo/Asia/Irkutsk",
+            "usr/share/zoneinfo/Asia/Istanbul",
+            "usr/share/zoneinfo/Asia/Jakarta",
+            "usr/share/zoneinfo/Asia/Jayapura",
+            "usr/share/zoneinfo/Asia/Jerusalem",
+            "usr/share/zoneinfo/Asia/Kabul",
+            "usr/share/zoneinfo/Asia/Kamchatka",
+            "usr/share/zoneinfo/Asia/Karachi",
+            "usr/share/zoneinfo/Asia/Kashgar",
+            "usr/share/zoneinfo/Asia/Kathmandu",
+            "usr/share/zoneinfo/Asia/Katmandu",
+            "usr/share/zoneinfo/Asia/Khandyga",
+            "usr/share/zoneinfo/Asia/Kolkata",
+            "usr/share/zoneinfo/Asia/Krasnoyarsk",
+            "usr/share/zoneinfo/Asia/Kuala_Lumpur",
+            "usr/share/zoneinfo/Asia/Kuching",
+            "usr/share/zoneinfo/Asia/Kuwait",
+            "usr/share/zoneinfo/Asia/Macao",
+            "usr/share/zoneinfo/Asia/Macau",
+            "usr/share/zoneinfo/Asia/Magadan",
+            "usr/share/zoneinfo/Asia/Makassar",
+            "usr/share/zoneinfo/Asia/Manila",
+            "usr/share/zoneinfo/Asia/Muscat",
+            "usr/share/zoneinfo/Asia/Nicosia",
+            "usr/share/zoneinfo/Asia/Novokuznetsk",
+            "usr/share/zoneinfo/Asia/Novosibirsk",
+            "usr/share/zoneinfo/Asia/Omsk",
+            "usr/share/zoneinfo/Asia/Oral",
+            "usr/share/zoneinfo/Asia/Phnom_Penh",
+            "usr/share/zoneinfo/Asia/Pontianak",
+            "usr/share/zoneinfo/Asia/Pyongyang",
+            "usr/share/zoneinfo/Asia/Qatar",
+            "usr/share/zoneinfo/Asia/Qostanay",
+            "usr/share/zoneinfo/Asia/Qyzylorda",
+            "usr/share/zoneinfo/Asia/Rangoon",
+            "usr/share/zoneinfo/Asia/Riyadh",
+            "usr/share/zoneinfo/Asia/Saigon",
+            "usr/share/zoneinfo/Asia/Sakhalin",
+            "usr/share/zoneinfo/Asia/Samarkand",
+            "usr/share/zoneinfo/Asia/Seoul",
+            "usr/share/zoneinfo/Asia/Shanghai",
+            "usr/share/zoneinfo/Asia/Singapore",
+            "usr/share/zoneinfo/Asia/Srednekolymsk",
+            "usr/share/zoneinfo/Asia/Taipei",
+            "usr/share/zoneinfo/Asia/Tashkent",
+            "usr/share/zoneinfo/Asia/Tbilisi",
+            "usr/share/zoneinfo/Asia/Tehran",
+            "usr/share/zoneinfo/Asia/Tel_Aviv",
+            "usr/share/zoneinfo/Asia/Thimbu",
+            "usr/share/zoneinfo/Asia/Thimphu",
+            "usr/share/zoneinfo/Asia/Tokyo",
+            "usr/share/zoneinfo/Asia/Tomsk",
+            "usr/share/zoneinfo/Asia/Ujung_Pandang",
+            "usr/share/zoneinfo/Asia/Ulaanbaatar",
+            "usr/share/zoneinfo/Asia/Ulan_Bator",
+            "usr/share/zoneinfo/Asia/Urumqi",
+            "usr/share/zoneinfo/Asia/Ust-Nera",
+            "usr/share/zoneinfo/Asia/Vientiane",
+            "usr/share/zoneinfo/Asia/Vladivostok",
+            "usr/share/zoneinfo/Asia/Yakutsk",
+            "usr/share/zoneinfo/Asia/Yangon",
+            "usr/share/zoneinfo/Asia/Yekaterinburg",
+            "usr/share/zoneinfo/Asia/Yerevan",
+            "usr/share/zoneinfo/Atlantic/Azores",
+            "usr/share/zoneinfo/Atlantic/Bermuda",
+            "usr/share/zoneinfo/Atlantic/Canary",
+            "usr/share/zoneinfo/Atlantic/Cape_Verde",
+            "usr/share/zoneinfo/Atlantic/Faeroe",
+            "usr/share/zoneinfo/Atlantic/Faroe",
+            "usr/share/zoneinfo/Atlantic/Jan_Mayen",
+            "usr/share/zoneinfo/Atlantic/Madeira",
+            "usr/share/zoneinfo/Atlantic/Reykjavik",
+            "usr/share/zoneinfo/Atlantic/South_Georgia",
+            "usr/share/zoneinfo/Atlantic/St_Helena",
+            "usr/share/zoneinfo/Atlantic/Stanley",
+            "usr/share/zoneinfo/Australia/ACT",
+            "usr/share/zoneinfo/Australia/Adelaide",
+            "usr/share/zoneinfo/Australia/Brisbane",
+            "usr/share/zoneinfo/Australia/Broken_Hill",
+            "usr/share/zoneinfo/Australia/Canberra",
+            "usr/share/zoneinfo/Australia/Currie",
+            "usr/share/zoneinfo/Australia/Darwin",
+            "usr/share/zoneinfo/Australia/Eucla",
+            "usr/share/zoneinfo/Australia/Hobart",
+            "usr/share/zoneinfo/Australia/LHI",
+            "usr/share/zoneinfo/Australia/Lindeman",
+            "usr/share/zoneinfo/Australia/Lord_Howe",
+            "usr/share/zoneinfo/Australia/Melbourne",
+            "usr/share/zoneinfo/Australia/NSW",
+            "usr/share/zoneinfo/Australia/North",
+            "usr/share/zoneinfo/Australia/Perth",
+            "usr/share/zoneinfo/Australia/Queensland",
+            "usr/share/zoneinfo/Australia/South",
+            "usr/share/zoneinfo/Australia/Sydney",
+            "usr/share/zoneinfo/Australia/Tasmania",
+            "usr/share/zoneinfo/Australia/Victoria",
+            "usr/share/zoneinfo/Australia/West",
+            "usr/share/zoneinfo/Australia/Yancowinna",
+            "usr/share/zoneinfo/Brazil/Acre",
+            "usr/share/zoneinfo/Brazil/DeNoronha",
+            "usr/share/zoneinfo/Brazil/East",
+            "usr/share/zoneinfo/Brazil/West",
+            "usr/share/zoneinfo/Canada/Atlantic",
+            "usr/share/zoneinfo/Canada/Central",
+            "usr/share/zoneinfo/Canada/Eastern",
+            "usr/share/zoneinfo/Canada/Mountain",
+            "usr/share/zoneinfo/Canada/Newfoundland",
+            "usr/share/zoneinfo/Canada/Pacific",
+            "usr/share/zoneinfo/Canada/Saskatchewan",
+            "usr/share/zoneinfo/Canada/Yukon",
+            "usr/share/zoneinfo/Chile/Continental",
+            "usr/share/zoneinfo/Chile/EasterIsland",
+            "usr/share/zoneinfo/Etc/GMT",
+            "usr/share/zoneinfo/Etc/GMT+0",
+            "usr/share/zoneinfo/Etc/GMT+1",
+            "usr/share/zoneinfo/Etc/GMT+10",
+            "usr/share/zoneinfo/Etc/GMT+11",
+            "usr/share/zoneinfo/Etc/GMT+12",
+            "usr/share/zoneinfo/Etc/GMT+2",
+            "usr/share/zoneinfo/Etc/GMT+3",
+            "usr/share/zoneinfo/Etc/GMT+4",
+            "usr/share/zoneinfo/Etc/GMT+5",
+            "usr/share/zoneinfo/Etc/GMT+6",
+            "usr/share/zoneinfo/Etc/GMT+7",
+            "usr/share/zoneinfo/Etc/GMT+8",
+            "usr/share/zoneinfo/Etc/GMT+9",
+            "usr/share/zoneinfo/Etc/GMT-0",
+            "usr/share/zoneinfo/Etc/GMT-1",
+            "usr/share/zoneinfo/Etc/GMT-10",
+            "usr/share/zoneinfo/Etc/GMT-11",
+            "usr/share/zoneinfo/Etc/GMT-12",
+            "usr/share/zoneinfo/Etc/GMT-13",
+            "usr/share/zoneinfo/Etc/GMT-14",
+            "usr/share/zoneinfo/Etc/GMT-2",
+            "usr/share/zoneinfo/Etc/GMT-3",
+            "usr/share/zoneinfo/Etc/GMT-4",
+            "usr/share/zoneinfo/Etc/GMT-5",
+            "usr/share/zoneinfo/Etc/GMT-6",
+            "usr/share/zoneinfo/Etc/GMT-7",
+            "usr/share/zoneinfo/Etc/GMT-8",
+            "usr/share/zoneinfo/Etc/GMT-9",
+            "usr/share/zoneinfo/Etc/GMT0",
+            "usr/share/zoneinfo/Etc/Greenwich",
+            "usr/share/zoneinfo/Etc/UCT",
+            "usr/share/zoneinfo/Etc/UTC",
+            "usr/share/zoneinfo/Etc/Universal",
+            "usr/share/zoneinfo/Etc/Zulu",
+            "usr/share/zoneinfo/Europe/Amsterdam",
+            "usr/share/zoneinfo/Europe/Andorra",
+            "usr/share/zoneinfo/Europe/Astrakhan",
+            "usr/share/zoneinfo/Europe/Athens",
+            "usr/share/zoneinfo/Europe/Belfast",
+            "usr/share/zoneinfo/Europe/Belgrade",
+            "usr/share/zoneinfo/Europe/Berlin",
+            "usr/share/zoneinfo/Europe/Bratislava",
+            "usr/share/zoneinfo/Europe/Brussels",
+            "usr/share/zoneinfo/Europe/Bucharest",
+            "usr/share/zoneinfo/Europe/Budapest",
+            "usr/share/zoneinfo/Europe/Busingen",
+            "usr/share/zoneinfo/Europe/Chisinau",
+            "usr/share/zoneinfo/Europe/Copenhagen",
+            "usr/share/zoneinfo/Europe/Dublin",
+            "usr/share/zoneinfo/Europe/Gibraltar",
+            "usr/share/zoneinfo/Europe/Guernsey",
+            "usr/share/zoneinfo/Europe/Helsinki",
+            "usr/share/zoneinfo/Europe/Isle_of_Man",
+            "usr/share/zoneinfo/Europe/Istanbul",
+            "usr/share/zoneinfo/Europe/Jersey",
+            "usr/share/zoneinfo/Europe/Kaliningrad",
+            "usr/share/zoneinfo/Europe/Kiev",
+            "usr/share/zoneinfo/Europe/Kirov",
+            "usr/share/zoneinfo/Europe/Kyiv",
+            "usr/share/zoneinfo/Europe/Lisbon",
+            "usr/share/zoneinfo/Europe/Ljubljana",
+            "usr/share/zoneinfo/Europe/London",
+            "usr/share/zoneinfo/Europe/Luxembourg",
+            "usr/share/zoneinfo/Europe/Madrid",
+            "usr/share/zoneinfo/Europe/Malta",
+            "usr/share/zoneinfo/Europe/Mariehamn",
+            "usr/share/zoneinfo/Europe/Minsk",
+            "usr/share/zoneinfo/Europe/Monaco",
+            "usr/share/zoneinfo/Europe/Moscow",
+            "usr/share/zoneinfo/Europe/Nicosia",
+            "usr/share/zoneinfo/Europe/Oslo",
+            "usr/share/zoneinfo/Europe/Paris",
+            "usr/share/zoneinfo/Europe/Podgorica",
+            "usr/share/zoneinfo/Europe/Prague",
+            "usr/share/zoneinfo/Europe/Riga",
+            "usr/share/zoneinfo/Europe/Rome",
+            "usr/share/zoneinfo/Europe/Samara",
+            "usr/share/zoneinfo/Europe/San_Marino",
+            "usr/share/zoneinfo/Europe/Sarajevo",
+            "usr/share/zoneinfo/Europe/Saratov",
+            "usr/share/zoneinfo/Europe/Simferopol",
+            "usr/share/zoneinfo/Europe/Skopje",
+            "usr/share/zoneinfo/Europe/Sofia",
+            "usr/share/zoneinfo/Europe/Stockholm",
+            "usr/share/zoneinfo/Europe/Tallinn",
+            "usr/share/zoneinfo/Europe/Tirane",
+            "usr/share/zoneinfo/Europe/Tiraspol",
+            "usr/share/zoneinfo/Europe/Ulyanovsk",
+            "usr/share/zoneinfo/Europe/Uzhgorod",
+            "usr/share/zoneinfo/Europe/Vaduz",
+            "usr/share/zoneinfo/Europe/Vatican",
+            "usr/share/zoneinfo/Europe/Vienna",
+            "usr/share/zoneinfo/Europe/Vilnius",
+            "usr/share/zoneinfo/Europe/Volgograd",
+            "usr/share/zoneinfo/Europe/Warsaw",
+            "usr/share/zoneinfo/Europe/Zagreb",
+            "usr/share/zoneinfo/Europe/Zaporozhye",
+            "usr/share/zoneinfo/Europe/Zurich",
+            "usr/share/zoneinfo/Indian/Antananarivo",
+            "usr/share/zoneinfo/Indian/Chagos",
+            "usr/share/zoneinfo/Indian/Christmas",
+            "usr/share/zoneinfo/Indian/Cocos",
+            "usr/share/zoneinfo/Indian/Comoro",
+            "usr/share/zoneinfo/Indian/Kerguelen",
+            "usr/share/zoneinfo/Indian/Mahe",
+            "usr/share/zoneinfo/Indian/Maldives",
+            "usr/share/zoneinfo/Indian/Mauritius",
+            "usr/share/zoneinfo/Indian/Mayotte",
+            "usr/share/zoneinfo/Indian/Reunion",
+            "usr/share/zoneinfo/Mexico/BajaNorte",
+            "usr/share/zoneinfo/Mexico/BajaSur",
+            "usr/share/zoneinfo/Mexico/General",
+            "usr/share/zoneinfo/Pacific/Apia",
+            "usr/share/zoneinfo/Pacific/Auckland",
+            "usr/share/zoneinfo/Pacific/Bougainville",
+            "usr/share/zoneinfo/Pacific/Chatham",
+            "usr/share/zoneinfo/Pacific/Chuuk",
+            "usr/share/zoneinfo/Pacific/Easter",
+            "usr/share/zoneinfo/Pacific/Efate",
+            "usr/share/zoneinfo/Pacific/Enderbury",
+            "usr/share/zoneinfo/Pacific/Fakaofo",
+            "usr/share/zoneinfo/Pacific/Fiji",
+            "usr/share/zoneinfo/Pacific/Funafuti",
+            "usr/share/zoneinfo/Pacific/Galapagos",
+            "usr/share/zoneinfo/Pacific/Gambier",
+            "usr/share/zoneinfo/Pacific/Guadalcanal",
+            "usr/share/zoneinfo/Pacific/Guam",
+            "usr/share/zoneinfo/Pacific/Honolulu",
+            "usr/share/zoneinfo/Pacific/Johnston",
+            "usr/share/zoneinfo/Pacific/Kanton",
+            "usr/share/zoneinfo/Pacific/Kiritimati",
+            "usr/share/zoneinfo/Pacific/Kosrae",
+            "usr/share/zoneinfo/Pacific/Kwajalein",
+            "usr/share/zoneinfo/Pacific/Majuro",
+            "usr/share/zoneinfo/Pacific/Marquesas",
+            "usr/share/zoneinfo/Pacific/Midway",
+            "usr/share/zoneinfo/Pacific/Nauru",
+            "usr/share/zoneinfo/Pacific/Niue",
+            "usr/share/zoneinfo/Pacific/Norfolk",
+            "usr/share/zoneinfo/Pacific/Noumea",
+            "usr/share/zoneinfo/Pacific/Pago_Pago",
+            "usr/share/zoneinfo/Pacific/Palau",
+            "usr/share/zoneinfo/Pacific/Pitcairn",
+            "usr/share/zoneinfo/Pacific/Pohnpei",
+            "usr/share/zoneinfo/Pacific/Ponape",
+            "usr/share/zoneinfo/Pacific/Port_Moresby",
+            "usr/share/zoneinfo/Pacific/Rarotonga",
+            "usr/share/zoneinfo/Pacific/Saipan",
+            "usr/share/zoneinfo/Pacific/Samoa",
+            "usr/share/zoneinfo/Pacific/Tahiti",
+            "usr/share/zoneinfo/Pacific/Tarawa",
+            "usr/share/zoneinfo/Pacific/Tongatapu",
+            "usr/share/zoneinfo/Pacific/Truk",
+            "usr/share/zoneinfo/Pacific/Wake",
+            "usr/share/zoneinfo/Pacific/Wallis",
+            "usr/share/zoneinfo/Pacific/Yap",
+            "usr/share/zoneinfo/US/Alaska",
+            "usr/share/zoneinfo/US/Aleutian",
+            "usr/share/zoneinfo/US/Arizona",
+            "usr/share/zoneinfo/US/Central",
+            "usr/share/zoneinfo/US/East-Indiana",
+            "usr/share/zoneinfo/US/Eastern",
+            "usr/share/zoneinfo/US/Hawaii",
+            "usr/share/zoneinfo/US/Indiana-Starke",
+            "usr/share/zoneinfo/US/Michigan",
+            "usr/share/zoneinfo/US/Mountain",
+            "usr/share/zoneinfo/US/Pacific",
+            "usr/share/zoneinfo/US/Samoa"
+          ]
+        },
+        {
+          "ID": "utmps-libs@0.1.3.1-r0",
+          "Name": "utmps-libs",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/utmps-libs@0.1.3.1-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "1ee6211b1c236a1f"
+          },
+          "Version": "0.1.3.1-r0",
+          "Arch": "x86_64",
+          "SrcName": "utmps",
+          "SrcVersion": "0.1.3.1-r0",
+          "Licenses": [
+            "ISC"
+          ],
+          "Maintainer": "Laurent Bercot \u003cska-devel@skarnet.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10",
+            "skalibs-libs@2.14.4.0-r0"
+          ],
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "Digest": "sha1:d1b08eb3000d104b5670bf768af4384591021538",
+          "InstalledFiles": [
+            "usr/lib/libutmps.so.0.1",
+            "usr/lib/libutmps.so.0.1.3.1"
+          ]
+        },
+        {
+          "ID": "zlib@1.3.1-r2",
+          "Name": "zlib",
+          "Identifier": {
+            "PURL": "pkg:apk/alpine/zlib@1.3.1-r2?arch=x86_64\u0026distro=3.22.2",
+            "UID": "a165403c2117fdcf"
+          },
+          "Version": "1.3.1-r2",
+          "Arch": "x86_64",
+          "SrcName": "zlib",
+          "SrcVersion": "1.3.1-r2",
+          "Licenses": [
+            "Zlib"
+          ],
+          "Maintainer": "Natanael Copa \u003cncopa@alpinelinux.org\u003e",
+          "DependsOn": [
+            "musl@1.2.5-r10"
+          ],
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "Digest": "sha1:bf7d90d89e5429c18167b91ab8d7e6256cfc7fdf",
+          "InstalledFiles": [
+            "usr/lib/libz.so.1",
+            "usr/lib/libz.so.1.3.1"
+          ]
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-58251",
+          "PkgID": "busybox@1.37.0-r19",
+          "PkgName": "busybox",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/busybox@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5158911d21d1c608"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-58251",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:0223e22f30a4097e7fb67dad7deb2eda665448dca3bec5c8d10ea0dbfb034c0d",
+          "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+          "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-150"
+          ],
+          "VendorSeverity": {
+            "ubuntu": 2
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/6",
+            "https://bugs.busybox.net/show_bug.cgi?id=15922",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-58251"
+          ],
+          "PublishedDate": "2025-04-23T18:16:03.057Z",
+          "LastModifiedDate": "2025-04-29T13:52:47.47Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-46394",
+          "PkgID": "busybox@1.37.0-r19",
+          "PkgName": "busybox",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/busybox@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "5158911d21d1c608"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-46394",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:562b6b166b8bbd4bcd8efa1b569d671910fd8437906f6f7c9b051a0a731b9c87",
+          "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+          "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-451"
+          ],
+          "VendorSeverity": {
+            "nvd": 1,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 3.3
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/5",
+            "http://www.openwall.com/lists/oss-security/2025/04/24/3",
+            "https://bugs.busybox.net/show_bug.cgi?id=16018",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090806.html",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090814.html",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-46394",
+            "https://www.openwall.com/lists/oss-security/2025/04/23/1"
+          ],
+          "PublishedDate": "2025-04-23T16:15:48.713Z",
+          "LastModifiedDate": "2025-09-24T14:38:22.127Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-58251",
+          "PkgID": "busybox-binsh@1.37.0-r19",
+          "PkgName": "busybox-binsh",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/busybox-binsh@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7150d5a240bb77cc"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-58251",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:9fa965231191e2e401831dc1052866e433604f33889989b9e7b781fbf3cb26b6",
+          "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+          "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-150"
+          ],
+          "VendorSeverity": {
+            "ubuntu": 2
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/6",
+            "https://bugs.busybox.net/show_bug.cgi?id=15922",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-58251"
+          ],
+          "PublishedDate": "2025-04-23T18:16:03.057Z",
+          "LastModifiedDate": "2025-04-29T13:52:47.47Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-46394",
+          "PkgID": "busybox-binsh@1.37.0-r19",
+          "PkgName": "busybox-binsh",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/busybox-binsh@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "7150d5a240bb77cc"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-46394",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:03dfc06927458a521fe13f6913128b88cb679842249d59fadbb700d27edf3c2d",
+          "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+          "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-451"
+          ],
+          "VendorSeverity": {
+            "nvd": 1,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 3.3
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/5",
+            "http://www.openwall.com/lists/oss-security/2025/04/24/3",
+            "https://bugs.busybox.net/show_bug.cgi?id=16018",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090806.html",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090814.html",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-46394",
+            "https://www.openwall.com/lists/oss-security/2025/04/23/1"
+          ],
+          "PublishedDate": "2025-04-23T16:15:48.713Z",
+          "LastModifiedDate": "2025-09-24T14:38:22.127Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-64720",
+          "PkgID": "libpng@1.6.47-r0",
+          "PkgName": "libpng",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/libpng@1.6.47-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "dc7943769b551d5b"
+          },
+          "InstalledVersion": "1.6.47-r0",
+          "FixedVersion": "1.6.51-r0",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-64720",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:dfe387aef271a3db981baf54740ac1eedc8416584af7416c6360e26a7de50346",
+          "Title": "libpng: LIBPNG buffer overflow",
+          "Description": "LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. From version 1.6.0 to before 1.6.51, an out-of-bounds read vulnerability exists in png_image_read_composite when processing palette images with PNG_FLAG_OPTIMIZE_ALPHA enabled. The palette compositing code in png_init_read_transformations incorrectly applies background compositing during premultiplication, violating the invariant component ≤ alpha × 257 required by the simplified PNG API. This issue has been patched in version 1.6.51.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-125"
+          ],
+          "VendorSeverity": {
+            "azure": 3,
+            "cbl-mariner": 3,
+            "photon": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:H",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-64720",
+            "https://github.com/pnggroup/libpng/commit/08da33b4c88cfcd36e5a706558a8d7e0e4773643",
+            "https://github.com/pnggroup/libpng/issues/686",
+            "https://github.com/pnggroup/libpng/pull/751",
+            "https://github.com/pnggroup/libpng/security/advisories/GHSA-hfc7-ph9c-wcww",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-64720",
+            "https://www.cve.org/CVERecord?id=CVE-2025-64720"
+          ],
+          "PublishedDate": "2025-11-25T00:15:47.46Z",
+          "LastModifiedDate": "2025-11-26T18:35:18.253Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-65018",
+          "PkgID": "libpng@1.6.47-r0",
+          "PkgName": "libpng",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/libpng@1.6.47-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "dc7943769b551d5b"
+          },
+          "InstalledVersion": "1.6.47-r0",
+          "FixedVersion": "1.6.51-r0",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-65018",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:ee58b0c155db6dba7e25d58c51c52ce2323a2563b38193c8864295545ae587d6",
+          "Title": "libpng: LIBPNG heap buffer overflow",
+          "Description": "LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. From version 1.6.0 to before 1.6.51, there is a heap buffer overflow vulnerability in the libpng simplified API function png_image_finish_read when processing 16-bit interlaced PNGs with 8-bit output format. Attacker-crafted interlaced PNG files cause heap writes beyond allocated buffer bounds. This issue has been patched in version 1.6.51.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-122",
+            "CWE-787"
+          ],
+          "VendorSeverity": {
+            "azure": 3,
+            "cbl-mariner": 3,
+            "photon": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-65018",
+            "https://github.com/pnggroup/libpng/commit/16b5e3823918840aae65c0a6da57c78a5a496a4d",
+            "https://github.com/pnggroup/libpng/commit/218612ddd6b17944e21eda56caf8b4bf7779d1ea",
+            "https://github.com/pnggroup/libpng/issues/755",
+            "https://github.com/pnggroup/libpng/pull/757",
+            "https://github.com/pnggroup/libpng/security/advisories/GHSA-7wv6-48j4-hj3g",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-65018",
+            "https://www.cve.org/CVERecord?id=CVE-2025-65018"
+          ],
+          "PublishedDate": "2025-11-25T00:15:47.61Z",
+          "LastModifiedDate": "2025-11-26T18:34:53.65Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-64505",
+          "PkgID": "libpng@1.6.47-r0",
+          "PkgName": "libpng",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/libpng@1.6.47-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "dc7943769b551d5b"
+          },
+          "InstalledVersion": "1.6.47-r0",
+          "FixedVersion": "1.6.51-r0",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-64505",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:e850b5f323ad5f44d26cfe137fed1925e46115f10b4f84cfecbaa26c47c73738",
+          "Title": "libpng: LIBPNG heap buffer overflow via malformed palette index",
+          "Description": "LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. Prior to version 1.6.51, a heap buffer over-read vulnerability exists in libpng's png_do_quantize function when processing PNG files with malformed palette indices. The vulnerability occurs when palette_lookup array bounds are not validated against externally-supplied image data, allowing an attacker to craft a PNG file with out-of-range palette indices that trigger out-of-bounds memory access. This issue has been patched in version 1.6.51.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-125"
+          ],
+          "VendorSeverity": {
+            "azure": 2,
+            "cbl-mariner": 2,
+            "photon": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:L",
+              "V3Score": 4.4
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-64505",
+            "https://github.com/pnggroup/libpng/commit/6a528eb5fd0dd7f6de1c39d30de0e41473431c37",
+            "https://github.com/pnggroup/libpng/pull/748",
+            "https://github.com/pnggroup/libpng/security/advisories/GHSA-4952-h5wq-4m42",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-64505",
+            "https://www.cve.org/CVERecord?id=CVE-2025-64505"
+          ],
+          "PublishedDate": "2025-11-25T00:15:47.133Z",
+          "LastModifiedDate": "2025-11-26T18:28:32.22Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-64506",
+          "PkgID": "libpng@1.6.47-r0",
+          "PkgName": "libpng",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/libpng@1.6.47-r0?arch=x86_64\u0026distro=3.22.2",
+            "UID": "dc7943769b551d5b"
+          },
+          "InstalledVersion": "1.6.47-r0",
+          "FixedVersion": "1.6.51-r0",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:30261cabbe127a522d0105f2bdf90efa98e14f9160db9d75137cc83186261812"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-64506",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:13be568bdb9b767dfff00e9363141ff77f33a4ff24d31afa213eb5e18335243e",
+          "Title": "libpng: LIBPNG heap buffer over-read",
+          "Description": "LIBPNG is a reference library for use in applications that read, create, and manipulate PNG (Portable Network Graphics) raster image files. From version 1.6.0 to before 1.6.51, a heap buffer over-read vulnerability exists in libpng's png_write_image_8bit function when processing 8-bit images through the simplified write API with convert_to_8bit enabled. The vulnerability affects 8-bit grayscale+alpha, RGB/RGBA, and images with incomplete row data. A conditional guard incorrectly allows 8-bit input to enter code expecting 16-bit input, causing reads up to 2 bytes beyond allocated buffer boundaries. This issue has been patched in version 1.6.51.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-125"
+          ],
+          "VendorSeverity": {
+            "azure": 2,
+            "cbl-mariner": 2,
+            "photon": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:H",
+              "V3Score": 6.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-64506",
+            "https://github.com/pnggroup/libpng/commit/2bd84c019c300b78e811743fbcddb67c9d9bf821",
+            "https://github.com/pnggroup/libpng/pull/749",
+            "https://github.com/pnggroup/libpng/security/advisories/GHSA-qpr4-xm66-hww6",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-64506",
+            "https://www.cve.org/CVERecord?id=CVE-2025-64506"
+          ],
+          "PublishedDate": "2025-11-25T00:15:47.3Z",
+          "LastModifiedDate": "2025-11-26T18:34:38.24Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-58251",
+          "PkgID": "ssl_client@1.37.0-r19",
+          "PkgName": "ssl_client",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/ssl_client@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "691bd1fc4de953e2"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-58251",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:9c74f61d2f1e8dbc0eaf7d5bb4d3637426fba3c93a06a203e7a872940a6feed2",
+          "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+          "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-150"
+          ],
+          "VendorSeverity": {
+            "ubuntu": 2
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/6",
+            "https://bugs.busybox.net/show_bug.cgi?id=15922",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-58251"
+          ],
+          "PublishedDate": "2025-04-23T18:16:03.057Z",
+          "LastModifiedDate": "2025-04-29T13:52:47.47Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-46394",
+          "PkgID": "ssl_client@1.37.0-r19",
+          "PkgName": "ssl_client",
+          "PkgIdentifier": {
+            "PURL": "pkg:apk/alpine/ssl_client@1.37.0-r19?arch=x86_64\u0026distro=3.22.2",
+            "UID": "691bd1fc4de953e2"
+          },
+          "InstalledVersion": "1.37.0-r19",
+          "FixedVersion": "1.37.0-r20",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1"
+          },
+          "SeveritySource": "nvd",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-46394",
+          "DataSource": {
+            "ID": "alpine",
+            "Name": "Alpine Secdb",
+            "URL": "https://secdb.alpinelinux.org/"
+          },
+          "Fingerprint": "sha256:a485175cd4a7d495ac159a53f39aa6936774055077cf86dd0bdce0e3f6673d2c",
+          "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+          "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-451"
+          ],
+          "VendorSeverity": {
+            "nvd": 1,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 3.3
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/04/23/5",
+            "http://www.openwall.com/lists/oss-security/2025/04/24/3",
+            "https://bugs.busybox.net/show_bug.cgi?id=16018",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090806.html",
+            "https://lists.busybox.net/pipermail/busybox/2024-July/090814.html",
+            "https://www.busybox.net",
+            "https://www.busybox.net/downloads/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-46394",
+            "https://www.openwall.com/lists/oss-security/2025/04/23/1"
+          ],
+          "PublishedDate": "2025-04-23T16:15:48.713Z",
+          "LastModifiedDate": "2025-09-24T14:38:22.127Z"
+        }
+      ]
+    },
+    {
+      "Target": "Java",
+      "Class": "lang-pkgs",
+      "Type": "jar",
+      "Packages": [
+        {
+          "Name": "biz.aQute.bnd:biz.aQute.bnd.annotation",
+          "Identifier": {
+            "PURL": "pkg:maven/biz.aQute.bnd/biz.aQute.bnd.annotation@7.1.0",
+            "UID": "e6125ac06ac3607e"
+          },
+          "Version": "7.1.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/biz.aQute.bnd.annotation-7.1.0.jar"
+        },
+        {
+          "Name": "com.fasterxml.jackson.core:jackson-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20",
+            "UID": "9f792aca635e45fc"
+          },
+          "Version": "2.20",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/jackson-annotations-2.20.jar"
+        },
+        {
+          "Name": "com.fasterxml.jackson.core:jackson-core",
+          "Identifier": {
+            "PURL": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1",
+            "UID": "3bf9264364e2df42"
+          },
+          "Version": "2.20.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/jackson-core-2.20.1.jar"
+        },
+        {
+          "Name": "com.fasterxml.jackson.core:jackson-databind",
+          "Identifier": {
+            "PURL": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1",
+            "UID": "760160273a473bba"
+          },
+          "Version": "2.20.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/jackson-databind-2.20.1.jar"
+        },
+        {
+          "Name": "com.github.spotbugs:spotbugs-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.github.spotbugs/spotbugs-annotations@4.8.6",
+            "UID": "df7352fa210f782e"
+          },
+          "Version": "4.8.6",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/spotbugs-annotations-4.8.6.jar"
+        },
+        {
+          "Name": "com.google.android:annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.android/annotations@4.1.1.4",
+            "UID": "9504b23f274733d8"
+          },
+          "Version": "4.1.1.4",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/annotations-4.1.1.4.jar"
+        },
+        {
+          "Name": "com.google.api.grpc:proto-google-common-protos",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.api.grpc/proto-google-common-protos@2.63.1",
+            "UID": "81e599ed795db978"
+          },
+          "Version": "2.63.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/proto-google-common-protos-2.63.1.jar"
+        },
+        {
+          "Name": "com.google.api.grpc:proto-google-common-protos",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.api.grpc/proto-google-common-protos@2.63.1",
+            "UID": "27c2077867c855ce"
+          },
+          "Version": "2.63.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/proto-google-common-protos-2.63.1.jar"
+        },
+        {
+          "Name": "com.google.code.findbugs:jsr305",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2",
+            "UID": "2c45bf942f8ebab7"
+          },
+          "Version": "3.0.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/jsr305-3.0.2.jar"
+        },
+        {
+          "Name": "com.google.code.findbugs:jsr305",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2",
+            "UID": "90bdcc051b36ac2d"
+          },
+          "Version": "3.0.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/jsr305-3.0.2.jar"
+        },
+        {
+          "Name": "com.google.code.gson:gson",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.code.gson/gson@2.11.0",
+            "UID": "44373271c7f150c"
+          },
+          "Version": "2.11.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/gson-2.11.0.jar"
+        },
+        {
+          "Name": "com.google.errorprone:error_prone_annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.errorprone/error_prone_annotations@2.36.0",
+            "UID": "abea167ced6c9a60"
+          },
+          "Version": "2.36.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/error_prone_annotations-2.36.0.jar"
+        },
+        {
+          "Name": "com.google.errorprone:error_prone_annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.errorprone/error_prone_annotations@2.38.0",
+            "UID": "5428137045becb3"
+          },
+          "Version": "2.38.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/error_prone_annotations-2.38.0.jar"
+        },
+        {
+          "Name": "com.google.guava:failureaccess",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/failureaccess@1.0.3",
+            "UID": "177091e64eea184c"
+          },
+          "Version": "1.0.3",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/failureaccess-1.0.3.jar"
+        },
+        {
+          "Name": "com.google.guava:failureaccess",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/failureaccess@1.0.3",
+            "UID": "99956cc5d41ab3c4"
+          },
+          "Version": "1.0.3",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/failureaccess-1.0.3.jar"
+        },
+        {
+          "Name": "com.google.guava:guava",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/guava@33.4.8-jre",
+            "UID": "fd581ad9f9328943"
+          },
+          "Version": "33.4.8-jre",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/guava-33.4.8-jre.jar"
+        },
+        {
+          "Name": "com.google.guava:guava",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/guava@33.4.8-jre",
+            "UID": "7e720f4f6f89629f"
+          },
+          "Version": "33.4.8-jre",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/guava-33.4.8-jre.jar"
+        },
+        {
+          "Name": "com.google.guava:listenablefuture",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava",
+            "UID": "9f9f45ac9bf3b40"
+          },
+          "Version": "9999.0-empty-to-avoid-conflict-with-guava",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
+        },
+        {
+          "Name": "com.google.guava:listenablefuture",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava",
+            "UID": "ee764c19b004bc43"
+          },
+          "Version": "9999.0-empty-to-avoid-conflict-with-guava",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
+        },
+        {
+          "Name": "com.google.j2objc:j2objc-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.j2objc/j2objc-annotations@3.0.0",
+            "UID": "d9957bdccbf74be"
+          },
+          "Version": "3.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/j2objc-annotations-3.0.0.jar"
+        },
+        {
+          "Name": "com.google.j2objc:j2objc-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.j2objc/j2objc-annotations@3.0.0",
+            "UID": "5d85c3425a4532c6"
+          },
+          "Version": "3.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/j2objc-annotations-3.0.0.jar"
+        },
+        {
+          "Name": "com.google.protobuf:protobuf-java",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.protobuf/protobuf-java@4.33.1",
+            "UID": "c002c70985943b64"
+          },
+          "Version": "4.33.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/protobuf-java-4.33.1.jar"
+        },
+        {
+          "Name": "com.google.protobuf:protobuf-java",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.protobuf/protobuf-java@4.33.1",
+            "UID": "1ceaa9bbbc7e424b"
+          },
+          "Version": "4.33.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/protobuf-java-4.33.1.jar"
+        },
+        {
+          "Name": "com.google.protobuf:protobuf-java-util",
+          "Identifier": {
+            "PURL": "pkg:maven/com.google.protobuf/protobuf-java-util@3.25.8",
+            "UID": "669fe37ac89480c"
+          },
+          "Version": "3.25.8",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/protobuf-java-util-3.25.8.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-api",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-api@1.76.0",
+            "UID": "70189c01767d74c3"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-api-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-api",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-api@1.76.0",
+            "UID": "4459f3a7d86f8d47"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-api-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-census",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-census@1.76.0",
+            "UID": "90b576f62b9a1d33"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-census-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-census",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-census@1.76.0",
+            "UID": "dd1606ea05c2770b"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-census-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-context",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-context@1.76.0",
+            "UID": "4ba9a9c0f3deab9a"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-context-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-core",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-core@1.76.0",
+            "UID": "3f683dd60e1e562"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-core-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-netty",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-netty@1.76.0",
+            "UID": "33ed3b5afe8423b9"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-netty-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-netty",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-netty@1.76.0",
+            "UID": "da208e076468f637"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-netty-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-protobuf",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-protobuf@1.76.0",
+            "UID": "22e3fbdb2530d635"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-protobuf-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-protobuf",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-protobuf@1.76.0",
+            "UID": "9629a498f5a90450"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-protobuf-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-protobuf-lite",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-protobuf-lite@1.76.0",
+            "UID": "2d41420f0377b815"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-protobuf-lite-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-services",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-services@1.76.0",
+            "UID": "4bc8b09c34883cac"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-services-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-services",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-services@1.76.0",
+            "UID": "a214470c55dd2a5b"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-services-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-stub",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-stub@1.76.0",
+            "UID": "d3d5d845800cfc42"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-stub-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-stub",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-stub@1.76.0",
+            "UID": "ae06f11227558d2f"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/grpc-stub-1.76.0.jar"
+        },
+        {
+          "Name": "io.grpc:grpc-util",
+          "Identifier": {
+            "PURL": "pkg:maven/io.grpc/grpc-util@1.76.0",
+            "UID": "733129f5f7c2fd9f"
+          },
+          "Version": "1.76.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/grpc-util-1.76.0.jar"
+        },
+        {
+          "Name": "io.netty:netty-buffer",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-buffer@4.1.124.Final",
+            "UID": "cdc95a69c7e0d472"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-buffer-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-buffer",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-buffer@4.1.124.Final",
+            "UID": "f84edc44ea105686"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-buffer-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec@4.1.124.Final",
+            "UID": "2980da2ac458500a"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-codec-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec@4.1.124.Final",
+            "UID": "c28096bcb639e1b1"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-codec-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec-http",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http@4.1.124.Final",
+            "UID": "df8a3d586e3dc135"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-codec-http-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec-http",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http@4.1.124.Final",
+            "UID": "8d437bb3d89a20d2"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-codec-http-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec-http2",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http2@4.1.124.Final",
+            "UID": "7017e8a1b2ab9368"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-codec-http2-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec-http2",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http2@4.1.124.Final",
+            "UID": "59634cc60c6fa1af"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-codec-http2-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-codec-socks",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-socks@4.1.124.Final",
+            "UID": "22b36ce600a54763"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-codec-socks-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-common",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-common@4.1.124.Final",
+            "UID": "bfb4430b9ed4bd06"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-common",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-common@4.1.124.Final",
+            "UID": "ac8b2eed59cfb883"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-handler",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-handler@4.1.124.Final",
+            "UID": "45589033479bd2ec"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-handler-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-handler",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-handler@4.1.124.Final",
+            "UID": "6cb6223d15599afd"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-handler-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-handler-proxy",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-handler-proxy@4.1.124.Final",
+            "UID": "fb55248e270b413f"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-handler-proxy-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-resolver",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-resolver@4.1.124.Final",
+            "UID": "39c3cfe9f41600ea"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-resolver-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-resolver",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-resolver@4.1.124.Final",
+            "UID": "b90dffb9799aa45a"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-resolver-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-tcnative-boringssl-static",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-tcnative-boringssl-static@2.0.74.Final",
+            "UID": "91248c34322e7e17"
+          },
+          "Version": "2.0.74.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-tcnative-boringssl-static-2.0.74.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-tcnative-classes",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-tcnative-classes@2.0.74.Final",
+            "UID": "c35aa46ccb9e78df"
+          },
+          "Version": "2.0.74.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-tcnative-classes-2.0.74.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-transport",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-transport@4.1.124.Final",
+            "UID": "9f93fa0f26d2d16e"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-transport-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-transport",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-transport@4.1.124.Final",
+            "UID": "16e1eca9214a947a"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-transport-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-transport-native-unix-common",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-transport-native-unix-common@4.1.124.Final",
+            "UID": "be3bf130d4d69337"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-transport-native-unix-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.netty:netty-transport-native-unix-common",
+          "Identifier": {
+            "PURL": "pkg:maven/io.netty/netty-transport-native-unix-common@4.1.124.Final",
+            "UID": "ae1d5e029667f452"
+          },
+          "Version": "4.1.124.Final",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-transport-native-unix-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "io.opencensus:opencensus-api",
+          "Identifier": {
+            "PURL": "pkg:maven/io.opencensus/opencensus-api@0.31.1",
+            "UID": "6f6cacd4915ab0ec"
+          },
+          "Version": "0.31.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/opencensus-api-0.31.1.jar"
+        },
+        {
+          "Name": "io.opencensus:opencensus-contrib-grpc-metrics",
+          "Identifier": {
+            "PURL": "pkg:maven/io.opencensus/opencensus-contrib-grpc-metrics@0.31.1",
+            "UID": "70067bfea3632a50"
+          },
+          "Version": "0.31.1",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/opencensus-contrib-grpc-metrics-0.31.1.jar"
+        },
+        {
+          "Name": "io.perfmark:perfmark-api",
+          "Identifier": {
+            "PURL": "pkg:maven/io.perfmark/perfmark-api@0.27.0",
+            "UID": "1b54c1d891b5466c"
+          },
+          "Version": "0.27.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/perfmark-api-0.27.0.jar"
+        },
+        {
+          "Name": "javax.annotation:javax.annotation-api",
+          "Identifier": {
+            "PURL": "pkg:maven/javax.annotation/javax.annotation-api@1.3.2",
+            "UID": "70ce1058192172c9"
+          },
+          "Version": "1.3.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/javax.annotation-api-1.3.2.jar"
+        },
+        {
+          "Name": "javax.annotation:javax.annotation-api",
+          "Identifier": {
+            "PURL": "pkg:maven/javax.annotation/javax.annotation-api@1.3.2",
+            "UID": "1875081092dae252"
+          },
+          "Version": "1.3.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/javax.annotation-api-1.3.2.jar"
+        },
+        {
+          "Name": "org.apache.logging.log4j:log4j-api",
+          "Identifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-api@2.25.2",
+            "UID": "43c4232b92799c06"
+          },
+          "Version": "2.25.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/log4j-api-2.25.2.jar"
+        },
+        {
+          "Name": "org.apache.logging.log4j:log4j-api",
+          "Identifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-api@2.25.2",
+            "UID": "e1a15e98c53b6524"
+          },
+          "Version": "2.25.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/log4j-api-2.25.2.jar"
+        },
+        {
+          "Name": "org.apache.logging.log4j:log4j-core",
+          "Identifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-core@2.25.2",
+            "UID": "4b3d7df2cb84bc93"
+          },
+          "Version": "2.25.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/log4j-core-2.25.2.jar"
+        },
+        {
+          "Name": "org.apache.logging.log4j:log4j-core",
+          "Identifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-core@2.25.2",
+            "UID": "570b7cc7efdec604"
+          },
+          "Version": "2.25.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/log4j-core-2.25.2.jar"
+        },
+        {
+          "Name": "org.codehaus.mojo:animal-sniffer-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/org.codehaus.mojo/animal-sniffer-annotations@1.24",
+            "UID": "839eaef7b74fc084"
+          },
+          "Version": "1.24",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/animal-sniffer-annotations-1.24.jar"
+        },
+        {
+          "Name": "org.codehaus.mojo:animal-sniffer-annotations",
+          "Identifier": {
+            "PURL": "pkg:maven/org.codehaus.mojo/animal-sniffer-annotations@1.24",
+            "UID": "181adccf7cc8cff9"
+          },
+          "Version": "1.24",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/animal-sniffer-annotations-1.24.jar"
+        },
+        {
+          "Name": "org.jctools:jctools-core",
+          "Identifier": {
+            "PURL": "pkg:maven/org.jctools/jctools-core@4.0.5",
+            "UID": "611863ff53f11e6d"
+          },
+          "Version": "4.0.5",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/netty-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "org.jctools:jctools-core",
+          "Identifier": {
+            "PURL": "pkg:maven/org.jctools/jctools-core@4.0.5",
+            "UID": "5282cc697268f97f"
+          },
+          "Version": "4.0.5",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/netty-common-4.1.124.Final.jar"
+        },
+        {
+          "Name": "org.jspecify:jspecify",
+          "Identifier": {
+            "PURL": "pkg:maven/org.jspecify/jspecify@1.0.0",
+            "UID": "905168e7f51ccad2"
+          },
+          "Version": "1.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/install/hipstershop/lib/jspecify-1.0.0.jar"
+        },
+        {
+          "Name": "org.jspecify:jspecify",
+          "Identifier": {
+            "PURL": "pkg:maven/org.jspecify/jspecify@1.0.0",
+            "UID": "627a7892879a9e5"
+          },
+          "Version": "1.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/jspecify-1.0.0.jar"
+        },
+        {
+          "Name": "org.osgi:org.osgi.annotation.bundle",
+          "Identifier": {
+            "PURL": "pkg:maven/org.osgi/org.osgi.annotation.bundle@2.0.0",
+            "UID": "7c4fe7a82a3964f5"
+          },
+          "Version": "2.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/org.osgi.annotation.bundle-2.0.0.jar"
+        },
+        {
+          "Name": "org.osgi:org.osgi.annotation.versioning",
+          "Identifier": {
+            "PURL": "pkg:maven/org.osgi/org.osgi.annotation.versioning@1.1.2",
+            "UID": "c0446d5173084253"
+          },
+          "Version": "1.1.2",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/org.osgi.annotation.versioning-1.1.2.jar"
+        },
+        {
+          "Name": "org.osgi:org.osgi.resource",
+          "Identifier": {
+            "PURL": "pkg:maven/org.osgi/org.osgi.resource@1.0.0",
+            "UID": "95a1928c7c59f5c6"
+          },
+          "Version": "1.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/org.osgi.resource-1.0.0.jar"
+        },
+        {
+          "Name": "org.osgi:org.osgi.service.serviceloader",
+          "Identifier": {
+            "PURL": "pkg:maven/org.osgi/org.osgi.service.serviceloader@1.0.0",
+            "UID": "dec4bcb6d930f31"
+          },
+          "Version": "1.0.0",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "FilePath": "app/build/output/lib/org.osgi.service.serviceloader-1.0.0.jar"
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2025-58057",
+          "PkgName": "io.netty:netty-codec",
+          "PkgPath": "app/build/install/hipstershop/lib/netty-codec-4.1.124.Final.jar",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec@4.1.124.Final",
+            "UID": "2980da2ac458500a"
+          },
+          "InstalledVersion": "4.1.124.Final",
+          "FixedVersion": "4.1.125.Final",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58057",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:eb56ccdb54be4a37a26b2473f2e616e0a9770ad7d46cdec13d54a79827a5ceb2",
+          "Title": "netty-codec: netty-codec-compression: Netty's BrotliDecoder is vulnerable to DoS via zip bomb style attack",
+          "Description": "Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers \u0026 clients. In netty-codec-compression versions 4.1.124.Final and below, and netty-codec versions 4.2.4.Final and below, when supplied with specially crafted input, BrotliDecoder and certain other decompression decoders will allocate a large number of reachable byte buffers, which can lead to denial of service. BrotliDecoder.decompress has no limit in how often it calls pull, decompressing data 64K bytes at a time. The buffers are saved in the output list, and remain reachable until OOM is hit. This is fixed in versions 4.1.125.Final of netty-codec and 4.2.5.Final of netty-codec-compression.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-409"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-58057",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/9d804c54ce962408ae6418255a83a13924f7145d",
+            "https://github.com/netty/netty/security/advisories/GHSA-3p8m-j85q-pgmj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-58057",
+            "https://www.cve.org/CVERecord?id=CVE-2025-58057"
+          ],
+          "PublishedDate": "2025-09-04T10:42:32.18Z",
+          "LastModifiedDate": "2025-09-08T16:45:55.143Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58057",
+          "PkgName": "io.netty:netty-codec",
+          "PkgPath": "app/build/output/lib/netty-codec-4.1.124.Final.jar",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec@4.1.124.Final",
+            "UID": "c28096bcb639e1b1"
+          },
+          "InstalledVersion": "4.1.124.Final",
+          "FixedVersion": "4.1.125.Final",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58057",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:eb56ccdb54be4a37a26b2473f2e616e0a9770ad7d46cdec13d54a79827a5ceb2",
+          "Title": "netty-codec: netty-codec-compression: Netty's BrotliDecoder is vulnerable to DoS via zip bomb style attack",
+          "Description": "Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers \u0026 clients. In netty-codec-compression versions 4.1.124.Final and below, and netty-codec versions 4.2.4.Final and below, when supplied with specially crafted input, BrotliDecoder and certain other decompression decoders will allocate a large number of reachable byte buffers, which can lead to denial of service. BrotliDecoder.decompress has no limit in how often it calls pull, decompressing data 64K bytes at a time. The buffers are saved in the output list, and remain reachable until OOM is hit. This is fixed in versions 4.1.125.Final of netty-codec and 4.2.5.Final of netty-codec-compression.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-409"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-58057",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/9d804c54ce962408ae6418255a83a13924f7145d",
+            "https://github.com/netty/netty/security/advisories/GHSA-3p8m-j85q-pgmj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-58057",
+            "https://www.cve.org/CVERecord?id=CVE-2025-58057"
+          ],
+          "PublishedDate": "2025-09-04T10:42:32.18Z",
+          "LastModifiedDate": "2025-09-08T16:45:55.143Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58056",
+          "PkgName": "io.netty:netty-codec-http",
+          "PkgPath": "app/build/install/hipstershop/lib/netty-codec-http-4.1.124.Final.jar",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http@4.1.124.Final",
+            "UID": "df8a3d586e3dc135"
+          },
+          "InstalledVersion": "4.1.124.Final",
+          "FixedVersion": "4.1.125.Final, 4.2.5.Final",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58056",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:ae1cfd85f35f4f73c5e9a46543a515abd9950ce7aa2c11153f1244df61991847",
+          "Title": "netty-codec-http: Netty is vulnerable to request smuggling due to incorrect parsing of chunk extensions",
+          "Description": "Netty is an asynchronous event-driven network application framework for development of maintainable high performance protocol servers and clients. In versions 4.1.124.Final, and 4.2.0.Alpha3 through 4.2.4.Final, Netty incorrectly accepts standalone newline characters (LF) as a chunk-size line terminator, regardless of a preceding carriage return (CR), instead of requiring CRLF per HTTP/1.1 standards. When combined with reverse proxies that parse LF differently (treating it as part of the chunk extension), attackers can craft requests that the proxy sees as one request but Netty processes as two, enabling request smuggling attacks. This is fixed in versions 4.1.125.Final and 4.2.5.Final.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-444"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-58056",
+            "https://datatracker.ietf.org/doc/html/rfc9112#name-chunked-transfer-coding",
+            "https://github.com/JLLeitschuh/unCVEed/issues/1",
+            "https://github.com/github/advisory-database/pull/6092",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/edb55fd8e0a3bcbd85881e423464f585183d1284",
+            "https://github.com/netty/netty/issues/15522",
+            "https://github.com/netty/netty/pull/15611",
+            "https://github.com/netty/netty/security/advisories/GHSA-fghv-69vj-qj49",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-58056",
+            "https://w4ke.info/2025/06/18/funky-chunks.html",
+            "https://www.cve.org/CVERecord?id=CVE-2025-58056"
+          ],
+          "PublishedDate": "2025-09-03T21:15:33.07Z",
+          "LastModifiedDate": "2025-09-08T16:46:36.847Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-58056",
+          "PkgName": "io.netty:netty-codec-http",
+          "PkgPath": "app/build/output/lib/netty-codec-http-4.1.124.Final.jar",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/io.netty/netty-codec-http@4.1.124.Final",
+            "UID": "8d437bb3d89a20d2"
+          },
+          "InstalledVersion": "4.1.124.Final",
+          "FixedVersion": "4.1.125.Final, 4.2.5.Final",
+          "Status": "fixed",
+          "Layer": {
+            "DiffID": "sha256:41ab719d5e31c025ebe0a64c53c8e9a018e6d5955694b7cad527beb284c7a9c4"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58056",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:ae1cfd85f35f4f73c5e9a46543a515abd9950ce7aa2c11153f1244df61991847",
+          "Title": "netty-codec-http: Netty is vulnerable to request smuggling due to incorrect parsing of chunk extensions",
+          "Description": "Netty is an asynchronous event-driven network application framework for development of maintainable high performance protocol servers and clients. In versions 4.1.124.Final, and 4.2.0.Alpha3 through 4.2.4.Final, Netty incorrectly accepts standalone newline characters (LF) as a chunk-size line terminator, regardless of a preceding carriage return (CR), instead of requiring CRLF per HTTP/1.1 standards. When combined with reverse proxies that parse LF differently (treating it as part of the chunk extension), attackers can craft requests that the proxy sees as one request but Netty processes as two, enabling request smuggling attacks. This is fixed in versions 4.1.125.Final and 4.2.5.Final.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-444"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-58056",
+            "https://datatracker.ietf.org/doc/html/rfc9112#name-chunked-transfer-coding",
+            "https://github.com/JLLeitschuh/unCVEed/issues/1",
+            "https://github.com/github/advisory-database/pull/6092",
+            "https://github.com/netty/netty",
+            "https://github.com/netty/netty/commit/edb55fd8e0a3bcbd85881e423464f585183d1284",
+            "https://github.com/netty/netty/issues/15522",
+            "https://github.com/netty/netty/pull/15611",
+            "https://github.com/netty/netty/security/advisories/GHSA-fghv-69vj-qj49",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-58056",
+            "https://w4ke.info/2025/06/18/funky-chunks.html",
+            "https://www.cve.org/CVERecord?id=CVE-2025-58056"
+          ],
+          "PublishedDate": "2025-09-03T21:15:33.07Z",
+          "LastModifiedDate": "2025-09-08T16:46:36.847Z"
+        }
+      ]
+    }
+  ]
+}
