@@ -1,4 +1,4 @@
-# Development Guide
+# Deployment Guide
 
 This doc explains how to build and run the Online Boutique source code locally using the `skaffold` command-line tool.
 
@@ -50,6 +50,8 @@ This doc explains how to build and run the Online Boutique source code locally u
 10. Navigate to `localhost:3000` to acces grafana.
 
 11. Navigate to `localhost:8025` to acces mailhog.
+
+12. Voor de trivy data naar grafana te sturen `./scripts/trivy_report.py`.
 
 ## Cleanup
 
