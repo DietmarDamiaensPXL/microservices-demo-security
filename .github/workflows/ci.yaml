@@ -144,20 +144,6 @@ jobs:
           zap-report.xml
 
     # ------------------------------
-    # PDF REPORT GENERATION
-    # ------------------------------
-    - name: Generate PDF Report
-      run: |
-        mkdir -p secops-automation/pdf
-        python3 generate_pdf_pipeline.py
-
-    - name: Upload PDF Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: security-report-pdf
-        path: secops-automation/pdf/security-report.pdf
-
-    # ------------------------------
     # COLLECT + COMMIT EVERYTHING AT ONCE
     # ------------------------------
     - name: Collect all reports before commit
@@ -185,7 +171,6 @@ jobs:
 
         git add secops-automation/scans/
         git add secops-automation/reports/
-        git add secops-automation/pdf/
 
         git diff --staged --quiet || git commit -m "Update all security reports [skip ci]"
         git push
