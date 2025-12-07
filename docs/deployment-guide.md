@@ -43,7 +43,7 @@ This doc explains how to build and run the Online Boutique source code locally u
 
 7. Run `kubectl port-forward service/mailhog 8025:8025` to forward a port to mailhog.
 
-8. Run `kubectl port-forward svc/pushgateway 9091:9091` to forward a port to mailhog.
+8. Run `kubectl port-forward svc/pushgateway 9091:9091` to forward a port to pushgateway.
 
 9. Navigate to `localhost:8080` to access the web frontend.
 
