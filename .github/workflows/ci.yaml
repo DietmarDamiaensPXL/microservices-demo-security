@@ -52,11 +52,6 @@ jobs:
     - uses: actions/checkout@v5
       with:
         fetch-depth: 0
-
-    - name: Setup Trivy
-      uses: aquasecurity/setup-trivy@v0.1.0
-      with:
-        version: 'latest'
     
     - name: Setup OWASP ZAP
       run: |
@@ -66,19 +61,94 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-  
+
     - name: Install Python dependencies
       run: |
         pip install pandas reportlab matplotlib
 
-    - name: Run trivy scan
-      run: ./secops-automation/scripts/scan_trivy_k8s.sh
-    
-    - name: Run owasp zap
-      run: ./secops-automation/scripts/scan_zap_baseline.sh
-    
+    # ------------------------------
+    # TRIVY SCAN
+    # ------------------------------
+    - name: Trivy security scan
+      id: trivy
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        scan-type: "fs"
+        format: "json"
+        output: "trivy-report.json"
+        severity: "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN"
+        ignore-unfixed: true
+        exit-code: 0
+
+    - name: Generate Trivy CSV report
+      if: always()
+      run: |
+        docker run --rm -v $(pwd):/workspace ghcr.io/aquasecurity/trivy:latest \
+          fs --format template --template "@/contrib/csv.tpl" \
+          --severity "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN" \
+          --ignore-unfixed \
+          --output /workspace/trivy-report.csv \
+          /workspace
+
+    - name: Generate Trivy HTML report
+      if: always()
+      run: |
+        docker run --rm -v $(pwd):/workspace ghcr.io/aquasecurity/trivy:latest \
+          fs --format template --template "@/contrib/html.tpl" \
+          --severity "CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN" \
+          --ignore-unfixed \
+          --output /workspace/trivy-report.html \
+          /workspace
+
+    - name: Print Trivy report to logs
+      if: always()
+      run: |
+        echo "============ Trivy Report (JSON) ============"
+        if [ -f trivy-report.json ]; then cat trivy-report.json; fi
+        echo ""
+        echo "============ Trivy Report (CSV) ============"
+        if [ -f trivy-report.csv ]; then cat trivy-report.csv; fi
+
+    - name: Upload Trivy reports as artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-reports
+        path: |
+          trivy-report.json
+          trivy-report.csv
+          trivy-report.html
+
+    # ------------------------------
+    # ZAP SCAN
+    # ------------------------------
+    - name: Run OWASP ZAP Baseline Scan
+      if: always()
+      run: |
+        docker run --rm -v $(pwd):/zap/wrk/:rw \
+          ghcr.io/zaproxy/zaproxy:stable \
+          zap-baseline.py -t https://your-app-url.com \
+          -r zap-report.html \
+          -J zap-report.json \
+          -x zap-report.xml \
+          -I || true
+
+    - name: Upload ZAP reports as artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: zap-reports
+        path: |
+          zap-report.html
+          zap-report.json
+          zap-report.xml
+
+    # ------------------------------
+    # PDF REPORT GENERATION
+    # ------------------------------
     - name: Generate PDF Report
       run: |
+        mkdir -p secops-automation/pdf
         python3 generate_pdf_pipeline.py
 
     - name: Upload PDF Report
@@ -87,19 +157,38 @@ jobs:
         name: security-report-pdf
         path: secops-automation/pdf/security-report.pdf
 
-    - name: Commit and push security scan results
+    # ------------------------------
+    # COLLECT + COMMIT EVERYTHING AT ONCE
+    # ------------------------------
+    - name: Collect all reports before commit
+      if: always()
+      run: |
+        mkdir -p secops-automation/scans
+        mkdir -p secops-automation/reports
+
+        # Trivy reports
+        cp trivy-report.json trivy-report.csv secops-automation/scans/ || true
+        cp trivy-report.html secops-automation/reports/ || true
+
+        # ZAP reports
+        cp zap-report.json zap-report.xml secops-automation/scans/ || true
+        cp zap-report.html secops-automation/reports/ || true
+
+        # PDF report (copy also to reports folder for convenience)
+        cp secops-automation/pdf/security-report.pdf secops-automation/reports/ || true
+
+    - name: Commit and Push All Security Reports
+      if: always()
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
+
         git add secops-automation/scans/
         git add secops-automation/reports/
         git add secops-automation/pdf/
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "chore: add security scan results [skip ci]"
-          git push
-        fi
+
+        git diff --staged --quiet || git commit -m "Update all security reports [skip ci]"
+        git push
 
   smoke-tests:
     runs-on: ubuntu-latest
